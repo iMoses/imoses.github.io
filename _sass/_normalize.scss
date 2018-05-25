@@ -1,0 +1,47 @@
+* {
+  &,
+  &:before,
+  &:after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+html {
+  min-height: 100vh;
+  font-size: 10px;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 1.6rem;
+  overflow: hidden;
+  cursor: default;
+}
+
+kbd {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  
+  &,
+  &:link,
+  &:hover,
+  &:visited {
+    color: inherit;
+  }
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  outline: 0;
+}
