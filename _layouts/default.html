@@ -1,3 +1,4 @@
+{% assign timestamp = site.time | date:'%Y-%m-%d-%H-%M-%S' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
   <meta name="author" content="Ido Moshe" />
   <meta charset="utf-8" />
   <title>{{ site.title }} | {{ page.title }}</title>
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/styles.css?{{ timestamp }}" />
 </head>
 <body>
 
@@ -27,7 +28,7 @@
   </footer>
 </div>
 
-<script src="/js/scripts.js"></script>
+<script src="/js/scripts.js?{{ timestamp }}"></script>
 
 </body>
 </html>
