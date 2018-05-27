@@ -1,2 +1,21 @@
+url: imoses.co
+
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name
+
+defaults:
+  - scope:
+      type: pages
+    values:
+      layout: default
+  - scope:
+      type: projects
+    values:
+      layout: default
+
 sass:
   style: compressed
+
+exclude: [.idea]

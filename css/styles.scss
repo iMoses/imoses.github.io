@@ -29,11 +29,14 @@ body {
       display: inline-block;
     }
   }
+
+  > footer {
+    padding: .6rem;
+  }
 }
 
 #content {
-  min-height: 100vh;
-  padding-top: 4.8rem;
+  padding: 4.8rem .6rem 2.4rem;
 }
 
 .container {

@@ -1,0 +1,17 @@
+---
+title: My Canvas Project
+description: This is my awesome first project!
+tags: canvas javascript animations
+---
+<section class="container">
+  <h1>{{ page.title }}</h1>
+  <p>{{ page.description }}</p>
+  <div>
+    <strong>Tags:</strong>
+    <ul>
+      {% for tag in page.tags %}
+        <li>{{ tag }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

@@ -5,27 +5,26 @@
   <meta name="description" content="Personal website" />
   <meta name="author" content="Ido Moshe" />
   <meta charset="utf-8" />
-  <title>{{ page.title }}</title>
+  <title>iMoses.co | {{ page.title }}</title>
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-  <div id="layout">
-    <header>
-      <nav class="site-menu">
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    <div id="content">
-      {{ content }}
-    </div>
+<div id="layout">
+  <header>
+    {% include header.html %}
+  </header>
 
-    <footer id="foot"></footer>
+  <div id="content">
+    {{ content }}
   </div>
-  <script src="/js/scripts.js"></script>
+
+  <footer id="foot">
+    <a href="{{  site.url }}">imoses.co</a>
+  </footer>
+</div>
+
+<script src="/js/scripts.js"></script>
+
 </body>
 </html>

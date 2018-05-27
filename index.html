@@ -1,7 +1,17 @@
 ---
-layout: default
-title: iMoses - Personal Website
+title: Personal Website
 ---
-<section class="canvas-container">
-  <!--<canvas id="hex-animation"></canvas>-->
-</section>
+<!--section class="canvas-container">
+  <canvas id="hex-animation"></canvas>
+</section-->
+
+<div class="container">
+  <h2>Projects</h2>
+  {% for item in site.projects %}
+    <div>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+      <p><a href="{{ item.url }}">{{ item.title }}</a></p>
+    </div>
+  {% endfor %}
+</div>
