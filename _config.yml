@@ -1,9 +1,10 @@
-url: imoses.co
+title: iMoses.co
+url: http://imoses.co
 
 collections:
   projects:
     output: true
-    permalink: /:collection/:name
+    permalink: /:collection/:slug
 
 defaults:
   - scope:
@@ -13,7 +14,7 @@ defaults:
   - scope:
       type: projects
     values:
-      layout: default
+      layout: project
 
 sass:
   style: compressed

@@ -5,7 +5,7 @@
   <meta name="description" content="Personal website" />
   <meta name="author" content="Ido Moshe" />
   <meta charset="utf-8" />
-  <title>iMoses.co | {{ page.title }}</title>
+  <title>{{ site.title }} | {{ page.title }}</title>
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
@@ -19,8 +19,11 @@
     {{ content }}
   </div>
 
-  <footer id="foot">
-    <a href="{{  site.url }}">imoses.co</a>
+  <footer>
+    <span class="copyright">
+      Copyright &copy; {{ site.time | date:'%Y' }} iMoses (Ido Moshe). All rights reserved.
+    </span>
+    <a href="{{ site.url }}">{{ site.url }}</a>
   </footer>
 </div>
 

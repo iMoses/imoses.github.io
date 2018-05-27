@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<section class="project-page container">
+  <h1>Project: {{ page.title }}</h1>
+  <p>{{ page.description }}</p>
+
+  <div>
+    <strong>Tags:</strong>
+    <ul>
+      {% for tag in page.tags %}
+        <li>{{ tag }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="project-content">
+    {{ content | markdownify }}
+  </div>
+</section>
