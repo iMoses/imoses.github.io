@@ -14,13 +14,10 @@
 
 html {
   min-height: 100vh;
-  font-size: 10px;
 }
 
 body {
   min-height: 100vh;
-  font-size: 1.6rem;
-  overflow: hidden;
   cursor: default;
 }
 
@@ -44,4 +41,8 @@ select,
 textarea {
   font: inherit;
   outline: 0;
+}
+
+canvas {
+  display: block;
 }

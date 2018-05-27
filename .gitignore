@@ -1,3 +1,12 @@
+# IntelliJ IDEA
+.idea
+
+# jekyll
+.sass-cache
+_site
+
+### Pre-Defined ###
+
 # Logs
 logs
 *.log

@@ -2,3 +2,51 @@
 ---
 
 @import "normalize";
+@import "settings";
+
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700');
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Merriweather', serif;
+}
+
+#layout {
+  > header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4.8rem;
+    padding: .6rem;
+    line-height: 3.6rem;
+
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+#content {
+  min-height: 100vh;
+  padding-top: 4.8rem;
+}
+
+.container {
+  @include breakpoint(medium) {
+    width: 96rem;
+    margin: 0 auto;
+  }
+  @include breakpoint(large) {
+    width: 120rem;
+  }
+  @include breakpoint(xlarge) {
+    width: 138rem;
+  }
+}
+
+@import "homepage";
