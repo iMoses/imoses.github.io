@@ -1,0 +1,20 @@
+---
+title: Projects Gallery
+layout: default
+---
+<section class="section-block">
+  <div class="container">
+    <h1>Projects Gallery</h1>
+  </div>
+</section>
+
+<ul class="content-block container">
+  {% for item in site.projects %}
+    {% if item.slug != 'index' %}
+      <li class="project-block">
+        <h4><a href="{{ item.url }}">{{ item.title }}</a></h4>
+        <p>{{ item.description }}</p>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
