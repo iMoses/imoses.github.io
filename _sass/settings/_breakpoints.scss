@@ -1,0 +1,45 @@
+$screen: 'only screen' !default;
+
+$breakpoints: (
+    xsmall: 0,
+    small:  600px,
+    medium: 1024px,
+    large:  1280px,
+    xlarge: 1440px,
+) !default;
+
+/**
+ * Usage:
+ * @include breakpoints(small) - from 600px
+ * @include breakpoints(small, only) - between 600px and 1023px
+ * @include breakpoints(small, large) - between 600px and 1279px
+ */
+@mixin breakpoints($point, $range: 'from') {
+  $points: map-keys($breakpoints);
+  $index: index($points, $point);
+
+  @if $index != null {
+    $media-rule: $screen;
+
+    @if index != 1 {
+      $min-width: map-get($breakpoints, $point);
+      $media-rule: $media-rule + ' and (min-width: #{$min-width})';
+    }
+
+    @if $range == only and $index != length($points) {
+      $max-width: map-get($breakpoints, nth($points, $index + 1));
+      $media-rule: $media-rule + ' and (max-width: #{$max-width - 1px})';
+    }
+    @else if index($points, $range) != null {
+      $max-width: map-get($breakpoints, $range);
+      $media-rule: $media-rule + ' and (max-width: #{$max-width - 1px})';
+    }
+
+    @media #{$media-rule} {
+      @content;
+    }
+  }
+  @else {
+    @warn 'Breakpoint "#{$point}" not found';
+  }
+}

@@ -12,6 +12,10 @@ defaults:
     values:
       layout: default
   - scope:
+      type: posts
+    values:
+      layout: post
+  - scope:
       type: projects
     values:
       layout: project

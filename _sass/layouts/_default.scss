@@ -1,0 +1,76 @@
+@import "blocks";
+@import "typography";
+@import "settings";
+@import "syntax";
+
+#layout {
+  > header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4.8rem;
+    padding: .6rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1);
+
+    nav {
+      font: 700 1.4rem $fonts-montserrat;
+      line-height: 3.6rem;
+      text-transform: uppercase;
+      //text-align: center;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0 1rem;
+      transition: color 400ms;
+
+      &:hover {
+        color: #f34164;
+      }
+    }
+  }
+
+  > footer {
+    padding: .6rem;
+    font-size: 1rem;
+    background-color: $colors-grey-light;
+
+    .copyright {
+      float: right;
+    }
+  }
+}
+
+#content {
+  padding-top: 4.8rem;
+}
+
+.container {
+  margin: auto;
+
+  @include breakpoints(medium, only) {
+    width: 96rem;
+  }
+
+  @include breakpoints(large, only) {
+    width: 120rem;
+  }
+
+  @include breakpoints(xlarge) {
+    width: 138rem;
+  }
+}
+
+.highlighter-rouge {
+  font-size: 85%;
+  padding: 1.6rem;
+  border-radius: 3px;
+  background-color: #f6f8fa;
+}
+
+code.highlighter-rouge {
+  padding: .25em .5em;
+  background-color: rgba(27,31,35,0.05);
+}

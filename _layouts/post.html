@@ -1,9 +1,12 @@
 ---
 layout: default
-class: project-page
+class: blog-post
 ---
-<section class="project-page container">
-  <h2>Project: {{ page.title }}</h2>
+<section class="content-block container">
+  <article class="blog-post">
+
+  </article>
+  <h2>{{ page.title }}</h2>
   <p>{{ page.description }}</p>
 
   <div>
@@ -15,7 +18,7 @@ class: project-page
     </ul>
   </div>
 
-  <div class="project-content">
+  <div class="blog-post-content">
     {{ content | markdownify }}
   </div>
 </section>
