@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+{% assign timestamp = site.time | date:'%Y%m%d%H%M%S' -%}
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Personal website"/>
+  <meta name="author" content="Ido Moshe"/>
+  <meta charset="utf-8"/>
+  <title>{{ site.title }} | {{ page.title }}</title>
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/css/styles.css?{{ timestamp }}"/>
+  <script src="/js/scripts.js?{{ timestamp }}" async></script>
+</head>
+<body>
+  <div id="root">{{ content }}</div>
+</body>
+</html>

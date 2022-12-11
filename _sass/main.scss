@@ -1,0 +1,35 @@
+@import "design-system/reset";
+@import "design-system/variables";
+
+@import "design-system/article";
+@import "design-system/highlight";
+
+#root {
+  min-height: 100vh;
+  color: var(--text-color);
+  font-family: var(--default-font);
+  background-color: var(--background-color);
+}
+
+body {
+  cursor: default;
+  overflow-y: scroll;
+}
+
+a[href]:hover {
+  text-decoration: underline;
+}
+
+ul > li {
+  margin-left: 1.125em;
+
+  &::before {
+    content: '-';
+    position: absolute;
+    margin-left: -1.125em;
+  }
+}
+
+@import "default-layout";
+@import "sticky-sidebar";
+@import "post-card";

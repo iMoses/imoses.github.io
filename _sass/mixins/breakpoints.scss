@@ -1,11 +1,11 @@
 $screen: 'only screen' !default;
 
 $breakpoints: (
-    xsmall: 0,
-    small:  600px,
-    medium: 1024px,
-    large:  1280px,
-    xlarge: 1440px,
+  xsmall: 0,
+  small: 600px,
+  medium: 1024px,
+  large: 1280px,
+  xlarge: 1440px,
 ) !default;
 
 /**
@@ -29,8 +29,7 @@ $breakpoints: (
     @if $range == only and $index != length($points) {
       $max-width: map-get($breakpoints, nth($points, $index + 1));
       $media-rule: $media-rule + ' and (max-width: #{$max-width - 1px})';
-    }
-    @else if index($points, $range) != null {
+    } @else if index($points, $range) != null {
       $max-width: map-get($breakpoints, $range);
       $media-rule: $media-rule + ' and (max-width: #{$max-width - 1px})';
     }
@@ -38,8 +37,7 @@ $breakpoints: (
     @media #{$media-rule} {
       @content;
     }
-  }
-  @else {
+  } @else {
     @warn 'Breakpoint "#{$point}" not found';
   }
 }

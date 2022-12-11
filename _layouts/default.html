@@ -1,36 +1,10 @@
-{% assign timestamp = site.time | date:'%Y-%m-%d-%H-%M-%S' -%}
-{% assign class = layout.class | default: page.class -%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Personal website" />
-  <meta name="author" content="Ido Moshe" />
-  <meta charset="utf-8" />
-  <title>{{ site.title }} | {{ page.title }}</title>
-  <link rel="icon" href="/assets/favicon-16x16.png" type="image/png" sizes="16x16" />
-  <link rel="stylesheet" href="/css/styles.css?{{ timestamp }}" />
-</head>
-<body>
-
-<div id="layout">
-  <header>
-    {% include header.html %}
-  </header>
-
-  <div id="content" class="{{ class }}">
-    {{ content }}
-  </div>
-
-  <footer>
-    <a href="{{ site.url }}">{{ site.url }}</a>
-    <span class="copyright">
-      Copyright &copy; {{ site.time | date:'%Y' }} iMoses (Ido Moshe). All rights reserved.
-    </span>
-  </footer>
+---
+layout: root
+---
+<div id="default-layout">
+  <article>{{ content }}</article>
+  <aside>
+    <div class="sticky-sidebar">{% include sidebar.html %}</div>
+    <footer>{% include copyright.html %}</footer>
+  </aside>
 </div>
-
-<script src="/js/scripts.js?{{ timestamp }}"></script>
-
-</body>
-</html>

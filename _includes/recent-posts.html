@@ -1,0 +1,9 @@
+<section>
+  <h2>Recent Posts</h2>
+  {% for post in site.posts limit:5 %}
+  <a class="post-card" href="{{ post.url }}">
+    <h4>{{ post.title }}</h4>
+    <blockquote>{{ post.excerpt }}</blockquote>
+  </a>
+  {% endfor %}
+</section>

@@ -1,0 +1,15 @@
+a.post-card {
+  display: block;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+  transition: background-color 400ms, box-shadow 400ms;
+
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.3);
+  }
+}

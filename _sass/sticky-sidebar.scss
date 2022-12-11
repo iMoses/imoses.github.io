@@ -1,0 +1,22 @@
+@import "mixins/breakpoints";
+
+.sticky-sidebar {
+  .site-logo {
+    width: 196px;
+  }
+
+  > section {
+    margin: 16px 0;
+    break-inside: avoid;
+  }
+
+  li {
+    font-size: 14px;
+  }
+
+  @include breakpoints(xsmall, medium) {
+    display: block;
+    columns: 272px auto;
+    column-gap: 16px;
+  }
+}

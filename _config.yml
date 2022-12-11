@@ -1,26 +1,21 @@
 title: iMoses.me
-url: http://imoses.me
+url: https://imoses.me
 
-collections:
-  projects:
-    output: true
-    permalink: /:collection/:slug
+permalink: /:slugified_categories/:slug
 
 defaults:
   - scope:
+      path: ""
       type: pages
     values:
       layout: default
   - scope:
+      path: ""
       type: posts
     values:
-      layout: post
-  - scope:
-      type: projects
-    values:
-      layout: project
+      layout: article
 
 sass:
   style: compressed
 
-exclude: [.idea]
+exclude: [ .idea ]

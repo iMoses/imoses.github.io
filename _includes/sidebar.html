@@ -1,0 +1,36 @@
+<a href="/">
+  <img class="site-logo" src="/assets/logo.svg" alt="iMoses"/>
+</a>
+
+<section>
+  <h3>Ido Moshe // Tech Lead</h3>
+  <ul>
+    <li>20+ Years of Experience</li>
+    <li>Full-Stack Architect</li>
+    <li>Front-End Specialist</li>
+    <li>Interaction Engineer</li>
+    <li>Freelance Consultant</li>
+    <li>Professional Lecturer</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Read About</h3>
+  <ul>
+    {% for category in site.categories %}
+    <li><a href="/{{ category[0] | slugify }}">{{ category[0] }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Links</h3>
+  <ul>
+    <li><a href="{{ site.data.links.github }}" target="_blank">GitHub profile</a></li>
+    <li><a href="{{ site.data.links.linkedin }}" target="_blank">LinkedIn profile</a></li>
+    <li><a href="{{ site.data.links.stackoverflow }}" target="_blank">Stack Overflow profile</a></li>
+    <li><a href="{{ site.data.links.repository }}" target="_blank">View source on GitHub</a></li>
+  </ul>
+</section>
+
+<a href="mailto:{{ site.data.links.email }}">Send me a message</a>
