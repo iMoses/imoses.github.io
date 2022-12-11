@@ -1,19 +1,16 @@
-@import "design-system/reset";
-@import "design-system/variables";
-
-@import "design-system/article";
-@import "design-system/highlight";
+@import "mixins/scrollbar";
 
 #root {
   min-height: 100vh;
   color: var(--text-color);
   font-family: var(--default-font);
-  background-color: var(--background-color);
 }
 
 body {
+  background-color: var(--background-color);
   cursor: default;
-  overflow-y: scroll;
+
+  @include scrollbar;
 }
 
 a[href]:hover {
@@ -29,7 +26,3 @@ ul > li {
     margin-left: -1.125em;
   }
 }
-
-@import "default-layout";
-@import "sticky-sidebar";
-@import "post-card";

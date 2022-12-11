@@ -1,4 +1,12 @@
 ---
 ---
+@import "design-system/reset";
+@import "design-system/variables";
 
-@import "main";
+@import "design-system/article";
+@import "design-system/highlight";
+
+@import "normalize";
+@import "default-layout";
+@import "sticky-sidebar";
+@import "post-card";

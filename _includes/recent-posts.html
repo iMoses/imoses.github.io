@@ -1,9 +1,12 @@
 <section>
-  <h2>Recent Posts</h2>
+  <h3>Recent Posts</h3>
   {% for post in site.posts limit:5 %}
   <a class="post-card" href="{{ post.url }}">
     <h4>{{ post.title }}</h4>
-    <blockquote>{{ post.excerpt }}</blockquote>
+    <time datetime="{{ post.date }}">
+      {{ post.date | date: '%B %d, %Y' }}
+    </time>
+    {{ post.excerpt }}
   </a>
   {% endfor %}
 </section>

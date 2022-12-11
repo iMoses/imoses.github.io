@@ -28,7 +28,21 @@ article {
     font-weight: 600;
   }
 
+  blockquote {
+    position: relative;
+    padding-left: 16px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background-color: var(--text-color);
+    }
+  }
+
   p,
+  ul,
   table,
   blockquote,
   div.highlighter-rouge {

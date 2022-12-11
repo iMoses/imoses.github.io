@@ -2,9 +2,11 @@
 
 #default-layout {
   display: grid;
-  width: 1000px;
+  min-width: map-get($breakpoints, medium);
+  max-width: 1120px;
   min-height: 100vh;
   margin: 0 auto;
+  padding: 0 16px;
   grid-template-areas:
     'sidebar content'
     'blank content';
@@ -34,10 +36,9 @@
   }
 }
 
-@include breakpoints(xsmall, medium) {
+@include breakpoints(xxsmall, medium) {
   #default-layout {
-    width: auto;
-    padding: 0 8px;
+    min-width: auto;
     grid-template-areas:
       'content'
       'sidebar';

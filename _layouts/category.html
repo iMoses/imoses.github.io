@@ -1,12 +1,13 @@
 ---
 layout: default
 ---
+<h1>{{ page.title }}</h1>
 {{ content }}
 {% for post in site.posts %}
 {% if post.categories contains page.title %}
-<div class="blog-post">
-  <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-  <blockquote>{{ post.excerpt }}</blockquote>
-</div>
+<a class="post-card" href="{{ post.url }}">
+  <h4>{{ post.title }}</h4>
+  {{ post.excerpt }}
+</a>
 {% endif %}
 {% endfor %}

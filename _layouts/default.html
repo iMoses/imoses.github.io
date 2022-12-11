@@ -5,6 +5,9 @@ layout: root
   <article>{{ content }}</article>
   <aside>
     <div class="sticky-sidebar">{% include sidebar.html %}</div>
-    <footer>{% include copyright.html %}</footer>
+    <footer>
+      <a href="{{ site.data.contact.repository }}" target="_blank">View source on GitHub</a>
+      <p>{% include copyright.html %}</p>
+    </footer>
   </aside>
 </div>

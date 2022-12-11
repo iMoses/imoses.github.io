@@ -1,22 +1,41 @@
 @import "mixins/breakpoints";
 
 .sticky-sidebar {
-  .site-logo {
+  .logo {
     width: 196px;
   }
 
   > section {
     margin: 16px 0;
-    break-inside: avoid;
   }
 
-  li {
+  a, li {
     font-size: 14px;
   }
 
-  @include breakpoints(xsmall, medium) {
-    display: block;
-    columns: 272px auto;
-    column-gap: 16px;
+  @include breakpoints(xxsmall, medium) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 272px);
+    justify-content: center;
+    gap: 10px;
+
   }
 }
+
+.social-strip {
+  display: flex;
+  margin: 4px 0;
+  gap: 8px;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    transition: opacity 200ms ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+

@@ -1,5 +1,5 @@
 <a href="/">
-  <img class="site-logo" src="/assets/logo.svg" alt="iMoses"/>
+  <img class="logo" src="/assets/logo.svg" alt="iMoses"/>
 </a>
 
 <section>
@@ -17,20 +17,27 @@
 <section>
   <h3>Read About</h3>
   <ul>
-    {% for category in site.categories %}
+    {% assign categories = site.categories | sort %}
+    {% for category in categories %}
     <li><a href="/{{ category[0] | slugify }}">{{ category[0] }}</a></li>
     {% endfor %}
   </ul>
 </section>
 
 <section>
-  <h3>Links</h3>
-  <ul>
-    <li><a href="{{ site.data.links.github }}" target="_blank">GitHub profile</a></li>
-    <li><a href="{{ site.data.links.linkedin }}" target="_blank">LinkedIn profile</a></li>
-    <li><a href="{{ site.data.links.stackoverflow }}" target="_blank">Stack Overflow profile</a></li>
-    <li><a href="{{ site.data.links.repository }}" target="_blank">View source on GitHub</a></li>
-  </ul>
+  <h3>Contact Me</h3>
+  <div class="social-strip">
+    <a href="{{ site.data.contact.github }}" target="_blank">
+      <img src="/assets/github.svg" alt="GitHub profile" />
+    </a>
+    <a href="{{ site.data.contact.linkedin }}" target="_blank">
+      <img src="/assets/linkedin.svg" alt="LinkedIn profile" />
+    </a>
+    <a href="{{ site.data.contact.stackoverflow }}" target="_blank">
+      <img src="/assets/stackoverflow.svg" alt="Stack Overflow profile" />
+    </a>
+    <a href="mailto:{{ site.data.contact.email }}" target="_blank">
+      <img src="/assets/gmail.svg" alt="Send me a message" />
+    </a>
+  </div>
 </section>
-
-<a href="mailto:{{ site.data.links.email }}">Send me a message</a>
