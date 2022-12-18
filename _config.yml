@@ -2,6 +2,7 @@ title: iMoses.me
 url: https://imoses.me
 
 permalink: /:slugified_categories/:slug
+excerpt_separator: '#'
 
 defaults:
   - scope:

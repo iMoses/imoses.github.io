@@ -1,9 +1,55 @@
 :root {
-  --default-font: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace;
+  // Primary
+  --color-alabaster: #f2e9e1;
+  --color-cadet-blue: #56949f;
+  --color-lavender-purple: #907aa9;
+  --color-manatee: #9893a5;
+  --color-marigold: #ea9d34;
+  --color-ming: #286983;
+  --color-new-york-pink: #d7827e;
+  --color-purple-navy: #575279;
+  --color-rich-black: #073642;
+  --color-rose-gold: #b4637a;
+  --color-seashell: #faf4ed;
 
-  --text-color: #18212a;
-  --background-color: #f4ebe4;
-  --highlighter-color: #f6f8fa;
-  --scrollbar-color: #18212a66;
-  --scrollbar-border-color: #fff;
+  // Highlighter
+  --color-apple: #55a649;
+  --color-auro-metal-saurus: #657b83;
+  --color-button-blue: #1d99f3;
+  --color-dark-chocolate: #520000;
+  --color-dark-gunmetal: #1e2229;
+  --color-dolphin-gray: #7f8c8d;
+  --color-light-sea-green: #1abc9c;
+  --color-lotion: #fcfcfc;
+  --color-may-green: #44853a;
+  --color-morning-blue: #93a1a1;
+  --color-pastel-orange: #fdbc4b;
+  --color-permanent-geranium-lake: #dc322f;
+  --color-philippine-orange: #f67400;
+  --color-picton-blue: #3daee9;
+  --color-silver-sand: #bdc3c7;
+  --color-vivid-red: #ed1515;
+  --color-white-chocolate: #eee8d5;
+
+  // Complimentary (unused)
+  --color-cadet: #586e75;
+  --color-cyan-cornflower-blue: #268bd2;
+  --color-dark-goldenrod: #b58900;
+  --color-deep-cerise: #d33682;
+  --color-deep-lilac: #9b59b6;
+  --color-green-crayola: #16a085;
+  --color-international-orange: #c0392b;
+  --color-maastricht-blue: #002b36;
+  --color-old-lace: #fdf6e3;
+  --color-olive: #859900;
+  --color-purpureus: #8e44ad;
+  --color-roman-silver: #839496;
+  --color-sinopia: #cb4b16;
+  --color-toolbox: #6c71c4;
+  --color-zomp: #2aa198;
+
+  // Global defaults
+  --default-color: var(--color-rich-black);
+  --default-background-color: var(--color-seashell);
+  --default-font: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace;
 }

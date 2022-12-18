@@ -10,15 +10,15 @@
   grid-template-areas:
     'sidebar content'
     'blank content';
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 272px 1fr;
+  column-gap: 8px;
 
-  > aside {
+  .layout-sidebar {
     grid-area: sidebar;
     position: sticky;
     top: 0;
     display: flex;
     min-height: 100vh;
-    margin-right: 8px;
     padding: 16px 8px 0;
     flex-grow: 0;
     flex-direction: column;
@@ -31,8 +31,9 @@
     }
   }
 
-  > article {
+  .layout-content {
     grid-area: content;
+    padding: 8px 0 32px;
   }
 }
 
@@ -44,12 +45,12 @@
       'sidebar';
     grid-template-columns: unset;
     grid-template-rows: 1fr auto;
+    row-gap: 8px;
 
-    > aside {
+    .layout-sidebar {
       min-height: unset;
-      margin-right: unset;
 
-      > footer {
+      footer {
         text-align: center;
       }
     }

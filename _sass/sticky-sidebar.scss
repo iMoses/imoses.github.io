@@ -5,6 +5,29 @@
     width: 196px;
   }
 
+  .social-strip {
+    display: flex;
+    margin: 4px 0;
+    gap: 8px;
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+    a {
+      border-radius: 6px;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
+      transition: all 200ms ease-in-out;
+      opacity: 0.9;
+
+      &:hover {
+        box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
+        opacity: 1;
+      }
+    }
+  }
+
   > section {
     margin: 16px 0;
   }
@@ -19,23 +42,6 @@
     justify-content: center;
     gap: 10px;
 
-  }
-}
-
-.social-strip {
-  display: flex;
-  margin: 4px 0;
-  gap: 8px;
-
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    transition: opacity 200ms ease-in-out;
-
-    &:hover {
-      opacity: 0.8;
-    }
   }
 }
 

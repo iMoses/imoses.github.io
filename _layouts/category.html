@@ -5,9 +5,6 @@ layout: default
 {{ content }}
 {% for post in site.posts %}
 {% if post.categories contains page.title %}
-<a class="post-card" href="{{ post.url }}">
-  <h4>{{ post.title }}</h4>
-  {{ post.excerpt }}
-</a>
+{% include post-card.html content=post %}
 {% endif %}
 {% endfor %}

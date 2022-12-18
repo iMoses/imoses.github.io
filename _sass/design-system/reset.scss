@@ -38,14 +38,6 @@ a {
   cursor: pointer;
 }
 
-em {
-  font-style: italic;
-}
-
-strong {
-  font-weight: bold;
-}
-
 img,
 picture,
 video,
@@ -66,4 +58,8 @@ textarea {
 pre,
 code {
   white-space: pre;
+}
+
+iframe {
+  border: 0;
 }

@@ -2,12 +2,12 @@
 layout: root
 ---
 <div id="default-layout">
-  <article>{{ content }}</article>
-  <aside>
+  <aside class="layout-sidebar">
     <div class="sticky-sidebar">{% include sidebar.html %}</div>
     <footer>
       <a href="{{ site.data.contact.repository }}" target="_blank">View source on GitHub</a>
       <p>{% include copyright.html %}</p>
     </footer>
   </aside>
+  <main class="layout-content">{{ content }}</main>
 </div>
