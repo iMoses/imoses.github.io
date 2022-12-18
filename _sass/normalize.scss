@@ -1,16 +1,16 @@
 @import "mixins/scrollbar";
 
-#root {
-  min-height: 100vh;
+body {
   color: var(--default-color);
   font-family: var(--default-font);
-}
-
-body {
   background-color: var(--default-background-color);
   cursor: default;
 
   @include scrollbar;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 a[href]:hover {

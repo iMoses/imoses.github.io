@@ -1,14 +1,15 @@
 div.highlighter-rouge {
   padding: 16px;
   color: var(--color-alabaster);
-  font-size: 0.85em;
+  font-size: 0.875em;
   border-radius: 2px;
   background-color: var(--color-dark-gunmetal);
 }
 
 code.highlighter-rouge {
   padding: 0.25em 0.5em;
-  font-size: 0.85em;
+  color: var(--color-rich-black);
+  font-size: 0.875em;
   border-radius: 2px;
   background-color: var(--color-lotion);
 }
