@@ -1,8 +1,16 @@
 ---
 title: About me
 ---
+<article>
 {% capture README %}
 {% include_relative README.md %}
 {% endcapture %}
-<article>{{ README | markdownify }}</article>
-{% include post-list.html title="Recently Published" limit=5 %}
+{{ README | markdownify }}
+</article>
+
+---
+
+## Recently Published
+{% for post in site.posts limit:5 %}
+{%- include post-card.html content=post -%}
+{% endfor %}

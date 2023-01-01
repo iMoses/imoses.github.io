@@ -1,6 +1,6 @@
 ---
 title: "SVG: Scalable Vector Graphics"
-category: Software Design
+category: tutorials
 ---
 This is a quick tutorial for SVG, bluntly copying from MDN and Wiki with the purpose of pointing newcomers towards
 the important stuff, which aren't always easy to come by when going over refs.

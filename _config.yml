@@ -4,6 +4,10 @@ url: https://imoses.me
 permalink: /:slugified_categories/:slug
 excerpt_separator: '#'
 
+collections:
+  category:
+    output: true
+
 defaults:
   - scope:
       path: ""
@@ -15,6 +19,11 @@ defaults:
       type: posts
     values:
       layout: article
+  - scope:
+      path: ""
+      type: category
+    values:
+      layout: category
 
 sass:
   style: compressed

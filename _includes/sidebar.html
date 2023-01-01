@@ -16,12 +16,14 @@
 </section>
 
 <section>
-  <h3>Read About</h3>
+  <h3>Read About // Categories</h3>
   <ul>
-    {% assign categories = site.categories | sort %}
+    {%- assign categories = site.categories | sort -%}
     {% for category in categories %}
-    <li><a href="/{{ category[0] | slugify }}">{{ category[0] }}</a></li>
-    {% endfor %}
+    <li><a href="/category/{{ category | first | slugify }}">
+      {{- category[0] | capitalize -}}
+    </a></li>
+    {%- endfor %}
   </ul>
 </section>
 
