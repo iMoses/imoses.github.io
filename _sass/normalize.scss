@@ -1,4 +1,4 @@
-@import "mixins/scrollbar";
+@use "mixins/scrollbar" as *;
 
 body {
   color: var(--default-color);

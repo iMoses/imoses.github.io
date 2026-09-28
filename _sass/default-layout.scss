@@ -1,8 +1,9 @@
-@import "mixins/breakpoints";
+@use "sass:map";
+@use "mixins/breakpoints" as *;
 
 #default-layout {
   display: grid;
-  min-width: map-get($breakpoints, medium);
+  min-width: map.get($breakpoints, medium);
   max-width: 1120px;
   min-height: 100vh;
   margin: 0 auto;
