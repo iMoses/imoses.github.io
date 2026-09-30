@@ -242,11 +242,27 @@ hr {
 // ——— Chrome ———
 
 .site-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--u);
+  // Title block: logo, then name + tagline beside it (like a drawing's title block), then the
+  // contact icons and theme switch. On phones the controls get their own row above.
+  display: grid;
+  grid-template-columns: calc(var(--u) * 8) 1fr auto;
+  grid-template-rows: var(--u) auto;
+  grid-template-areas: "logo . actions" "logo title title";
+  align-items: start;
   padding: calc(var(--u) * 2) 0 var(--u);
+
+  .logo { grid-area: logo; }
+  .title-block { grid-area: title; }
+  .header-actions { grid-area: actions; }
+
+  @media (max-width: 600px) {
+    grid-template-columns: calc(var(--u) * 6) 1fr;
+    grid-template-rows: var(--u) auto;
+    grid-template-areas: "actions actions" "logo title";
+    row-gap: var(--u);
+
+    .header-actions { justify-self: end; }
+  }
 
   .logo {
     display: block;
@@ -267,6 +283,21 @@ hr {
     }
 
     &:hover { color: var(--accent); }
+  }
+}
+
+.title-block {
+
+  .site-name {
+    margin: 0;
+    font: 600 1.25rem/var(--u) var(--font-mono);
+    letter-spacing: -0.01em;
+  }
+
+  .site-tagline {
+    margin: 0;
+    font: 400 0.875rem/var(--u) var(--font-mono);
+    color: var(--ink-2);
   }
 }
 
@@ -343,14 +374,6 @@ hr {
 }
 
 // ——— Home ———
-
-.intro {
-  .tagline {
-    margin: 0 0 var(--u);
-    font: 400 1.25rem/var(--u) var(--font-mono);
-    color: var(--ink-2);
-  }
-}
 
 .lab-list {
   list-style: none;

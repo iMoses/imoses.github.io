@@ -44,7 +44,9 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   put it inside a `snap` container, give fixed-height controls a height of `var(--u)`, and add
   `framed` to anything with a visible border. Text lines run in the 24px rows; baselines are not
   forced onto lines (deliberately — too brittle for too little gain).
-- Header: logo, GitHub / LinkedIn / email icons (`_includes/icons/`) and the light/dark switch. The
+- Header is a drawing-style title block: logo, then the owner's name + tagline beside it (name is
+  the page's `<h1>` on the home page only; lab entries keep their own title as `<h1>`), and the
+  GitHub / LinkedIn / email icons (`_includes/icons/`) and the light/dark switch. The
   icons and switch are fixed-size cells on the grid (1 square each, 1-square spacer, 4-square switch)
   so changing the switch's label never moves anything. Footer repeats the links.
 - Logo (`_includes/logo.svg`): one continuous hand-drawn line (open on the right for the text), a
@@ -110,8 +112,8 @@ Confirmed by owner (2026-09-30):
 - English. Professional, can be whimsical. Less is more.
 
 Structure chosen by owner (2026-09-30): **Lab.**
-- Homepage: name, tagline, a short general "about me" (not just the current job), then the list of
-  experiments, then links (GitHub, LinkedIn for the CV, email).
+- Homepage: title block in the header (name + tagline beside the logo), a short general "about me"
+  (not just the current job), then the list of experiments, then links.
 - Each experiment: a small, self-contained, interactive piece (SVG / canvas / charting /
   performance) with a one-paragraph "what and why". Plain HTML/CSS/JS, no framework unless the
   experiment needs one. Must work on mobile and without breaking if JS fails to load.
@@ -126,6 +128,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Owner asked for the name to be smaller, like a subtitle beside the logo: the big
+  headline was replaced by a title block in the header (on every page).
 - 2026-09-30: Design feedback round 4 (owner): logo line made continuous, small circle masks the
   line inside it, intro animation reworked (single stroke + circle rides into place); tighter
   Lab-title/card/footer spacing; header controls fixed on the grid.
