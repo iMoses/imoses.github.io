@@ -61,8 +61,8 @@
   new ResizeObserver(layout).observe(document.body);
   document.fonts?.ready.then(layout);
 
-  // Logo intro: the line draws itself in one stroke, and the small circle rides the pen
-  // along it until it reaches its resting place, where it stops.
+  // Logo intro: the line draws itself in one stroke while the small circle rolls along the drawn
+  // line and eases to a stop at its resting place.
   if (root.classList.contains('logo-intro')) {
     const svg = document.querySelector('.site-header .logo svg');
     const line = svg.querySelector('.logo-stroke');
@@ -84,7 +84,11 @@
       for (const c of [dot, hole]) { c.setAttribute('cx', x); c.setAttribute('cy', y); }
     };
 
+    // The circle has its own ease so it decelerates to a stop instead of halting with the pen still
+    // at full speed. Both eases start with 4t³, so the circle never overtakes the pen as long as its
+    // duration is at least ∛(rest / L) of the pen's (the start is the tightest point).
     const DURATION = 1800;
+    const DOT_DURATION = DURATION * Math.cbrt(rest / L) * 1.02;
     const start = performance.now();
     line.style.strokeDasharray = `0 ${L}`;
     dot.style.opacity = 1;
@@ -95,12 +99,12 @@
       const t = Math.min((now - start) / DURATION, 1);
       const drawn = ease(t) * L;
       line.style.strokeDasharray = `${drawn} ${L}`;
-      const along = Math.min(drawn, rest);
+      const along = ease(Math.min((now - start) / DOT_DURATION, 1)) * rest;
       const p = line.getPointAtLength(along);
       const k = rest ? along / rest : 1; // ease the tiny path-to-centre offset in over the ride
       place(p.x + (home.x - restPoint.x) * k, p.y + (home.y - restPoint.y) * k);
       if (t > 0.75) text.style.opacity = 1;
-      if (t < 1) return requestAnimationFrame(frame);
+      if (now - start < Math.max(DURATION, DOT_DURATION)) return requestAnimationFrame(frame);
       line.style.strokeDasharray = '';
       dot.style.opacity = '';
       text.style.opacity = '';

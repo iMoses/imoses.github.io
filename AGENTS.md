@@ -70,7 +70,8 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 - Logo (`_includes/logo.svg`): one continuous hand-drawn line (open on the right for the text), a
   small circle whose inside is cut out of the line with an SVG mask (so the grid shows through),
   and the lettering. On the home page `site.js` animates it: the line draws in one stroke while
-  the small circle rides the pen tip to its resting place. The inline `<head>` script hides the
+  the small circle rolls along the drawn line on its own ease and glides to a stop at its resting
+  place (its duration is ∛(rest/length) of the pen's, so it never overtakes the pen). The inline `<head>` script hides the
   parts before first paint (`.logo-intro`), only when motion is allowed, with a 4s failsafe.
   The viewBox is padded by 12 units left/top/bottom (`-12 -12 222 152`) so the riding circle never
   clips; CSS offsets that padding with negative margins so the drawing stays on the grid. Keep the
@@ -149,6 +150,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Logo intro smoothed (owner): the circle used to ride the pen tip and halt at full speed;
+  it now has its own ease and decelerates to zero at its resting place.
 - 2026-09-30: Mobile Chrome drift (~1px per code block/figure): borders in the flow rounded to device
   pixels. All dashed rules moved to a no-layout `rule-above` mixin; `roundFrames` uses exact
   fractional heights; added unprefixed `text-size-adjust`.
