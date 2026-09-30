@@ -25,14 +25,15 @@
 
   drawRulers();
 
-  // Paper (light) / Blueprint (dark) switch. Defaults to the OS setting; a choice is remembered.
+  // Light (paper) / dark (blueprint) switch. Defaults to the OS setting; a choice is remembered.
   const toggle = document.querySelector('.theme-toggle');
   const root = document.documentElement;
   const osDark = matchMedia('(prefers-color-scheme: dark)');
   const isDark = () => (root.dataset.theme ?? (osDark.matches ? 'dark' : 'light')) === 'dark';
   const setToggleLabel = () => {
-    toggle.querySelector('span').textContent = isDark() ? 'Paper' : 'Blueprint';
-    toggle.setAttribute('aria-label', `Switch to ${isDark() ? 'paper (light)' : 'blueprint (dark)'} theme`);
+    toggle.querySelector('span').textContent = isDark() ? 'Light' : 'Dark';
+    toggle.dataset.target = isDark() ? 'light' : 'dark';
+    toggle.setAttribute('aria-label', `Switch to ${isDark() ? 'light' : 'dark'} mode`);
   };
   toggle.addEventListener('click', () => {
     root.dataset.theme = isDark() ? 'light' : 'dark';

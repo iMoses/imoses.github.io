@@ -21,7 +21,8 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 ## Tech
 
 - Jekyll 4.4 static site, Ruby version in `.ruby-version`, deps in `Gemfile` / `Gemfile.lock`
-  (plugins: jekyll-seo-tag, plus the local `_plugins/code_file.rb`).
+  (plugins: jekyll-seo-tag, plus local `_plugins/code_file.rb` and `_plugins/external_links.rb`,
+  which makes every link to another site open in a new tab at build time).
 - Interactive figures: React + Vite, sources in `demos/<entry>/`, built by `npm run build` into
   `assets/demos/<entry>.js|.css` (git-ignored, generated). Add each new entry to the `entries` map in
   `demos/vite.config.js`. **Run `npm run build` before `jekyll build`**, locally and in CI.
@@ -36,7 +37,7 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   use them in fixed order and don't add new hues.
 - Layouts: `root.html` (head, rulers, header/footer, crosshair) → `default.html` (pages) and
   `entry.html` (lab entries). `assets/site.js` draws the page rulers, the crosshair (under the
-  text, never over it) and the Paper/Blueprint theme switch (defaults to the OS setting; the
+  text, never over it) and the light/dark switch (sun/moon icon + text) (defaults to the OS setting; the
   visitor's choice is kept in localStorage and applied by an inline script in `<head>`).
 
 ### How a lab entry works
@@ -85,8 +86,7 @@ Confirmed by owner (2026-09-30):
 - English. Professional, can be whimsical. Less is more.
 
 Structure chosen by owner (2026-09-30): **Lab.**
-- Homepage: a few lines of intro (who, and one line on "now": AG Charts infrastructure,
-  performance and refactoring, linking to the owner's public contributions), then a grid of
+- Homepage: name, tagline, a short general "about me" (not just the current job), then the list of
   experiments, then links (GitHub, LinkedIn for the CV, email).
 - Each experiment: a small, self-contained, interactive piece (SVG / canvas / charting /
   performance) with a one-paragraph "what and why". Plain HTML/CSS/JS, no framework unless the
@@ -102,6 +102,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Design feedback round 2 (owner): external links open in a new tab; home intro is a
+  general "about me" (LinkedIn-summary style), not current-job-only and no link to the AG Charts
+  repo; standard light/dark toggle with icon + text.
 - 2026-09-30: Design feedback round 1 (owner): crosshair moved under the text, bigger logo,
   visible Paper/Blueprint theme switch, RSS removed (no feed), tagline broadened to not box the
   owner in as charts-only — owner is a full-stack engineer across many fields.

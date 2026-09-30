@@ -104,6 +104,8 @@ Also:
   [GitNation](https://gitnation.com/contents/efficient-data-visualisation-with-react-and-svg) ·
   [YouTube](https://www.youtube.com/watch?v=0lcQ-d2oII8). Owner is "not super proud" of it. [OWNER]
 - Has given meetup talks in Tel Aviv in the past. [OWNER]
+- Started writing code at 10 (Visual Basic 6.0) and built a first website at 11. [owner's own
+  draft, `_drafts/memoir.md`]
 - Largely self-taught: a few Open University courses as a teenager, then web-dev forums and IRC.
   Long-time volunteer with young people; prefers small study groups. [CV]
 - Hebrew (native), English (full professional). [LI]
@@ -132,4 +134,5 @@ Also:
    can be credited. It's currently labelled only as sample data.
 3. Home page tagline: owner found "draws things in browsers" too narrow (they're full-stack across
    many fields). Now "Full-stack engineer, from pixels to pipelines" (agent draft) — confirm or rewrite.
+5. Home "about me" paragraph is an agent draft built only from facts in this file — confirm or rewrite.
 4. The talk-based entry says it's adapted from the talk and links it. OK, or drop the link?
