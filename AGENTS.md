@@ -128,6 +128,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Design feedback round 5 (owner): boxed LinkedIn icon (balances the GitHub mark);
+  dashed separators use their own stronger token `--rule-dash`; tighter lab-entry rhythm (date
+  right under the subtitle, section line 24px after the previous block, heading straight into text).
 - 2026-09-30: Owner asked for the name to be smaller, like a subtitle beside the logo: the big
   headline was replaced by a title block in the header (on every page).
 - 2026-09-30: Design feedback round 4 (owner): logo line made continuous, small circle masks the

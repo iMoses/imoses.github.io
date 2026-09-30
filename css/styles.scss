@@ -16,6 +16,7 @@
   --code-bg: #fffdf7;
   --code-ink: #24324d;
   --rule: rgb(27 42 68 / 0.18);
+  --rule-dash: rgb(27 42 68 / 0.4);
   --track: #dcdfe6;
 
   // Categorical series (validated set; light steps)
@@ -50,6 +51,7 @@
   --code-bg: #0b1a2e;
   --code-ink: #dbe5f3;
   --rule: rgb(232 238 247 / 0.2);
+  --rule-dash: rgb(232 238 247 / 0.4);
   --track: #2a3f5e;
 
   --series-1: #3987e5;
@@ -161,7 +163,7 @@ h1, h2, h3, h4 {
 
 h1 { font-size: clamp(2rem, 6vw, 2.75rem); line-height: calc(var(--u) * 2); margin: 0 0 var(--u); }
 h2 { font-size: 1.5rem; line-height: calc(var(--u) * 1.5); margin: var(--u) 0 0; }
-h3 { font-size: 1.125rem; margin: var(--u) 0; }
+h3 { font-size: 1.125rem; margin: 0; }
 
 p, ul, ol { margin: 0 0 var(--u); }
 
@@ -169,7 +171,7 @@ img, svg { max-width: 100%; }
 
 hr {
   border: 0;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px dashed var(--rule-dash);
   margin: calc(var(--u) * 2) 0;
 }
 
@@ -317,6 +319,8 @@ hr {
     &:hover { color: var(--accent); }
 
     svg { width: 18px; height: 18px; }
+
+    &.icon-linkedin svg { width: 16px; height: 16px; } // a filled square reads heavier than the round mark
   }
 }
 
@@ -349,7 +353,7 @@ hr {
 .site-footer {
   margin-top: var(--u);
   padding: var(--u) 0 calc(var(--u) * 2);
-  border-top: 1px dashed var(--rule);
+  border-top: 1px dashed var(--rule-dash);
   font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
 
@@ -422,27 +426,27 @@ hr {
 .entry-header {
   margin-bottom: var(--u);
 
-  h1 { margin-bottom: var(--u); }
+  h1 { margin-bottom: 12px; }
 
   time {
     display: block;
-    margin-bottom: var(--u);
     font: 400 0.875rem/var(--u) var(--font-mono);
     color: var(--ink-3);
   }
 }
 
 .entry-subtitle {
-  margin: 0 0 var(--u);
-  font-size: 1.25rem;
-  line-height: calc(var(--u) * 1.5);
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: var(--u);
   color: var(--ink-2);
 }
 
 .entry {
   h2 {
-    padding-top: var(--u);
-    border-top: 1px dashed var(--rule);
+    margin-top: 0;
+    padding-top: 11px; // + 1px border + 36px line = exactly two rows
+    border-top: 1px dashed var(--rule-dash);
   }
 
   blockquote {
@@ -506,7 +510,7 @@ div.highlighter-rouge {
     padding: 0 var(--u);
     font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono);
     color: var(--ink-3);
-    border-bottom: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule-dash);
   }
 
   pre {
