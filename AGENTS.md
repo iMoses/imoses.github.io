@@ -52,6 +52,9 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   and the lettering. On the home page `site.js` animates it: the line draws in one stroke while
   the small circle rides the pen tip to its resting place. The inline `<head>` script hides the
   parts before first paint (`.logo-intro`), only when motion is allowed, with a 4s failsafe.
+  The viewBox is padded by 12 units left/top/bottom (`-12 -12 222 152`) so the riding circle never
+  clips; CSS offsets that padding with negative margins so the drawing stays on the grid. Keep the
+  padding if the path or circle changes (the circle reaches radius + half stroke = 11 units out).
 - Link previews: `assets/og.png` (1200×630) is set as the default `image` for jekyll-seo-tag.
   Regenerate it with `npm run og` whenever the tagline or logo changes (template in `tools/og/`;
   needs Playwright + Chromium, see `tools/og/render.mjs`).

@@ -252,9 +252,19 @@ hr {
     display: block;
     color: var(--ink);
 
-    svg { display: block; height: calc(var(--u) * 4); width: auto; }
+    // The SVG is padded by 12 units (of 128) on the left, top and bottom so the intro's riding
+    // circle never clips; negative margins keep the drawing itself exactly on the grid.
+    --logo-h: calc(var(--u) * 4);
 
-    @media (max-width: 480px) { svg { height: calc(var(--u) * 3); } }
+    @media (max-width: 480px) { --logo-h: calc(var(--u) * 3); }
+
+    svg {
+      display: block;
+      height: calc(var(--logo-h) * 152 / 128);
+      width: auto;
+      margin: calc(var(--logo-h) * -12 / 128) 0 calc(var(--logo-h) * -12 / 128) calc(var(--logo-h) * -12 / 128);
+      overflow: visible;
+    }
 
     &:hover { color: var(--accent); }
   }

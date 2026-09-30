@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 128">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 222 152">
   <defs>
-    <mask id="logo-mask" maskUnits="userSpaceOnUse" x="-8" y="-8" width="226" height="144">
-      <rect x="-8" y="-8" width="226" height="144" fill="#fff"/>
+    <mask id="logo-mask" maskUnits="userSpaceOnUse" x="-12" y="-12" width="222" height="152">
+      <rect x="-12" y="-12" width="222" height="152" fill="#fff"/>
       <circle class="logo-hole" cx="31.9" cy="12.6" r="9" fill="#000"/>
     </mask>
   </defs>
