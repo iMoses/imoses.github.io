@@ -5,8 +5,10 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
+  <script>
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
+  </script>
   {% seo %}
-  {% feed_meta %}
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -23,6 +25,12 @@
   <div class="ruler ruler-y" aria-hidden="true"></div>
   <header class="site-header">
     <a class="logo" href="/" aria-label="{{ site.title }} — home">{% include logo.svg %}</a>
+    <button class="theme-toggle" type="button" hidden>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="13" height="13"/><path d="M1.5 6h13M1.5 10h13M6 1.5v13M10 1.5v13" opacity=".5"/>
+      </svg>
+      <span></span>
+    </button>
   </header>
   <main>{{ content }}</main>
   <footer class="site-footer">
@@ -30,7 +38,6 @@
       <a href="{{ site.data.contact.github }}">GitHub</a>
       <a href="{{ site.data.contact.linkedin }}">LinkedIn</a>
       <a href="mailto:{{ site.data.contact.email }}">Email</a>
-      <a href="/feed.xml">RSS</a>
     </nav>
     <p>© {{ site.time | date: '%Y' }} {{ site.author }} · <a href="{{ site.data.contact.repository }}">source</a></p>
   </footer>

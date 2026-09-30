@@ -110,6 +110,8 @@ body {
 }
 
 main, .site-header, .site-footer {
+  position: relative;
+  z-index: 1;
   max-width: var(--measure);
   margin-inline: auto;
 }
@@ -187,7 +189,7 @@ hr {
   pointer-events: none;
   opacity: 0;
   transition: opacity 150ms;
-  z-index: 10;
+  z-index: 0; // drawn on the paper, under the text
 
   &.on { opacity: 1; }
 
@@ -217,16 +219,39 @@ hr {
 // ——— Chrome ———
 
 .site-header {
-  padding: 48px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 40px 0 24px;
 
   .logo {
     display: inline-block;
     color: var(--ink);
 
-    svg { display: block; width: 72px; height: auto; }
+    svg { display: block; width: clamp(110px, 28vw, 150px); height: auto; }
 
     &:hover { color: var(--accent); }
   }
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font: 500 0.75rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  cursor: pointer;
+
+  &:hover { color: var(--accent); border-color: var(--accent); }
+  &[hidden] { display: none; }
+
+  svg { width: 16px; height: 16px; }
 }
 
 .site-footer {

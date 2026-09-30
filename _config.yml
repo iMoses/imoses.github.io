@@ -1,7 +1,7 @@
 title: Ido Moshe
-tagline: draws things in browsers
+tagline: Full-stack engineer, from pixels to pipelines
 description: >-
-  Ido Moshe (iMoses) — a lab of small, interactive experiments with SVG, canvas and charts.
+  Ido Moshe (iMoses) — full-stack engineer. A lab of small, interactive experiments.
 author: Ido Moshe
 url: https://imoses.me
 lang: en
@@ -20,7 +20,6 @@ defaults:
       layout: entry
 
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
 
 sass:

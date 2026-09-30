@@ -21,7 +21,7 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 ## Tech
 
 - Jekyll 4.4 static site, Ruby version in `.ruby-version`, deps in `Gemfile` / `Gemfile.lock`
-  (plugins: jekyll-feed, jekyll-seo-tag, plus the local `_plugins/code_file.rb`).
+  (plugins: jekyll-seo-tag, plus the local `_plugins/code_file.rb`).
 - Interactive figures: React + Vite, sources in `demos/<entry>/`, built by `npm run build` into
   `assets/demos/<entry>.js|.css` (git-ignored, generated). Add each new entry to the `entries` map in
   `demos/vite.config.js`. **Run `npm run build` before `jekyll build`**, locally and in CI.
@@ -35,7 +35,9 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   Categorical chart colours `--series-1…8` are a validated colour-blind-safe set for both surfaces;
   use them in fixed order and don't add new hues.
 - Layouts: `root.html` (head, rulers, header/footer, crosshair) → `default.html` (pages) and
-  `entry.html` (lab entries). `assets/site.js` draws the page rulers and the crosshair.
+  `entry.html` (lab entries). `assets/site.js` draws the page rulers, the crosshair (under the
+  text, never over it) and the Paper/Blueprint theme switch (defaults to the OS setting; the
+  visitor's choice is kept in localStorage and applied by an inline script in `<head>`).
 
 ### How a lab entry works
 
@@ -100,6 +102,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Design feedback round 1 (owner): crosshair moved under the text, bigger logo,
+  visible Paper/Blueprint theme switch, RSS removed (no feed), tagline broadened to not box the
+  owner in as charts-only — owner is a full-stack engineer across many fields.
 - 2026-09-30: Owner chose the blueprint design and a storytelling first entry built from the
   React Summit talk (github.com/iMoses/svg-react-slides) and the meetup sandbox
   (github.com/iMoses/d3-examples). Demo code was adapted: plain CSS instead of styled-components/

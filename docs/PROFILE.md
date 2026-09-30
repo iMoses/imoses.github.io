@@ -130,5 +130,6 @@ Also:
    (agents couldn't check it from their environment). It's currently left off the footer.
 2. Source of the "yearly sales 1988–2017" sample data used in the talk and in Fig. 01, so it
    can be credited. It's currently labelled only as sample data.
-3. Home page copy: "draws things in browsers" and the intro lines are agent drafts. Keep or rewrite.
+3. Home page tagline: owner found "draws things in browsers" too narrow (they're full-stack across
+   many fields). Now "Full-stack engineer, from pixels to pipelines" (agent draft) — confirm or rewrite.
 4. The talk-based entry says it's adapted from the talk and links it. OK, or drop the link?
