@@ -44,6 +44,12 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   put it inside a `snap` container, give fixed-height controls a height of `var(--u)`, and add
   `framed` to anything with a visible border. Text lines run in the 24px rows; baselines are not
   forced onto lines (deliberately — too brittle for too little gain).
+- **Styles come from CSS classes (owner's requirement).** Size things in CSS so they land on the grid
+  by themselves (line-heights, paddings and margins in rows; framed boxes = 1px border + 23px top
+  padding + rows + 24px bottom padding + 1px border, with the extra pixel taken back from the
+  margin). `site.js` only writes an inline style when it must: `--gx` on `<html>`, and a nudge or
+  `min-height` where content height can't be known in advance (currently only live figures). Don't
+  add inline styles in markup or React components; add a class instead.
 - Header is a drawing-style title block: logo, then the owner's name + tagline beside it (name is
   the page's `<h1>` on the home page only; lab entries keep their own title as `<h1>`), and the
   GitHub / LinkedIn / email icons (`_includes/icons/`) and the light/dark switch. The
@@ -131,6 +137,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Owner: no unnecessary inline styles; h2 is `line-height: 1; margin: var(--u) 0` and
+  the lab list has no special margin. Framed boxes, card thumbnails, post headings and `hr` resized
+  in CSS so the snapping script only nudges live figures.
 - 2026-09-30: Added GoatCounter visit stats (owner's account); theme-aware custom crosshair cursor
   (OS crosshairs ignore the theme); home intro opener changed to present work, no childhood backstory.
 - 2026-09-30: Design feedback round 5 (owner): boxed LinkedIn icon (balances the GitHub mark);

@@ -140,7 +140,10 @@ main, .site-header, .site-footer {
 }
 
 .framed {
-  margin-right: -1px; // 1px wider/taller than the squares so both borders sit on lines
+  // Framed boxes are whole squares + 1px so both borders sit on grid lines: 1px border, 23px top
+  // padding, rows of content, 24px bottom padding, 1px border. The extra pixel is taken back
+  // from the margins so whatever follows still starts on a line.
+  margin-right: -1px;
 }
 
 a {
@@ -165,7 +168,7 @@ h1, h2, h3, h4 {
 }
 
 h1 { font-size: clamp(2rem, 6vw, 2.75rem); line-height: calc(var(--u) * 2); margin: 0 0 var(--u); }
-h2 { font-size: 1.5rem; line-height: calc(var(--u) * 1.5); margin: var(--u) 0 0; }
+h2 { font-size: 1.5rem; line-height: 1; margin: var(--u) 0; }
 h3 { font-size: 1.125rem; margin: 0; }
 
 p, ul, ol { margin: 0 0 var(--u); }
@@ -175,7 +178,7 @@ img, svg { max-width: 100%; }
 hr {
   border: 0;
   border-top: 1px dashed var(--rule-dash);
-  margin: calc(var(--u) * 2) 0;
+  margin: calc(var(--u) * 2) 0 calc(var(--u) * 2 - 1px); // the 1px line is taken from the margin
 }
 
 // ——— Rulers & crosshair ———
@@ -385,7 +388,6 @@ hr {
 .lab-list {
   list-style: none;
   padding: 0;
-  margin: 0;
   display: grid;
   gap: var(--u);
 }
@@ -396,7 +398,8 @@ hr {
   grid-template-columns: calc(var(--u) * 5) 1fr;
   gap: var(--u);
   align-items: start;
-  padding: calc(var(--u) - 1px) var(--u);
+  margin-bottom: -1px;
+  padding: calc(var(--u) - 1px) var(--u) var(--u);
   color: inherit;
   text-decoration: none;
   background: color-mix(in srgb, var(--paper) 85%, transparent);
@@ -411,9 +414,10 @@ hr {
   .thumb {
     color: var(--accent);
 
-    svg { display: block; width: 100%; height: auto; }
+    svg { display: block; height: calc(var(--u) * 3); width: auto; max-width: 100%; }
   }
 
+  .fig-label { display: block; }
   h3 { margin: 0; font-size: 1.125rem; }
   p { margin: 0; color: var(--ink-2); }
 
@@ -429,7 +433,7 @@ hr {
 .entry-header {
   margin-bottom: var(--u);
 
-  h1 { margin-bottom: 12px; }
+  h1 { margin-bottom: var(--u); }
 
   time {
     display: block;
@@ -447,8 +451,8 @@ hr {
 
 .entry {
   h2 {
-    margin-top: 0;
-    padding-top: 11px; // + 1px border + 36px line = exactly two rows
+    margin: 0 0 12px;
+    padding-top: 11px; // 1px border + 11px + 24px line + 12px = exactly two rows
     border-top: 1px dashed var(--rule-dash);
   }
 
@@ -468,8 +472,8 @@ hr {
 // ——— Figures (live demos) ———
 
 .demo {
-  margin: 0 0 var(--u);
-  padding: calc(var(--u) - 1px) var(--u);
+  margin: 0 -1px calc(var(--u) - 1px) 0;
+  padding: calc(var(--u) - 1px) var(--u) var(--u);
   background: var(--paper);
   border: 1px solid var(--rule);
   box-shadow: 6px 6px 0 var(--grid-major);
@@ -495,6 +499,7 @@ code, pre { font-family: var(--font-mono); }
 
 code.highlighter-rouge {
   padding: 0.1em 0.35em;
+  line-height: 1; // never stretch the 24px text row
   font-size: 0.875em;
   background: var(--code-bg);
   border: 1px solid var(--rule);
@@ -503,7 +508,7 @@ code.highlighter-rouge {
 
 div.highlighter-rouge {
   position: relative;
-  margin: 0 0 var(--u);
+  margin: 0 -1px calc(var(--u) - 1px) 0;
   background: var(--code-bg);
   border: 1px solid var(--rule);
 
@@ -518,7 +523,7 @@ div.highlighter-rouge {
 
   pre {
     margin: 0;
-    padding: 12px var(--u);
+    padding: 12px var(--u) 11px; // label row + 12 + n rows + 11 + borders = whole squares + 1px
     overflow-x: auto;
     font-size: 0.8125rem;
     line-height: var(--u);

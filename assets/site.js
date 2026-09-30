@@ -37,18 +37,20 @@
       const { position, display } = getComputedStyle(el);
       return position !== 'absolute' && position !== 'fixed' && display !== 'none';
     });
+    // Clear previous nudges so the stylesheet's own margins apply, then add inline margin only
+    // where a block actually needs pushing down to the next line.
     for (const el of els) {
-      el.dataset.mt ??= parseFloat(getComputedStyle(el).marginTop) || 0;
-      if (el.parentElement.matches('.snap')) el.style.marginTop = `${el.dataset.mt}px`;
-      if (el.matches(FRAMED)) el.style.minHeight = '';
+      el.style.removeProperty('margin-top');
+      el.style.removeProperty('min-height');
+      if (!el.getAttribute('style')) el.removeAttribute('style');
     }
     for (const el of els) {
       if (el.parentElement.matches('.snap')) {
         const top = Math.round(el.getBoundingClientRect().top + scrollY);
         const dy = (U - (top % U)) % U;
-        if (dy) el.style.marginTop = `${+el.dataset.mt + dy}px`;
+        if (dy) el.style.marginTop = `${(parseFloat(getComputedStyle(el).marginTop) || 0) + dy}px`;
       }
-      if (el.matches(FRAMED)) {
+      if (el.matches(FRAMED) && (el.offsetHeight - 1) % U) {
         el.style.minHeight = `${Math.ceil((el.offsetHeight - 1) / U) * U + 1}px`;
       }
     }
@@ -110,6 +112,8 @@
       if (t > 0.75) text.style.opacity = 1;
       if (t < 1) return requestAnimationFrame(frame);
       line.style.strokeDasharray = '';
+      dot.style.opacity = '';
+      text.style.opacity = '';
       place(home.x, home.y);
     });
   }

@@ -84,7 +84,7 @@ function Legend({ data }) {
     <ul className="legend">
       {data.map((d, i) => (
         <li key={d.category}>
-          <i style={{ background: `var(--series-${i + 1})` }} />
+          <i className={`swatch-${i + 1}`} />
           {d.category} ({d.value})
         </li>
       ))}
@@ -124,7 +124,7 @@ function Gauge() {
   return (
     <>
       <GaugeChart value={value} label="Benchmark" />
-      <div className="controls" style={{ justifyContent: 'center' }}>
+      <div className="controls controls-center">
         <label>
           value
           <input type="range" min={0} max={100} value={target} onChange={(e) => setTarget(+e.target.value)} />

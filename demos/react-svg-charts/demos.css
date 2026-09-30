@@ -148,6 +148,19 @@
   border-radius: 2px;
 }
 
+.swatch-1 { background: var(--series-1); }
+.swatch-2 { background: var(--series-2); }
+.swatch-3 { background: var(--series-3); }
+.swatch-4 { background: var(--series-4); }
+.swatch-5 { background: var(--series-5); }
+.swatch-6 { background: var(--series-6); }
+.swatch-7 { background: var(--series-7); }
+.swatch-8 { background: var(--series-8); }
+
+.controls-center {
+  justify-content: center;
+}
+
 .gauge {
   text-align: center;
 }
