@@ -451,8 +451,10 @@ hr {
 
 .entry {
   h2 {
-    margin: 0 0 12px;
-    padding-top: 11px; // 1px border + 11px + 24px line + 12px = exactly two rows
+    // Same spacing as the home page h2 (one row above the heading text, one row below), with the
+    // dashed rule drawn in the row above: 1px border + (1 row - 1px) padding + 1 row of text.
+    margin: 0 0 var(--u);
+    padding-top: calc(var(--u) - 1px);
     border-top: 1px dashed var(--rule-dash);
   }
 
