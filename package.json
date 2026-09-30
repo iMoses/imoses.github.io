@@ -6,7 +6,8 @@
   "scripts": {
     "build": "vite build --config demos/vite.config.js",
     "watch": "vite build --config demos/vite.config.js --watch",
-    "og": "node tools/og/render.mjs"
+    "og": "node tools/og/render.mjs",
+    "check": "node tools/check-layout.mjs"
   },
   "dependencies": {
     "d3-array": "^3.2.4",

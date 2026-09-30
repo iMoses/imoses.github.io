@@ -97,8 +97,11 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 - Show real source code with `{% code_file demos/<entry>/File.jsx %}`; add `region=name` to show only
   the lines between `#region name` / `#endregion` comments, and `label=` to set the file caption.
   Never paste code by hand when the file exists, so the post can't drift from what runs.
-- Before pushing: build both, then check the pages in a real browser (light + dark, 390px wide),
-  with no console errors and no horizontal scroll.
+- Before pushing: `npm run build && bundle exec jekyll build && npm run check`. The check
+  (`tools/check-layout.mjs`) renders every page at desktop and phone width, light and dark, and fails
+  on anything off the grid, frames that aren't whole rows, in-flow vertical borders, stray inline
+  styles, horizontal overflow or console errors. Add new pages to its `pages` list. Also look at
+  the pages yourself: the check can't judge whether something looks right.
 
 ## Status (update this)
 
@@ -124,6 +127,36 @@ Drafts worth keeping:
 - `_drafts/memoir.md` — short, specific, strongest writing voice in the repo. Good basis for the About.
 - `_drafts/scalable-vector-graphics.md` — half-finished tutorial, partly paraphrased from MDN.
 
+## Working with the owner
+
+- **Loop:** work on the session's feature branch; the owner reviews and says "merge"; then
+  fast-forward `main` to the branch and push, which deploys. Watch the run with
+  `curl https://api.github.com/repos/iMoses/imoses.github.io/actions/runs?per_page=1` (the GitHub
+  API is reachable from the sandbox even when the MCP tools aren't). GitHub occasionally returns a
+  500 on push: retry with backoff.
+- **The owner reviews on Windows desktop (display scaling, e.g. 125–150%) and on mobile Chrome.**
+  Several bugs only showed up there: uneven frame edges at fractional scaling, and ~1px drift per
+  bordered block on mobile. Desktop Chromium at 100% doesn't reproduce these, so reason about
+  device-pixel rounding and don't trust a clean local render alone.
+- **The sandbox can't reach imoses.me or github.io** (egress policy), and Google Fonts may be
+  blocked, so local renders can fall back to other fonts. To test with the real fonts, serve IBM Plex
+  from `@fontsource/ibm-plex-*` and intercept the Google Fonts requests in Playwright. Only Chromium is
+  available (no WebKit/Safari).
+- **Owner preferences:** concise answers, lead with what's verified, don't guess; say plainly what
+  couldn't be checked. Push back with evidence when you disagree. Budget is limited, so keep each
+  session focused on one goal.
+
+## Lab ideas (not started)
+
+Candidates discussed with the owner for the next entries; the owner hasn't picked yet.
+- **SVG vs Canvas, live:** render N points both ways, drag N up and watch frame rate. Ties to the
+  owner's performance/rendering work and follows Fig. 01's "canvas wins when you draw a lot".
+- **"Keep these display settings?":** a whimsical Windows 3.11 resolution dialog that distorts the
+  page, counts down and reverts (from the owner's memoir draft). Shows personality; not a chart.
+- **Labels that avoid each other:** drag shapes, labels re-place to stay clear. Must be built from
+  scratch; don't copy AG Charts code.
+- **SVG shapes playground:** turn `_drafts/scalable-vector-graphics.md` into something interactive.
+
 ## Direction
 
 Confirmed by owner (2026-09-30):
@@ -139,8 +172,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
 - Each experiment: a small, self-contained, interactive piece (SVG / canvas / charting /
   performance) with a one-paragraph "what and why". Plain HTML/CSS/JS, no framework unless the
   experiment needs one. Must work on mobile and without breaking if JS fails to load.
-- Don't launch the Lab with fewer than 3 finished experiments; an empty or 1-item lab reads as
-  abandoned.
+- Aim for at least 3 experiments: one entry reads as a start, three as a practice. (Owner chose to
+  launch with one; this is a target, not a gate.)
 - Experiments are the owner's own from-scratch work. Don't copy AG Charts code (the enterprise
   package is commercially licensed).
 - No 3DFY work, no CV content on the site. The React Summit talk is used as source material for
@@ -150,6 +183,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Added `npm run check` (tools/check-layout.mjs) so layout rules are verified by a
+  committed script, not ad-hoc ones; documented the owner's review setup and lab ideas.
+- 2026-09-30: Crosshair coordinates update on scroll, not only on pointer move.
 - 2026-09-30: Logo intro smoothed (owner): the circle used to ride the pen tip and halt at full speed;
   it now has its own ease and decelerates to zero at its resting place.
 - 2026-09-30: Mobile Chrome drift (~1px per code block/figure): borders in the flow rounded to device

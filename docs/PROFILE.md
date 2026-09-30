@@ -134,7 +134,7 @@ Also:
    can be credited. It's currently labelled only as sample data.
 3. Home page tagline: owner found "draws things in browsers" too narrow (they're full-stack across
    many fields). Now "Full-stack engineer, from pixels to pipelines" (agent draft) — confirm or rewrite.
+4. The talk-based entry says it's adapted from the talk and links it. OK, or drop the link?
 5. Home "about me" paragraph is an agent draft built only from facts in this file — confirm or rewrite.
    (Owner rejected the "first code at ten" opener as too much: keep the about text about the
    present and relevant work, not childhood backstory.)
-4. The talk-based entry says it's adapted from the talk and links it. OK, or drop the link?
