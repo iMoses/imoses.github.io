@@ -2,6 +2,7 @@
 // the page works the same without it.
 (() => {
   const MAJOR = 96;
+  const fmt = new Intl.NumberFormat('en-US'); // 1,248 — always commas, whatever the visitor's locale
   const root = document.documentElement;
   const rx = document.querySelector('.ruler-x');
   const ry = document.querySelector('.ruler-y');
@@ -23,7 +24,7 @@
   function tick(side, pos, value) {
     const t = document.createElement('span');
     t.style[side] = `${pos}px`;
-    t.textContent = value;
+    t.textContent = fmt.format(value);
     return t;
   }
 
@@ -148,7 +149,7 @@
     if (off) return;
     ch.style.setProperty('--x', `${e.clientX}px`);
     ch.style.setProperty('--y', `${e.clientY}px`);
-    label.textContent = `(${Math.round(e.pageX) - gx}, ${Math.round(e.pageY)})`;
+    label.textContent = `(${fmt.format(Math.round(e.pageX) - gx)}, ${fmt.format(Math.round(e.pageY))})`;
   }, { passive: true });
   document.documentElement.addEventListener('pointerleave', () => ch.classList.remove('on'));
 })();
