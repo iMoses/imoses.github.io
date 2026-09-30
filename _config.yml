@@ -28,4 +28,4 @@ defaults:
 sass:
   style: compressed
 
-exclude: [ .idea, README.md, LICENSE ]
+exclude: [ .idea, README.md, LICENSE, AGENTS.md, CLAUDE.md, docs ]
