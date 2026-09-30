@@ -15,8 +15,9 @@
   --hot: #c6303a;
   --code-bg: #fffdf7;
   --code-ink: #24324d;
-  --rule: rgb(27 42 68 / 0.18);
-  --rule-dash: rgb(27 42 68 / 0.4);
+  // Rules are opaque (ink mixed into paper) so a line drawn over a grid line doesn't darken it.
+  --rule: color-mix(in srgb, var(--ink) 18%, var(--paper));
+  --rule-dash: color-mix(in srgb, var(--ink) 40%, var(--paper));
   // Own crosshair cursor: OS crosshairs (e.g. Windows) ignore the theme.
   --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25'%3E%3Cpath d='M12.5 1v23M1 12.5h23' stroke='%23f7f5ee' stroke-width='3'/%3E%3Cpath d='M12.5 2v21M2 12.5h21' stroke='%231b2a44' stroke-width='1'/%3E%3C/svg%3E") 12 12, crosshair;
   --track: #dcdfe6;
@@ -52,8 +53,8 @@
   --hot: #ff8a80;
   --code-bg: #0b1a2e;
   --code-ink: #dbe5f3;
-  --rule: rgb(232 238 247 / 0.2);
-  --rule-dash: rgb(232 238 247 / 0.4);
+  --rule: color-mix(in srgb, var(--ink) 20%, var(--paper));
+  --rule-dash: color-mix(in srgb, var(--ink) 40%, var(--paper));
   --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25'%3E%3Cpath d='M12.5 1v23M1 12.5h23' stroke='%2310233d' stroke-width='3'/%3E%3Cpath d='M12.5 2v21M2 12.5h21' stroke='%23e8eef7' stroke-width='1'/%3E%3C/svg%3E") 12 12, crosshair;
   --track: #2a3f5e;
 

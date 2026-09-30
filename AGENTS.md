@@ -48,6 +48,8 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   scaling (don't mix borders and shadows for this — they render differently at 125%/150%).
   Padding is plain `var(--u)`. Recolour with `--frame`, add a drop shadow with `--frame-extra`.
   Dashed rules (`hr`, entry `h2`, footer) are a 1px top border + `calc(var(--u) - 1px)` padding.
+  Line colours (`--rule`, `--rule-dash`) must be opaque (`color-mix` of ink into paper): frames sit
+  exactly on grid lines, and a translucent line would darken differently over minor vs major lines.
 - **Styles come from CSS classes (owner's requirement).** No inline styles in markup or components.
   `site.js` writes only what CSS can't know: `--gx` (grid origin) on `<html>`, and a `min-height`
   that rounds a framed box up to whole rows when its content height is unknowable (live figures,
@@ -143,6 +145,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Rule colours made opaque (owner noticed edges differing in dark mode: translucent
+  lines blended with the grid lines underneath).
 - 2026-09-30: Border+shadow frames looked uneven at fractional display scaling (owner noticed on the
   theme switch); frames are now one border on an ::after, which also simplified padding.
 - 2026-09-30: Owner: vertical margins should be whole rows so collapsing doesn't matter; removed the
