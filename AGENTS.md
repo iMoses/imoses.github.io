@@ -37,19 +37,25 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   use them in fixed order and don't add new hues.
 - **Layout grid (owner's requirement):** 24px minor / 96px major squares. The content column is a whole
   number of squares (672px on desktop) and the grid's origin is its top-left corner, so rulers and
-  the crosshair count from there (negative to the left). All spacing is in multiples of `--u` (24px).
-  Containers with class `snap` stack children without margin collapsing, and `site.js` nudges each
-  child down so its top edge sits on a grid line; boxes with class `framed` (cards, figures, code
-  blocks) are rounded up to whole squares + 1px so both borders sit on lines. New block-level UI:
-  put it inside a `snap` container, give fixed-height controls a height of `var(--u)`, and add
-  `framed` to anything with a visible border. Text lines run in the 24px rows; baselines are not
-  forced onto lines (deliberately — too brittle for too little gain).
-- **Styles come from CSS classes (owner's requirement).** Size things in CSS so they land on the grid
-  by themselves (line-heights, paddings and margins in rows; framed boxes = 1px border + 23px top
-  padding + rows + 24px bottom padding + 1px border, with the extra pixel taken back from the
-  margin). `site.js` only writes an inline style when it must: `--gx` on `<html>`, and a nudge or
-  `min-height` where content height can't be known in advance (currently only live figures). Don't
-  add inline styles in markup or React components; add a class instead.
+  the crosshair count from there (negative to the left).
+- **Vertical rhythm comes from CSS, not scripts.** Every vertical margin, padding and line-height is
+  whole rows (`var(--u)` = 24px), so blocks land on grid lines by themselves and margin collapsing
+  is harmless. Don't use one-off pixel values or negative margins to compensate for something;
+  size it in rows instead.
+- **Frames:** give any bordered box the `framed` class (code blocks get it via `@extend`). Its top
+  and left edges are a 1px border inside the box and its right and bottom edges are 1px shadows
+  just outside, so a box that is whole rows tall/wide has all four edges on grid lines. The border
+  eats 1px of the first row/column, hence `calc(var(--u) - 1px)` padding there. Recolour with
+  `--frame`, add a decorative shadow with `--frame-extra`. Dashed rules (`hr`, entry `h2`, footer)
+  follow the same pattern: 1px line + `calc(var(--u) - 1px)` padding = one row.
+- **Styles come from CSS classes (owner's requirement).** No inline styles in markup or components.
+  `site.js` writes only what CSS can't know: `--gx` (grid origin) on `<html>`, and a `min-height`
+  that rounds a framed box up to whole rows when its content height is unknowable (live figures,
+  code blocks with a scrollbar).
+- **The code is part of the showcase (owner).** The site is the owner's business card: how it's
+  written matters as much as how it looks. Keep CSS and JS small, consistent and commented where
+  the *why* isn't obvious; prefer one general rule over special cases; review your own diff before
+  committing.
 - Header is a drawing-style title block: logo, then the owner's name + tagline beside it (name is
   the page's `<h1>` on the home page only; lab entries keep their own title as `<h1>`), and the
   GitHub / LinkedIn / email icons (`_includes/icons/`) and the light/dark switch. The
@@ -137,6 +143,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Owner: vertical margins should be whole rows so collapsing doesn't matter; removed the
+  flex `snap` containers and the script's nudging. Frames reworked (inside top/left border + outside
+  right/bottom shadow) so boxes are exactly whole rows. Owner: code quality is part of the showcase.
 - 2026-09-30: Owner: no unnecessary inline styles; h2 is `margin: var(--u) 0` (24px line-height comes from the shared heading rule) and
   the lab list has no special margin. Framed boxes, card thumbnails, post headings and `hr` resized
   in CSS so the snapping script only nudges live figures.

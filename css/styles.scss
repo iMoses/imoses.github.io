@@ -102,8 +102,6 @@ body {
   position: relative;
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   padding: 0;
   color: var(--ink);
   font: 400 1rem/var(--u) var(--font-sans);
@@ -129,21 +127,21 @@ main, .site-header, .site-footer {
   margin-left: round(down, calc((100% - var(--measure)) / 2), 1px);
 }
 
-// Vertical rhythm: snapping containers stack their children without margin collapsing, and
-// site.js nudges each child down so its top edge lands on a grid line. Framed boxes (cards,
-// figures, code) also get their height rounded up so their bottom border sits on a line.
-.snap {
-  display: flex;
-  flex-direction: column;
-
-  > * { min-width: 0; }
-}
-
+// Vertical rhythm: every vertical margin, padding and line-height is whole rows (var(--u)), so
+// blocks land on grid lines by themselves and collapsing margins don't matter.
+//
+// Frames: the top and left edges are a 1px border inside the box, the right and bottom edges are
+// 1px shadows just outside it. A box that is whole rows tall and wide then has all four edges on
+// grid lines. The border eats 1px of the first row/column, hence `var(--u) - 1px` padding there.
+// Set --frame to recolour, --frame-extra for an additional shadow.
 .framed {
-  // Framed boxes are whole squares + 1px so both borders sit on grid lines: 1px border, 23px top
-  // padding, rows of content, 24px bottom padding, 1px border. The extra pixel is taken back
-  // from the margins so whatever follows still starts on a line.
-  margin-right: -1px;
+  --frame: var(--rule);
+  --frame-extra: 0 0 transparent;
+  padding: calc(var(--u) - 1px) var(--u) var(--u) calc(var(--u) - 1px);
+  border: 0;
+  border-top: 1px solid var(--frame);
+  border-left: 1px solid var(--frame);
+  box-shadow: 1px 0 var(--frame), 0 1px var(--frame), 1px 1px var(--frame), var(--frame-extra);
 }
 
 a {
@@ -178,7 +176,8 @@ img, svg { max-width: 100%; }
 hr {
   border: 0;
   border-top: 1px dashed var(--rule-dash);
-  margin: calc(var(--u) * 2) 0 calc(var(--u) * 2 - 1px); // the 1px line is taken from the margin
+  margin: var(--u) 0;
+  padding-top: calc(var(--u) - 1px); // line + padding = one row
 }
 
 // ——— Rulers & crosshair ———
@@ -335,19 +334,18 @@ hr {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: calc(var(--u) * 4 + 1px);
-  height: calc(var(--u) + 1px);
-  margin: 0 -1px -1px var(--u);
+  width: calc(var(--u) * 4);
+  height: var(--u);
+  margin-left: var(--u);
   padding: 0;
   font: 500 0.75rem/1 var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
   background: var(--paper);
-  border: 1px solid var(--rule);
   cursor: pointer;
 
-  &:hover { color: var(--accent); border-color: var(--accent); }
+  &:hover { --frame: var(--accent); color: var(--accent); }
   &[hidden] { display: none; }
 
   svg { width: 16px; height: 16px; }
@@ -358,7 +356,7 @@ hr {
 
 .site-footer {
   margin-top: var(--u);
-  padding: var(--u) 0 calc(var(--u) * 2);
+  padding: calc(var(--u) - 1px) 0 calc(var(--u) * 2);
   border-top: 1px dashed var(--rule-dash);
   font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
@@ -398,17 +396,14 @@ hr {
   grid-template-columns: calc(var(--u) * 5) 1fr;
   gap: var(--u);
   align-items: start;
-  margin-bottom: -1px;
-  padding: calc(var(--u) - 1px) var(--u) var(--u);
   color: inherit;
   text-decoration: none;
   background: color-mix(in srgb, var(--paper) 85%, transparent);
-  border: 1px solid var(--rule);
   transition: border-color 150ms, box-shadow 150ms;
 
   &:hover {
-    border-color: var(--accent);
-    box-shadow: 6px 6px 0 var(--grid-major);
+    --frame: var(--accent);
+    --frame-extra: 6px 6px 0 var(--grid-major);
   }
 
   .thumb {
@@ -453,7 +448,6 @@ hr {
   h2 {
     // Same spacing as the home page h2 (one row above the heading text, one row below), with the
     // dashed rule drawn in the row above: 1px border + (1 row - 1px) padding + 1 row of text.
-    margin: 0 0 var(--u);
     padding-top: calc(var(--u) - 1px);
     border-top: 1px dashed var(--rule-dash);
   }
@@ -474,11 +468,9 @@ hr {
 // ——— Figures (live demos) ———
 
 .demo {
-  margin: 0 -1px calc(var(--u) - 1px) 0;
-  padding: calc(var(--u) - 1px) var(--u) var(--u);
+  --frame-extra: 6px 6px 0 var(--grid-major);
+  margin: 0 0 var(--u);
   background: var(--paper);
-  border: 1px solid var(--rule);
-  box-shadow: 6px 6px 0 var(--grid-major);
 
   figcaption {
     margin-top: var(--u);
@@ -509,23 +501,24 @@ code.highlighter-rouge {
 }
 
 div.highlighter-rouge {
+  @extend .framed;
   position: relative;
-  margin: 0 -1px calc(var(--u) - 1px) 0;
+  margin: 0 0 var(--u);
+  padding: 0;
   background: var(--code-bg);
-  border: 1px solid var(--rule);
 
   &[data-file]::before {
     content: attr(data-file);
     display: block;
     padding: 0 var(--u);
-    font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono);
+    font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono); // + the dashed line = one row
     color: var(--ink-3);
     border-bottom: 1px dashed var(--rule-dash);
   }
 
   pre {
     margin: 0;
-    padding: 12px var(--u) 11px; // label row + 12 + n rows + 11 + borders = whole squares + 1px
+    padding: calc(var(--u) / 2) var(--u) calc(var(--u) / 2 - 1px); // - 1px: the frame's top border
     overflow-x: auto;
     font-size: 0.8125rem;
     line-height: var(--u);

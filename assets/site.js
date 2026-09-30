@@ -28,32 +28,18 @@
     return t;
   }
 
-  // Snap every block in a `.snap` container so its top edge sits on a grid line, and round framed
-  // boxes up to whole squares (+1px, so the bottom border lands on the line too).
+  // Everything is sized in whole rows by CSS, except content whose height can't be known in
+  // advance (live figures, code blocks with a scrollbar). Round those framed boxes up to whole
+  // rows so what follows them still starts on a grid line.
   const U = 24;
   const FRAMED = '.framed, div.highlighter-rouge';
 
-  function snap() {
-    const els = [...document.querySelectorAll(`.snap > *, ${FRAMED}`)].filter((el) => {
-      const { position, display } = getComputedStyle(el);
-      return position !== 'absolute' && position !== 'fixed' && display !== 'none';
-    });
-    // Clear previous nudges so the stylesheet's own margins apply, then add inline margin only
-    // where a block actually needs pushing down to the next line.
-    for (const el of els) {
-      el.style.removeProperty('margin-top');
+  function roundFrames() {
+    for (const el of document.querySelectorAll(FRAMED)) {
       el.style.removeProperty('min-height');
       if (!el.getAttribute('style')) el.removeAttribute('style');
-    }
-    for (const el of els) {
-      if (el.parentElement.matches('.snap')) {
-        const top = Math.round(el.getBoundingClientRect().top + scrollY);
-        const dy = (U - (top % U)) % U;
-        if (dy) el.style.marginTop = `${(parseFloat(getComputedStyle(el).marginTop) || 0) + dy}px`;
-      }
-      if (el.matches(FRAMED) && (el.offsetHeight - 1) % U) {
-        el.style.minHeight = `${Math.ceil((el.offsetHeight - 1) / U) * U + 1}px`;
-      }
+      const h = el.offsetHeight;
+      if (h % U) el.style.minHeight = `${Math.ceil(h / U) * U}px`;
     }
   }
 
@@ -63,7 +49,7 @@
     queued = true;
     requestAnimationFrame(() => {
       queued = false;
-      snap();
+      roundFrames();
       drawRulers();
     });
   }

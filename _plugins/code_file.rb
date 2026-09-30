@@ -36,7 +36,7 @@ module Jekyll
       lexer = Rouge::Lexer.find_fancy(lang, code) || Rouge::Lexers::PlainText
       html = Rouge::Formatters::HTML.new.format(lexer.lex(code))
       label = @opts["label"] || File.basename(@path)
-      %(<div class="language-#{lang} highlighter-rouge framed" data-file="#{label}">) +
+      %(<div class="language-#{lang} highlighter-rouge" data-file="#{label}">) +
         %(<div class="highlight"><pre class="highlight"><code>#{html}</code></pre></div></div>)
     end
   end
