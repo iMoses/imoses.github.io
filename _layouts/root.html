@@ -20,11 +20,15 @@
   <script type="module" src="/assets/demos/{{ page.demo }}.js?{{ timestamp }}"></script>
   {%- endif %}
 </head>
-<body>
+<body class="snap{% if page.url == '/' %} home{% endif %}">
   <div class="ruler ruler-x" aria-hidden="true"></div>
   <div class="ruler ruler-y" aria-hidden="true"></div>
   <header class="site-header">
     <a class="logo" href="/" aria-label="{{ site.title }} — home">{% include logo.svg %}</a>
+    <div class="header-actions">
+      <a class="icon-link" href="{{ site.data.contact.github }}" aria-label="GitHub" title="GitHub">{% include icons/github.svg %}</a>
+      <a class="icon-link" href="{{ site.data.contact.linkedin }}" aria-label="LinkedIn" title="LinkedIn">{% include icons/linkedin.svg %}</a>
+      <a class="icon-link" href="mailto:{{ site.data.contact.email }}" aria-label="Email" title="Email">{% include icons/mail.svg %}</a>
     <button class="theme-toggle" type="button" hidden>
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
@@ -34,8 +38,9 @@
       </svg>
       <span></span>
     </button>
+    </div>
   </header>
-  <main>{{ content }}</main>
+  <main class="snap">{{ content }}</main>
   <footer class="site-footer">
     <nav aria-label="Elsewhere">
       <a href="{{ site.data.contact.github }}">GitHub</a>

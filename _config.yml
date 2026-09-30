@@ -8,11 +8,15 @@ lang: en
 
 permalink: /lab/:slug/
 
+twitter:
+  card: summary_large_image
+
 defaults:
   - scope:
       path: ""
     values:
       layout: default
+      image: /assets/og.png
   - scope:
       path: ""
       type: posts

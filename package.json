@@ -5,7 +5,8 @@
   "description": "Interactive figures for lab entries. Built into assets/demos/ before Jekyll runs.",
   "scripts": {
     "build": "vite build --config demos/vite.config.js",
-    "watch": "vite build --config demos/vite.config.js --watch"
+    "watch": "vite build --config demos/vite.config.js --watch",
+    "og": "node tools/og/render.mjs"
   },
   "dependencies": {
     "d3-array": "^3.2.4",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.1",
-    "vite": "^8.3.1"
+    "vite": "^8.3.1",
+    "@fontsource/ibm-plex-mono": "^5.2.7"
   }
 }

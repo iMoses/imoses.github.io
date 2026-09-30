@@ -73,8 +73,13 @@
   @include light-tokens;
   --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
-  --measure: 42rem;
-  --gutter: 16px;
+  // Layout grid: 24px minor / 96px major squares. The content column is 28 × 24 = 672px, and the
+  // grid's origin (--gx, 0) is the column's top-left corner, so its edges sit on grid lines.
+  --u: 24px;
+  --major: 96px;
+  // Column: 672px, or as many whole squares as fit a phone with ≥ 12px either side.
+  --measure: min(672px, round(down, calc(100vw - 24px), 24px));
+  --gx: calc((100vw - var(--measure)) / 2); // fallback only; site.js sets the exact value
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,22 +91,25 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 
 body {
   position: relative;
   margin: 0;
   min-height: 100vh;
-  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   color: var(--ink);
-  font: 400 1.0625rem/1.65 var(--font-sans);
+  font: 400 1rem/var(--u) var(--font-sans);
   background-color: var(--paper);
   background-image:
     linear-gradient(var(--grid-major) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-size: var(--major) var(--major), var(--major) var(--major), var(--u) var(--u), var(--u) var(--u);
+  background-position: var(--gx) 0;
   overflow-x: hidden;
 }
 
@@ -112,8 +120,22 @@ body {
 main, .site-header, .site-footer {
   position: relative;
   z-index: 1;
-  max-width: var(--measure);
-  margin-inline: auto;
+  width: var(--measure);
+  margin-left: round(down, calc((100% - var(--measure)) / 2), 1px);
+}
+
+// Vertical rhythm: snapping containers stack their children without margin collapsing, and
+// site.js nudges each child down so its top edge lands on a grid line. Framed boxes (cards,
+// figures, code) also get their height rounded up so their bottom border sits on a line.
+.snap {
+  display: flex;
+  flex-direction: column;
+
+  > * { min-width: 0; }
+}
+
+.framed {
+  margin-right: -1px; // 1px wider/taller than the squares so both borders sit on lines
 }
 
 a {
@@ -132,23 +154,23 @@ a {
 h1, h2, h3, h4 {
   font-family: var(--font-mono);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: var(--u);
   letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
-h1 { font-size: clamp(2rem, 6vw, 2.75rem); margin: 0 0 0.25em; }
-h2 { font-size: 1.5rem; margin: 2.5em 0 0.6em; }
-h3 { font-size: 1.15rem; margin: 2em 0 0.5em; }
+h1 { font-size: clamp(2rem, 6vw, 2.75rem); line-height: calc(var(--u) * 2); margin: 0 0 var(--u); }
+h2 { font-size: 1.5rem; line-height: calc(var(--u) * 1.5); margin: var(--u) 0 var(--u); }
+h3 { font-size: 1.125rem; margin: var(--u) 0; }
 
-p, ul, ol { margin: 0 0 1em; }
+p, ul, ol { margin: 0 0 var(--u); }
 
 img, svg { max-width: 100%; }
 
 hr {
   border: 0;
   border-top: 1px dashed var(--rule);
-  margin: 3em 0;
+  margin: calc(var(--u) * 2) 0;
 }
 
 // ——— Rulers & crosshair ———
@@ -157,6 +179,7 @@ hr {
   position: absolute;
   font: 500 10px/1 var(--font-mono);
   color: var(--ink-3);
+  overflow: hidden;
   pointer-events: none;
   user-select: none;
 
@@ -220,18 +243,39 @@ hr {
 
 .site-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  padding: 40px 0 24px;
+  gap: var(--u);
+  padding: calc(var(--u) * 2) 0 var(--u);
 
   .logo {
-    display: inline-block;
+    display: block;
     color: var(--ink);
 
-    svg { display: block; width: clamp(110px, 28vw, 150px); height: auto; }
+    svg { display: block; height: calc(var(--u) * 4); width: auto; }
+
+    @media (max-width: 480px) { svg { height: calc(var(--u) * 3); } }
 
     &:hover { color: var(--accent); }
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--u);
+
+  .icon-link {
+    display: grid;
+    place-items: center;
+    width: var(--u);
+    height: var(--u);
+    color: var(--ink-2);
+
+    &:hover { color: var(--accent); }
+
+    svg { width: 18px; height: 18px; }
   }
 }
 
@@ -239,7 +283,8 @@ hr {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 10px;
+  height: var(--u);
+  padding: 0 10px;
   font: 500 0.75rem/1 var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -258,17 +303,16 @@ hr {
 }
 
 .site-footer {
-  margin-top: 6rem;
-  padding: 24px 0 48px;
+  margin-top: calc(var(--u) * 4);
+  padding: var(--u) 0 calc(var(--u) * 2);
   border-top: 1px dashed var(--rule);
-  font: 400 0.875rem/1.6 var(--font-mono);
+  font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
 
   nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5em 1.5em;
-    margin-bottom: 0.75em;
+    gap: 0 var(--u);
 
     a { color: var(--ink-2); }
   }
@@ -278,8 +322,8 @@ hr {
 }
 
 .fig-label {
-  margin: 0 0 0.5em;
-  font: 500 0.75rem/1 var(--font-mono);
+  margin: 0;
+  font: 500 0.75rem/var(--u) var(--font-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
@@ -289,8 +333,8 @@ hr {
 
 .intro {
   .tagline {
-    margin: 0 0 1.5em;
-    font: 400 1.25rem/1.4 var(--font-mono);
+    margin: 0 0 var(--u);
+    font: 400 1.25rem/var(--u) var(--font-mono);
     color: var(--ink-2);
   }
 }
@@ -300,26 +344,25 @@ hr {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 20px;
+  gap: var(--u);
 }
 
 .lab-card {
   position: relative;
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 20px;
-  align-items: center;
-  padding: 20px;
+  grid-template-columns: calc(var(--u) * 5) 1fr;
+  gap: var(--u);
+  align-items: start;
+  padding: calc(var(--u) - 1px) var(--u);
   color: inherit;
   text-decoration: none;
   background: color-mix(in srgb, var(--paper) 85%, transparent);
   border: 1px solid var(--rule);
-  transition: border-color 150ms, transform 150ms;
+  transition: border-color 150ms, box-shadow 150ms;
 
   &:hover {
     border-color: var(--accent);
-    transform: translate(-2px, -2px);
-    box-shadow: 4px 4px 0 var(--grid-major);
+    box-shadow: 6px 6px 0 var(--grid-major);
   }
 
   .thumb {
@@ -328,8 +371,8 @@ hr {
     svg { display: block; width: 100%; height: auto; }
   }
 
-  h3 { margin: 0 0 0.25em; font-size: 1.1rem; }
-  p { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+  h3 { margin: 0; font-size: 1.125rem; }
+  p { margin: 0; color: var(--ink-2); }
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
@@ -341,60 +384,65 @@ hr {
 // ——— Lab entry ———
 
 .entry-header {
-  margin-bottom: 2.5em;
+  margin-bottom: var(--u);
+
+  h1 { margin-bottom: var(--u); }
 
   time {
-    font: 400 0.875rem/1 var(--font-mono);
+    display: block;
+    margin-bottom: var(--u);
+    font: 400 0.875rem/var(--u) var(--font-mono);
     color: var(--ink-3);
   }
 }
 
 .entry-subtitle {
-  margin: 0.5em 0 1em;
-  font-size: 1.2rem;
+  margin: 0 0 var(--u);
+  font-size: 1.25rem;
+  line-height: calc(var(--u) * 1.5);
   color: var(--ink-2);
 }
 
 .entry {
   h2 {
-    padding-top: 1em;
+    padding-top: var(--u);
     border-top: 1px dashed var(--rule);
   }
 
   blockquote {
-    margin: 1.5em 0;
-    padding: 0.25em 0 0.25em 1.25em;
+    margin: 0 0 var(--u);
+    padding: 0 0 0 var(--u);
     border-left: 2px solid var(--accent);
     color: var(--ink-2);
   }
 }
 
 .back {
-  margin-top: 4em;
+  margin-top: calc(var(--u) * 2);
   font-family: var(--font-mono);
 }
 
 // ——— Figures (live demos) ———
 
 .demo {
-  margin: 1.75em 0 2em;
-  padding: 20px;
+  margin: 0 0 var(--u);
+  padding: calc(var(--u) - 1px) var(--u);
   background: var(--paper);
   border: 1px solid var(--rule);
   box-shadow: 6px 6px 0 var(--grid-major);
 
   figcaption {
-    margin-top: 12px;
-    font: 400 0.8125rem/1.5 var(--font-mono);
+    margin-top: var(--u);
+    font: 400 0.8125rem/var(--u) var(--font-mono);
     color: var(--ink-3);
   }
 }
 
 .demo-fallback {
   margin: 0;
-  padding: 2em 0;
+  padding: calc(var(--u) * 2) 0;
   text-align: center;
-  font: 400 0.875rem/1.4 var(--font-mono);
+  font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
 }
 
@@ -412,25 +460,25 @@ code.highlighter-rouge {
 
 div.highlighter-rouge {
   position: relative;
-  margin: 1.5em 0;
+  margin: 0 0 var(--u);
   background: var(--code-bg);
   border: 1px solid var(--rule);
 
   &[data-file]::before {
     content: attr(data-file);
     display: block;
-    padding: 6px 14px;
-    font: 500 0.75rem/1.4 var(--font-mono);
+    padding: 0 var(--u);
+    font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono);
     color: var(--ink-3);
     border-bottom: 1px dashed var(--rule);
   }
 
   pre {
     margin: 0;
-    padding: 14px;
+    padding: 12px var(--u);
     overflow-x: auto;
     font-size: 0.8125rem;
-    line-height: 1.6;
+    line-height: var(--u);
     color: var(--code-ink);
     tab-size: 2;
   }
@@ -445,6 +493,24 @@ div.highlighter-rouge {
   .na, .nb, .bp { color: var(--syn-attr); }
   .nf, .fm { color: var(--accent); }
 }
+
+// ——— Logo: drawn onto the blueprint on the home page ———
+
+.home .logo {
+  .logo-stroke {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+  }
+
+  .logo-fill {
+    opacity: 0;
+    animation: ink 0.6s ease-out 1.4s forwards;
+  }
+}
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes ink { to { opacity: 1; } }
 
 // ——— Motion ———
 

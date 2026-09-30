@@ -74,3 +74,4 @@ typings/
 
 # generated demo bundles
 assets/demos
+tools/og/.render.html

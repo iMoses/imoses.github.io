@@ -35,6 +35,20 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 - Styles: single file `css/styles.scss`. All colours are tokens on `:root`, redefined for dark mode.
   Categorical chart colours `--series-1…8` are a validated colour-blind-safe set for both surfaces;
   use them in fixed order and don't add new hues.
+- **Layout grid (owner's requirement):** 24px minor / 96px major squares. The content column is a whole
+  number of squares (672px on desktop) and the grid's origin is its top-left corner, so rulers and
+  the crosshair count from there (negative to the left). All spacing is in multiples of `--u` (24px).
+  Containers with class `snap` stack children without margin collapsing, and `site.js` nudges each
+  child down so its top edge sits on a grid line; boxes with class `framed` (cards, figures, code
+  blocks) are rounded up to whole squares + 1px so both borders sit on lines. New block-level UI:
+  put it inside a `snap` container, give fixed-height controls a height of `var(--u)`, and add
+  `framed` to anything with a visible border. Text lines run in the 24px rows; baselines are not
+  forced onto lines (deliberately — too brittle for too little gain).
+- Header: logo (draws itself on the home page; disabled under reduced motion), GitHub / LinkedIn /
+  email icons (`_includes/icons/`), light/dark switch. Footer repeats the links.
+- Link previews: `assets/og.png` (1200×630) is set as the default `image` for jekyll-seo-tag.
+  Regenerate it with `npm run og` whenever the tagline or logo changes (template in `tools/og/`;
+  needs Playwright + Chromium, see `tools/og/render.mjs`).
 - Layouts: `root.html` (head, rulers, header/footer, crosshair) → `default.html` (pages) and
   `entry.html` (lab entries). `assets/site.js` draws the page rulers, the crosshair (under the
   text, never over it) and the light/dark switch (sun/moon icon + text) (defaults to the OS setting; the
@@ -102,6 +116,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Design feedback round 3 (owner): background grid aligned to the layout, and every
+  block/box/button snapped to it (spacing may flex to make that work). Added link-preview image,
+  logo draw-in animation, contact icons in the header.
 - 2026-09-30: Design feedback round 2 (owner): external links open in a new tab; home intro is a
   general "about me" (LinkedIn-summary style), not current-job-only and no link to the AG Charts
   repo; standard light/dark toggle with icon + text.
