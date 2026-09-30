@@ -44,8 +44,14 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   put it inside a `snap` container, give fixed-height controls a height of `var(--u)`, and add
   `framed` to anything with a visible border. Text lines run in the 24px rows; baselines are not
   forced onto lines (deliberately — too brittle for too little gain).
-- Header: logo (draws itself on the home page; disabled under reduced motion), GitHub / LinkedIn /
-  email icons (`_includes/icons/`), light/dark switch. Footer repeats the links.
+- Header: logo, GitHub / LinkedIn / email icons (`_includes/icons/`) and the light/dark switch. The
+  icons and switch are fixed-size cells on the grid (1 square each, 1-square spacer, 4-square switch)
+  so changing the switch's label never moves anything. Footer repeats the links.
+- Logo (`_includes/logo.svg`): one continuous hand-drawn line (open on the right for the text), a
+  small circle whose inside is cut out of the line with an SVG mask (so the grid shows through),
+  and the lettering. On the home page `site.js` animates it: the line draws in one stroke while
+  the small circle rides the pen tip to its resting place. The inline `<head>` script hides the
+  parts before first paint (`.logo-intro`), only when motion is allowed, with a 4s failsafe.
 - Link previews: `assets/og.png` (1200×630) is set as the default `image` for jekyll-seo-tag.
   Regenerate it with `npm run og` whenever the tagline or logo changes (template in `tools/og/`;
   needs Playwright + Chromium, see `tools/og/render.mjs`).
@@ -116,6 +122,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Design feedback round 4 (owner): logo line made continuous, small circle masks the
+  line inside it, intro animation reworked (single stroke + circle rides into place); tighter
+  Lab-title/card/footer spacing; header controls fixed on the grid.
 - 2026-09-30: Design feedback round 3 (owner): background grid aligned to the layout, and every
   block/box/button snapped to it (spacing may flex to make that work). Added link-preview image,
   logo draw-in animation, contact icons in the header.

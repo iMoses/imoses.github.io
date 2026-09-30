@@ -69,6 +69,51 @@
   new ResizeObserver(layout).observe(document.body);
   document.fonts?.ready.then(layout);
 
+  // Logo intro: the line draws itself in one stroke, and the small circle rides the pen
+  // along it until it reaches its resting place, where it stops.
+  if (root.classList.contains('logo-intro')) {
+    const svg = document.querySelector('.site-header .logo svg');
+    const line = svg.querySelector('.logo-stroke');
+    const dot = svg.querySelector('.logo-dot');
+    const hole = svg.querySelector('.logo-hole');
+    const text = svg.querySelector('.logo-fill');
+    const home = { x: +dot.getAttribute('cx'), y: +dot.getAttribute('cy') };
+    const L = line.getTotalLength();
+
+    let rest = 0;
+    for (let i = 0, best = Infinity; i <= 400; i++) {
+      const p = line.getPointAtLength((L * i) / 400);
+      const d = Math.hypot(p.x - home.x, p.y - home.y);
+      if (d < best) [best, rest] = [d, (L * i) / 400];
+    }
+    const restPoint = line.getPointAtLength(rest);
+    const ease = (t) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
+    const place = (x, y) => {
+      for (const c of [dot, hole]) { c.setAttribute('cx', x); c.setAttribute('cy', y); }
+    };
+
+    const DURATION = 1800;
+    const start = performance.now();
+    line.style.strokeDasharray = `0 ${L}`;
+    dot.style.opacity = 1;
+    text.style.opacity = 0;
+    root.classList.remove('logo-intro');
+
+    requestAnimationFrame(function frame(now) {
+      const t = Math.min((now - start) / DURATION, 1);
+      const drawn = ease(t) * L;
+      line.style.strokeDasharray = `${drawn} ${L}`;
+      const along = Math.min(drawn, rest);
+      const p = line.getPointAtLength(along);
+      const k = rest ? along / rest : 1; // ease the tiny path-to-centre offset in over the ride
+      place(p.x + (home.x - restPoint.x) * k, p.y + (home.y - restPoint.y) * k);
+      if (t > 0.75) text.style.opacity = 1;
+      if (t < 1) return requestAnimationFrame(frame);
+      line.style.strokeDasharray = '';
+      place(home.x, home.y);
+    });
+  }
+
   // Light (paper) / dark (blueprint) switch. Defaults to the OS setting; a choice is remembered.
   const toggle = document.querySelector('.theme-toggle');
   const osDark = matchMedia('(prefers-color-scheme: dark)');

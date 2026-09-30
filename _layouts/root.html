@@ -7,6 +7,12 @@
   <meta name="color-scheme" content="light dark"/>
   <script>
     try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
+    {%- if page.url == '/' %}
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('logo-intro');
+      setTimeout(() => document.documentElement.classList.remove('logo-intro'), 4000); // never stay hidden
+    }
+    {%- endif %}
   </script>
   {% seo %}
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml"/>
