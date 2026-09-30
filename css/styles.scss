@@ -97,7 +97,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; }
 
 body {
   position: relative;
@@ -131,6 +131,22 @@ main, .site-header, .site-footer {
 // Vertical rhythm: every vertical margin, padding and line-height is whole rows (var(--u)), so
 // blocks land on grid lines by themselves and collapsing margins don't matter.
 //
+// Lines never take up layout space: browsers round border widths to whole device pixels (on a
+// 2.625x phone a 1px border is ~0.76 CSS px), which would nudge everything after it off the grid.
+// A dashed rule is drawn by ::before along the element's top edge instead; pass $reserve to also
+// give the element a row of padding to hold it.
+@mixin rule-above($reserve: true) {
+  position: relative;
+  @if $reserve { padding-top: var(--u); }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    border-top: 1px dashed var(--rule-dash);
+  }
+}
+
 // Frames: the box itself is whole rows; its frame is one 1px border drawn by a pseudo-element
 // that reaches 1px past the right and bottom edges, so all four lines sit on grid lines and render
 // identically at any display scaling. Set --frame to recolour, --frame-extra for a drop shadow.
@@ -181,10 +197,10 @@ p, ul, ol { margin: 0 0 var(--u); }
 img, svg { max-width: 100%; }
 
 hr {
-  border: 0;
-  border-top: 1px dashed var(--rule-dash);
+  @include rule-above;
+  height: 0;
   margin: var(--u) 0;
-  padding-top: calc(var(--u) - 1px); // line + padding = one row
+  border: 0;
 }
 
 // ——— Rulers & crosshair ———
@@ -362,9 +378,9 @@ hr {
 }
 
 .site-footer {
+  @include rule-above;
   margin-top: var(--u);
-  padding: calc(var(--u) - 1px) 0 calc(var(--u) * 2);
-  border-top: 1px dashed var(--rule-dash);
+  padding-bottom: calc(var(--u) * 2);
   font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
 
@@ -452,10 +468,8 @@ hr {
 
 .entry {
   h2 {
-    // Same spacing as the home page h2 (one row above the heading text, one row below), with the
-    // dashed rule drawn in the row above: 1px border + (1 row - 1px) padding + 1 row of text.
-    padding-top: calc(var(--u) - 1px);
-    border-top: 1px dashed var(--rule-dash);
+    // Same spacing as the home page h2, with a dashed rule in the row above the heading text.
+    @include rule-above;
   }
 
   blockquote {
@@ -516,10 +530,11 @@ div.highlighter-rouge {
     content: attr(data-file);
     display: block;
     padding: 0 var(--u);
-    font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono); // + its dashed line = one row
+    font: 500 0.75rem/var(--u) var(--font-mono);
     color: var(--ink-3);
-    border-bottom: 1px dashed var(--rule-dash);
   }
+
+  &[data-file] .highlight { @include rule-above($reserve: false); } // divider under the file label
 
   pre {
     margin: 0;

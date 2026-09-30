@@ -47,7 +47,11 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   right and bottom edges, so all four lines sit on grid lines and render identically at any display
   scaling (don't mix borders and shadows for this — they render differently at 125%/150%).
   Padding is plain `var(--u)`. Recolour with `--frame`, add a drop shadow with `--frame-extra`.
-  Dashed rules (`hr`, entry `h2`, footer) are a 1px top border + `calc(var(--u) - 1px)` padding.
+- **Lines never take up layout space.** Browsers round border widths to whole device pixels (on a
+  2.625x phone a 1px border is ~0.76 CSS px), so a border in the flow slowly pushes everything below
+  it off the grid (owner saw ~1px drift per code block on mobile Chrome). Frames use `::after`;
+  dashed rules (`hr`, entry `h2`, footer, code-label divider) use the `rule-above` mixin (`::before`
+  line + a row of padding). Never put a vertical border on an in-flow block.
   Line colours (`--rule`, `--rule-dash`) must be opaque (`color-mix` of ink into paper): frames sit
   exactly on grid lines, and a translucent line would darken differently over minor vs major lines.
 - **Styles come from CSS classes (owner's requirement).** No inline styles in markup or components.
@@ -145,6 +149,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Mobile Chrome drift (~1px per code block/figure): borders in the flow rounded to device
+  pixels. All dashed rules moved to a no-layout `rule-above` mixin; `roundFrames` uses exact
+  fractional heights; added unprefixed `text-size-adjust`.
 - 2026-09-30: Rule colours made opaque (owner noticed edges differing in dark mode: translucent
   lines blended with the grid lines underneath).
 - 2026-09-30: Border+shadow frames looked uneven at fractional display scaling (owner noticed on the

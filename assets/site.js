@@ -38,8 +38,11 @@
     for (const el of document.querySelectorAll(FRAMED)) {
       el.style.removeProperty('min-height');
       if (!el.getAttribute('style')) el.removeAttribute('style');
-      const h = el.offsetHeight;
-      if (h % U) el.style.minHeight = `${Math.ceil(h / U) * U}px`;
+      // Exact (fractional) height: scaled SVGs can be e.g. 336.3px tall, which offsetHeight would
+      // round to 336 and treat as whole rows, leaving everything below a fraction off the grid.
+      const h = el.getBoundingClientRect().height;
+      const rows = Math.ceil(h / U - 0.001);
+      if (Math.abs(h - rows * U) > 0.001) el.style.minHeight = `${rows * U}px`;
     }
   }
 
