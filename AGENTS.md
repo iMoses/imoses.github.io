@@ -137,7 +137,7 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
-- 2026-09-30: Owner: no unnecessary inline styles; h2 is `line-height: 1; margin: var(--u) 0` and
+- 2026-09-30: Owner: no unnecessary inline styles; h2 is `margin: var(--u) 0` (24px line-height comes from the shared heading rule) and
   the lab list has no special margin. Framed boxes, card thumbnails, post headings and `hr` resized
   in CSS so the snapping script only nudges live figures.
 - 2026-09-30: Added GoatCounter visit stats (owner's account); theme-aware custom crosshair cursor

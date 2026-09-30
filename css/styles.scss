@@ -168,7 +168,7 @@ h1, h2, h3, h4 {
 }
 
 h1 { font-size: clamp(2rem, 6vw, 2.75rem); line-height: calc(var(--u) * 2); margin: 0 0 var(--u); }
-h2 { font-size: 1.5rem; line-height: 1; margin: var(--u) 0; }
+h2 { font-size: 1.5rem; margin: var(--u) 0; }
 h3 { font-size: 1.125rem; margin: 0; }
 
 p, ul, ol { margin: 0 0 var(--u); }
