@@ -1,6 +1,6 @@
 # Owner profile — source of truth for all site content
 
-Filled in by Ido, in his own words. Agents: use only what's written here; never fill blanks yourself.
+Filled in by Ido, in Ido's own words. Agents: use only what's written here; never fill blanks yourself.
 Rough notes and bullet points are fine — agents will do the writing.
 **This repo is public** — only write what you're happy for anyone to read.
 
