@@ -136,13 +136,28 @@
   const label = ch.querySelector('.ch-label');
   const quiet = 'a, button, input, select, textarea, .demo, pre';
 
-  addEventListener('pointermove', (e) => {
-    const off = e.target.closest?.(quiet);
+  // Track the pointer in viewport coordinates and redraw on scroll too: scrolling moves the page
+  // under a still pointer, which changes both the page coordinates and what the pointer is over.
+  let pointer = null;
+
+  function update() {
+    if (!pointer) return;
+    const { x, y } = pointer;
+    const off = document.elementFromPoint(x, y)?.closest(quiet);
     ch.classList.toggle('on', !off);
     if (off) return;
-    ch.style.setProperty('--x', `${e.clientX}px`);
-    ch.style.setProperty('--y', `${e.clientY}px`);
-    label.textContent = `(${fmt.format(Math.round(e.pageX) - gx)}, ${fmt.format(Math.round(e.pageY))})`;
+    ch.style.setProperty('--x', `${x}px`);
+    ch.style.setProperty('--y', `${y}px`);
+    label.textContent = `(${fmt.format(Math.round(x + scrollX) - gx)}, ${fmt.format(Math.round(y + scrollY))})`;
+  }
+
+  addEventListener('pointermove', (e) => {
+    pointer = { x: e.clientX, y: e.clientY };
+    update();
   }, { passive: true });
-  document.documentElement.addEventListener('pointerleave', () => ch.classList.remove('on'));
+  addEventListener('scroll', update, { passive: true });
+  document.documentElement.addEventListener('pointerleave', () => {
+    pointer = null;
+    ch.classList.remove('on');
+  });
 })();
