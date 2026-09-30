@@ -36,6 +36,8 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 Last updated: 2026-09-30
 
 Done:
+- 2026-09-30: `docs/PROFILE.md` filled from the owner's LinkedIn export, detailed CV and the
+  public ag-charts git history. Remaining gaps are listed in its "Open questions" section.
 - 2026-09-29: Build infrastructure updated (Jekyll 4.4.1, Ruby 3.4, current Pages actions,
   Sass modules). Deployed successfully from `main`.
 
@@ -62,6 +64,11 @@ Drafts worth keeping:
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: The owner's current work is AG Charts (open source, AG Grid). Their public GitHub
+  history there is the primary evidence for the site; to refresh it, clone
+  `https://github.com/ag-grid/ag-charts` (blobless) and use `git log origin/latest --author=iMoses`.
+- 2026-09-30: The source CV/LinkedIn PDFs are not stored in the repo (it's public). Their relevant
+  facts are summarised in `docs/PROFILE.md` with source tags.
 - 2026-09-30: Repo files (this file + `docs/PROFILE.md`) are the handoff mechanism between agents.
 
 ## Open questions for the owner
