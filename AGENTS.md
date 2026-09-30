@@ -42,12 +42,12 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   whole rows (`var(--u)` = 24px), so blocks land on grid lines by themselves and margin collapsing
   is harmless. Don't use one-off pixel values or negative margins to compensate for something;
   size it in rows instead.
-- **Frames:** give any bordered box the `framed` class (code blocks get it via `@extend`). Its top
-  and left edges are a 1px border inside the box and its right and bottom edges are 1px shadows
-  just outside, so a box that is whole rows tall/wide has all four edges on grid lines. The border
-  eats 1px of the first row/column, hence `calc(var(--u) - 1px)` padding there. Recolour with
-  `--frame`, add a decorative shadow with `--frame-extra`. Dashed rules (`hr`, entry `h2`, footer)
-  follow the same pattern: 1px line + `calc(var(--u) - 1px)` padding = one row.
+- **Frames:** give any bordered box the `framed` class (code blocks get it via `@extend`). The box
+  itself is whole rows; its frame is a single 1px border on an `::after` that reaches 1px past the
+  right and bottom edges, so all four lines sit on grid lines and render identically at any display
+  scaling (don't mix borders and shadows for this — they render differently at 125%/150%).
+  Padding is plain `var(--u)`. Recolour with `--frame`, add a drop shadow with `--frame-extra`.
+  Dashed rules (`hr`, entry `h2`, footer) are a 1px top border + `calc(var(--u) - 1px)` padding.
 - **Styles come from CSS classes (owner's requirement).** No inline styles in markup or components.
   `site.js` writes only what CSS can't know: `--gx` (grid origin) on `<html>`, and a `min-height`
   that rounds a framed box up to whole rows when its content height is unknowable (live figures,
@@ -143,6 +143,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Border+shadow frames looked uneven at fractional display scaling (owner noticed on the
+  theme switch); frames are now one border on an ::after, which also simplified padding.
 - 2026-09-30: Owner: vertical margins should be whole rows so collapsing doesn't matter; removed the
   flex `snap` containers and the script's nudging. Frames reworked (inside top/left border + outside
   right/bottom shadow) so boxes are exactly whole rows. Owner: code quality is part of the showcase.

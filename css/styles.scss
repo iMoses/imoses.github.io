@@ -130,18 +130,24 @@ main, .site-header, .site-footer {
 // Vertical rhythm: every vertical margin, padding and line-height is whole rows (var(--u)), so
 // blocks land on grid lines by themselves and collapsing margins don't matter.
 //
-// Frames: the top and left edges are a 1px border inside the box, the right and bottom edges are
-// 1px shadows just outside it. A box that is whole rows tall and wide then has all four edges on
-// grid lines. The border eats 1px of the first row/column, hence `var(--u) - 1px` padding there.
-// Set --frame to recolour, --frame-extra for an additional shadow.
+// Frames: the box itself is whole rows; its frame is one 1px border drawn by a pseudo-element
+// that reaches 1px past the right and bottom edges, so all four lines sit on grid lines and render
+// identically at any display scaling. Set --frame to recolour, --frame-extra for a drop shadow.
 .framed {
   --frame: var(--rule);
-  --frame-extra: 0 0 transparent;
-  padding: calc(var(--u) - 1px) var(--u) var(--u) calc(var(--u) - 1px);
-  border: 0;
-  border-top: 1px solid var(--frame);
-  border-left: 1px solid var(--frame);
-  box-shadow: 1px 0 var(--frame), 0 1px var(--frame), 1px 1px var(--frame), var(--frame-extra);
+  position: relative;
+  padding: var(--u);
+  border: 0; // the frame is drawn by ::after (also clears native borders, e.g. on <button>)
+  box-shadow: var(--frame-extra, none);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0 -1px -1px 0;
+    border: 1px solid var(--frame);
+    pointer-events: none;
+    transition: border-color 150ms;
+  }
 }
 
 a {
@@ -391,7 +397,6 @@ hr {
 }
 
 .lab-card {
-  position: relative;
   display: grid;
   grid-template-columns: calc(var(--u) * 5) 1fr;
   gap: var(--u);
@@ -399,7 +404,7 @@ hr {
   color: inherit;
   text-decoration: none;
   background: color-mix(in srgb, var(--paper) 85%, transparent);
-  transition: border-color 150ms, box-shadow 150ms;
+  transition: box-shadow 150ms;
 
   &:hover {
     --frame: var(--accent);
@@ -502,7 +507,6 @@ code.highlighter-rouge {
 
 div.highlighter-rouge {
   @extend .framed;
-  position: relative;
   margin: 0 0 var(--u);
   padding: 0;
   background: var(--code-bg);
@@ -511,14 +515,14 @@ div.highlighter-rouge {
     content: attr(data-file);
     display: block;
     padding: 0 var(--u);
-    font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono); // + the dashed line = one row
+    font: 500 0.75rem/calc(var(--u) - 1px) var(--font-mono); // + its dashed line = one row
     color: var(--ink-3);
     border-bottom: 1px dashed var(--rule-dash);
   }
 
   pre {
     margin: 0;
-    padding: calc(var(--u) / 2) var(--u) calc(var(--u) / 2 - 1px); // - 1px: the frame's top border
+    padding: calc(var(--u) / 2) var(--u);
     overflow-x: auto;
     font-size: 0.8125rem;
     line-height: var(--u);
