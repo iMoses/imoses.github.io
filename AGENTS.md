@@ -63,20 +63,25 @@ Confirmed by owner (2026-09-30):
 - No freelance / consulting / "open to work" offer.
 - English. Professional, can be whimsical. Less is more.
 
-Proposed structure (awaiting owner's pick; see the session of 2026-09-30):
-- **A (recommended). One page:** short intro in the memoir's voice → "Now" (AG Charts:
-  infrastructure, performance, refactoring, linking to the owner's public contributions) →
-  a few showcase items → links (GitHub, LinkedIn for the CV, email). Optionally one small
-  interactive SVG/canvas touch as the whimsical element.
-- **B. Lab:** minimal intro plus a growing set of small interactive experiments. Strongest
-  showcase, needs ongoing effort.
-- **C. Card:** name, one line, links. Least effort, weakest showcase.
+Structure chosen by owner (2026-09-30): **Lab.**
+- Homepage: a few lines of intro (who, and one line on "now": AG Charts infrastructure,
+  performance and refactoring, linking to the owner's public contributions), then a grid of
+  experiments, then links (GitHub, LinkedIn for the CV, email).
+- Each experiment: a small, self-contained, interactive piece (SVG / canvas / charting /
+  performance) with a one-paragraph "what and why". Plain HTML/CSS/JS, no framework unless the
+  experiment needs one. Must work on mobile and without breaking if JS fails to load.
+- Don't launch the Lab with fewer than 3 finished experiments; an empty or 1-item lab reads as
+  abandoned.
+- Experiments are the owner's own from-scratch work. Don't copy AG Charts code (the enterprise
+  package is commercially licensed).
+- No React Summit talk, no 3DFY work, no CV content on the site.
 
 Whichever is chosen: drop the sidebar of titles, the categories and the blog listing; remove the
 lorem post; add `jekyll-seo-tag` and a real meta description; drop the empty JS file.
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Owner chose the Lab structure; talk and 3DFY work stay off the site.
 - 2026-09-30: The site is not a CV (owner). Career history stays in `docs/PROFILE.md` as context.
 - 2026-09-30: The owner's current work is AG Charts (open source, AG Grid). Their public GitHub
   history there is the primary evidence for the site; to refresh it, clone

@@ -118,9 +118,14 @@ Also:
 - Stack Overflow: https://stackoverflow.com/users/1145124/imoses (still wanted? see below)
 - Email (site uses): imoses.g+website@gmail.com
 
-## 5. Open questions (owner to answer; delete each once answered)
+## 5. Owner decisions (2026-09-30)
 
-1. Site structure — proposed in the session of 2026-09-30, awaiting owner's pick (see AGENTS.md).
-2. Is any of the 3DFY.ai work publicly showable (link, screenshots)?
-3. Include the React Summit 2025 talk on the site, or leave it out?
-4. Keep the Stack Overflow link?
+- Site structure: Lab (showcase of experiments). See AGENTS.md → Direction.
+- 3DFY.ai work: not showable publicly.
+- React Summit 2025 talk: leave off the site; focus on the Lab.
+
+## 6. Open questions (owner to answer; delete each once answered)
+
+1. Which experiments to build first (candidates proposed in the session of 2026-09-30).
+2. Stack Overflow link: keep only if the profile is still active or has notable reputation
+   (agents couldn't check it from their environment).
