@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap"/>
   <link rel="stylesheet" href="/css/styles.css?{{ timestamp }}"/>
   <script src="/assets/site.js?{{ timestamp }}" defer></script>
+  {%- if jekyll.environment == "production" %}
+  <script data-goatcounter="https://imoses.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  {%- endif %}
   {%- if page.demo %}
   <link rel="stylesheet" href="/assets/demos/{{ page.demo }}.css?{{ timestamp }}"/>
   <script type="module" src="/assets/demos/{{ page.demo }}.js?{{ timestamp }}"></script>

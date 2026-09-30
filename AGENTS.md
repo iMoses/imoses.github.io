@@ -60,6 +60,9 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 - Link previews: `assets/og.png` (1200×630) is set as the default `image` for jekyll-seo-tag.
   Regenerate it with `npm run og` whenever the tagline or logo changes (template in `tools/og/`;
   needs Playwright + Chromium, see `tools/og/render.mjs`).
+- Visit stats: GoatCounter (imoses.goatcounter.com; cookieless, no consent banner needed). The script
+  is in `root.html` and only rendered when `JEKYLL_ENV=production` (CI sets it), so local builds
+  don't count visits. Owner chose it over Google Analytics (GA needs a UK cookie-consent banner).
 - Layouts: `root.html` (head, rulers, header/footer, crosshair) → `default.html` (pages) and
   `entry.html` (lab entries). `assets/site.js` draws the page rulers, the crosshair (under the
   text, never over it) and the light/dark switch (sun/moon icon + text) (defaults to the OS setting; the
@@ -128,6 +131,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Added GoatCounter visit stats (owner's account); theme-aware custom crosshair cursor
+  (OS crosshairs ignore the theme); home intro opener changed to present work, no childhood backstory.
 - 2026-09-30: Design feedback round 5 (owner): boxed LinkedIn icon (balances the GitHub mark);
   dashed separators use their own stronger token `--rule-dash`; tighter lab-entry rhythm (date
   right under the subtitle, section line 24px after the previous block, heading straight into text).
