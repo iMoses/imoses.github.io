@@ -83,17 +83,18 @@ Last updated: 2026-09-30
 Done:
 - 2026-09-30: Blueprint redesign (graph-paper light theme, blueprint-navy dark theme, page rulers,
   coordinate crosshair) and the first lab entry, "Charts are just shapes" (Fig. 01), adapted from
-  the owner's React Summit 2025 talk and d3-examples meetup repo. On branch `claude/loving-gates-v43lvq`,
-  **not merged to `main` yet**.
+  the owner's React Summit 2025 talk and d3-examples meetup repo. Merged to `main` and deployed
+  2026-09-30 at the owner's request ("not done, but good enough to replace the existing content").
 - 2026-09-30: Owner answered the profile questions; `docs/PROFILE.md` and "Direction" updated.
 - 2026-09-30: `docs/PROFILE.md` filled from the owner's LinkedIn export, detailed CV and the
   public ag-charts git history. Remaining gaps are listed in its "Open questions" section.
 - 2026-09-29: Build infrastructure updated (Jekyll 4.4.1, Ruby 3.4, current Pages actions,
   Sass modules). Deployed successfully from `main`.
 
-Known problems on the live site (fixed on the branch, live once merged):
-- The lorem-ipsum post, the 2023 cover-letter About text, the sidebar of titles, the "Personal
-  website" meta description, the empty JS file and the Giphy 404 are all gone on the branch.
+Still open (see also `docs/PROFILE.md` → Open questions):
+- Owner to approve or rewrite the tagline and the home "about me" paragraph.
+- Credit for the sample sales data in Fig. 01; keep or drop the link to the talk.
+- Only one lab entry so far; the "3 experiments" guideline is now a target, not a launch gate.
 
 Drafts worth keeping:
 - `_drafts/memoir.md` — short, specific, strongest writing voice in the repo. Good basis for the About.
