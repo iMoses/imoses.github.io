@@ -122,10 +122,13 @@ Also:
 
 - Site structure: Lab (showcase of experiments). See AGENTS.md → Direction.
 - 3DFY.ai work: not showable publicly.
-- React Summit 2025 talk: leave off the site; focus on the Lab.
+- React Summit 2025 talk: its content became the first lab entry (Fig. 01), credited at the end.
 
 ## 6. Open questions (owner to answer; delete each once answered)
 
-1. Which experiments to build first (candidates proposed in the session of 2026-09-30).
-2. Stack Overflow link: keep only if the profile is still active or has notable reputation
-   (agents couldn't check it from their environment).
+1. Stack Overflow link: keep only if the profile is still active or has notable reputation
+   (agents couldn't check it from their environment). It's currently left off the footer.
+2. Source of the "yearly sales 1988–2017" sample data used in the talk and in Fig. 01, so it
+   can be credited. It's currently labelled only as sample data.
+3. Home page copy: "draws things in browsers" and the intro lines are agent drafts. Keep or rewrite.
+4. The talk-based entry says it's adapted from the talk and links it. OK, or drop the link?

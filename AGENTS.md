@@ -20,35 +20,54 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 
 ## Tech
 
-- Jekyll 4.4 static site, Ruby version in `.ruby-version`, deps in `Gemfile` / `Gemfile.lock`.
-- Deploy: `.github/workflows/jekyll.yml` builds and deploys to GitHub Pages on every push to `main`.
+- Jekyll 4.4 static site, Ruby version in `.ruby-version`, deps in `Gemfile` / `Gemfile.lock`
+  (plugins: jekyll-feed, jekyll-seo-tag, plus the local `_plugins/code_file.rb`).
+- Interactive figures: React + Vite, sources in `demos/<entry>/`, built by `npm run build` into
+  `assets/demos/<entry>.js|.css` (git-ignored, generated). Add each new entry to the `entries` map in
+  `demos/vite.config.js`. **Run `npm run build` before `jekyll build`**, locally and in CI.
+- Deploy: `.github/workflows/jekyll.yml` runs `npm ci && npm run build`, then Jekyll, then deploys to
+  GitHub Pages on every push to `main`.
 - Custom domain `imoses.me` is configured in the repo's Settings → Pages (there is no `CNAME` file).
-- Local build: `bundle install && bundle exec jekyll build` (or `jekyll serve`). If `bundle exec jekyll`
-  reports "command not found", run `bundle exec ruby "$(bundle info --path jekyll)/exe/jekyll" build`.
-- Styles: `css/styles.scss` + `_sass/` (Dart Sass module syntax, `@use` — don't reintroduce `@import`).
-- Layouts: `_layouts/root.html` → `default.html` (sidebar + content) → `article.html` / `category.html`.
-- Homepage `index.md` renders `README.md` as the About section, then recent posts.
-- Contact links live in `_data/contact.yml`. Sidebar text in `_includes/sidebar.html`.
-- `docs/`, `README.md`, `LICENSE`, `AGENTS.md`, `CLAUDE.md` are excluded from the built site.
+- Local build: `npm ci && npm run build && bundle install && bundle exec jekyll build` (or `serve`).
+  If `bundle exec jekyll` reports "command not found", run
+  `bundle exec ruby "$(bundle info --path jekyll)/exe/jekyll" build`.
+- Styles: single file `css/styles.scss`. All colours are tokens on `:root`, redefined for dark mode.
+  Categorical chart colours `--series-1…8` are a validated colour-blind-safe set for both surfaces;
+  use them in fixed order and don't add new hues.
+- Layouts: `root.html` (head, rulers, header/footer, crosshair) → `default.html` (pages) and
+  `entry.html` (lab entries). `assets/site.js` draws the page rulers and the crosshair.
+
+### How a lab entry works
+
+- A lab entry is a Jekyll post: `_posts/YYYY-MM-DD-slug.md` → `/lab/slug/`. Front matter:
+  `title`, `subtitle`, `summary` (card text), `fig` (e.g. `"02"`), `thumb` (name of an inline SVG in
+  `_includes/thumbs/`, drawn with `currentColor`), and `demo` (bundle name, if it has figures).
+- Place a live figure with `{% include demo.html id="name" caption="…" %}`; the entry's bundle maps
+  `id` → component in `demos/<entry>/main.jsx`. The figure shows a text fallback without JS.
+- Show real source code with `{% code_file demos/<entry>/File.jsx %}`; add `region=name` to show only
+  the lines between `#region name` / `#endregion` comments, and `label=` to set the file caption.
+  Never paste code by hand when the file exists, so the post can't drift from what runs.
+- Before pushing: build both, then check the pages in a real browser (light + dark, 390px wide),
+  with no console errors and no horizontal scroll.
 
 ## Status (update this)
 
 Last updated: 2026-09-30
 
 Done:
+- 2026-09-30: Blueprint redesign (graph-paper light theme, blueprint-navy dark theme, page rulers,
+  coordinate crosshair) and the first lab entry, "Charts are just shapes" (Fig. 01), adapted from
+  the owner's React Summit 2025 talk and d3-examples meetup repo. On branch `claude/loving-gates-v43lvq`,
+  **not merged to `main` yet**.
 - 2026-09-30: Owner answered the profile questions; `docs/PROFILE.md` and "Direction" updated.
 - 2026-09-30: `docs/PROFILE.md` filled from the owner's LinkedIn export, detailed CV and the
   public ag-charts git history. Remaining gaps are listed in its "Open questions" section.
 - 2026-09-29: Build infrastructure updated (Jekyll 4.4.1, Ruby 3.4, current Pages actions,
   Sass modules). Deployed successfully from `main`.
 
-Known problems on the live site:
-- The only published post, `_posts/2022-12-01-going-rouge.md`, is lorem-ipsum placeholder text.
-- `README.md` (the About text) is a 2023 cover letter addressed to a hiring manager, with three
-  duplicated drafts of the "Open to Work" paragraph. Availability info may be stale.
-- Sidebar lists 7 self-titles with no supporting evidence on the site.
-- Meta description is "Personal website"; no Open Graph / social preview tags.
-- `js/scripts.js` is empty but loaded on every page. 404 page embeds a Giphy iframe.
+Known problems on the live site (fixed on the branch, live once merged):
+- The lorem-ipsum post, the 2023 cover-letter About text, the sidebar of titles, the "Personal
+  website" meta description, the empty JS file and the Giphy 404 are all gone on the branch.
 
 Drafts worth keeping:
 - `_drafts/memoir.md` — short, specific, strongest writing voice in the repo. Good basis for the About.
@@ -74,13 +93,17 @@ Structure chosen by owner (2026-09-30): **Lab.**
   abandoned.
 - Experiments are the owner's own from-scratch work. Don't copy AG Charts code (the enterprise
   package is commercially licensed).
-- No React Summit talk, no 3DFY work, no CV content on the site.
-
-Whichever is chosen: drop the sidebar of titles, the categories and the blog listing; remove the
-lorem post; add `jekyll-seo-tag` and a real meta description; drop the empty JS file.
+- No 3DFY work, no CV content on the site. The React Summit talk is used as source material for
+  Fig. 01 (owner's choice) and credited at the end of that entry.
+- Design (owner's choice, 2026-09-30): blueprint / graph paper. Mono headings (IBM Plex Mono),
+  IBM Plex Sans body, entries labelled "Fig. NN", figures framed like drawings.
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: Owner chose the blueprint design and a storytelling first entry built from the
+  React Summit talk (github.com/iMoses/svg-react-slides) and the meetup sandbox
+  (github.com/iMoses/d3-examples). Demo code was adapted: plain CSS instead of styled-components/
+  Tippy, validated palette colours, `viewBox` on every chart so it scales.
 - 2026-09-30: Owner chose the Lab structure; talk and 3DFY work stay off the site.
 - 2026-09-30: The site is not a CV (owner). Career history stays in `docs/PROFILE.md` as context.
 - 2026-09-30: The owner's current work is AG Charts (open source, AG Grid). Their public GitHub

@@ -1,0 +1,4 @@
+<figure class="demo" data-demo="{{ include.id }}"{% if include.props %} data-props='{{ include.props }}'{% endif %}>
+  <div class="demo-stage"><p class="demo-fallback">Interactive figure — needs JavaScript.</p></div>
+  {%- if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>

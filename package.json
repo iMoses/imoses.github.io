@@ -1,0 +1,22 @@
+{
+  "name": "imoses.me-demos",
+  "private": true,
+  "type": "module",
+  "description": "Interactive figures for lab entries. Built into assets/demos/ before Jekyll runs.",
+  "scripts": {
+    "build": "vite build --config demos/vite.config.js",
+    "watch": "vite build --config demos/vite.config.js --watch"
+  },
+  "dependencies": {
+    "d3-array": "^3.2.4",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.2.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.1"
+  }
+}

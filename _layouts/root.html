@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-{% assign timestamp = site.time | date:'%Y%m%d%H%M%S' -%}
+<html lang="{{ site.lang }}">
+{% assign timestamp = site.time | date: '%Y%m%d%H%M%S' -%}
 <head>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Personal website"/>
-  <meta name="author" content="Ido Moshe"/>
   <meta charset="utf-8"/>
-  <title>{{ site.title }} | {{ page.title }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  {% seo %}
+  {% feed_meta %}
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap"/>
   <link rel="stylesheet" href="/css/styles.css?{{ timestamp }}"/>
-  <script src="/js/scripts.js?{{ timestamp }}" async></script>
+  <script src="/assets/site.js?{{ timestamp }}" defer></script>
+  {%- if page.demo %}
+  <link rel="stylesheet" href="/assets/demos/{{ page.demo }}.css?{{ timestamp }}"/>
+  <script type="module" src="/assets/demos/{{ page.demo }}.js?{{ timestamp }}"></script>
+  {%- endif %}
 </head>
 <body>
-  <div id="root">{{ content }}</div>
+  <div class="ruler ruler-x" aria-hidden="true"></div>
+  <div class="ruler ruler-y" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="logo" href="/" aria-label="{{ site.title }} — home">{% include logo.svg %}</a>
+  </header>
+  <main>{{ content }}</main>
+  <footer class="site-footer">
+    <nav aria-label="Elsewhere">
+      <a href="{{ site.data.contact.github }}">GitHub</a>
+      <a href="{{ site.data.contact.linkedin }}">LinkedIn</a>
+      <a href="mailto:{{ site.data.contact.email }}">Email</a>
+      <a href="/feed.xml">RSS</a>
+    </nav>
+    <p>© {{ site.time | date: '%Y' }} {{ site.author }} · <a href="{{ site.data.contact.repository }}">source</a></p>
+  </footer>
+  <div class="crosshair" aria-hidden="true"><i class="ch-x"></i><i class="ch-y"></i><output class="ch-label"></output></div>
 </body>
 </html>

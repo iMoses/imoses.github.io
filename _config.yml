@@ -1,31 +1,40 @@
-title: iMoses.me
+title: Ido Moshe
+tagline: draws things in browsers
+description: >-
+  Ido Moshe (iMoses) — a lab of small, interactive experiments with SVG, canvas and charts.
+author: Ido Moshe
 url: https://imoses.me
+lang: en
 
-permalink: /:slugified_categories/:slug
-excerpt_separator: '#'
-
-collections:
-  category:
-    output: true
+permalink: /lab/:slug/
 
 defaults:
   - scope:
       path: ""
-      type: pages
     values:
       layout: default
   - scope:
       path: ""
       type: posts
     values:
-      layout: article
-  - scope:
-      path: ""
-      type: category
-    values:
-      layout: category
+      layout: entry
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
 
 sass:
   style: compressed
+  sourcemap: never
 
-exclude: [ .idea, README.md, LICENSE, AGENTS.md, CLAUDE.md, docs ]
+exclude:
+  - .idea
+  - README.md
+  - LICENSE
+  - AGENTS.md
+  - CLAUDE.md
+  - docs
+  - demos
+  - node_modules
+  - package.json
+  - package-lock.json

@@ -1,0 +1,31 @@
+---
+title: Ido Moshe
+---
+<section class="intro">
+  <h1>{{ site.title }}</h1>
+  <p class="tagline">{{ site.tagline }}.</p>
+  <p>
+    I work on <a href="https://github.com/ag-grid/ag-charts">AG Charts</a>, mostly on its insides:
+    optimising and refactoring the library's infrastructure.
+    <a href="https://github.com/ag-grid/ag-charts/commits?author=iMoses">My commits&nbsp;→</a>
+  </p>
+  <p>This is my lab: small, interactive experiments with the pixels and the maths behind them.</p>
+</section>
+
+<section class="lab" aria-labelledby="lab-title">
+  <h2 id="lab-title">Lab</h2>
+  <ol class="lab-list">
+    {%- for entry in site.posts %}
+    <li>
+      <a class="lab-card" href="{{ entry.url }}">
+        <span class="thumb" aria-hidden="true">{% include thumbs/{{ entry.thumb }}.svg %}</span>
+        <span>
+          <span class="fig-label">Fig. {{ entry.fig }}</span>
+          <h3>{{ entry.title }}</h3>
+          <p>{{ entry.summary }}</p>
+        </span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
