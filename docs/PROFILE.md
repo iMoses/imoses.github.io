@@ -4,10 +4,19 @@ About Ido Moshe (iMoses). Agents: use only what's written here; never fill blank
 Anything under "Open questions" is unanswered — ask the owner, don't guess.
 **This repo is public** — only write what the owner is happy for anyone to read.
 
+## 0. What the site is — and isn't [OWNER]
+
+- **The site is not a CV and must not list the owner's past.** LinkedIn does that. Career history
+  below is background for agents (to understand who the owner is), **not site content**.
+- Audience: potential employers, potential connections. Purpose: a place to showcase the owner's
+  talents and work.
+- **Not** open to freelance / consulting work — don't offer it anywhere.
+- Language: English. Tone: professional, can be whimsical. **Less is more.**
+
 Sources, cited inline:
 - **[LI]** LinkedIn profile export (summarised, public-facing) — supplied by owner 2026-09-30.
 - **[CV]** Detailed CV (longer narrative version, written for an application) — supplied by owner 2026-09-30.
-  Company funding/valuation figures in it are point-in-time; re-verify before publishing any.
+  Company funding/valuation figures were deliberately left out here (owner: not important).
 - **[GIT]** `ag-grid/ag-charts` public git history, author `iMoses`, default branch `latest`,
   read 2026-09-30.
 - **[OWNER]** Stated directly by the owner in a session.
@@ -19,8 +28,10 @@ When [LI] and [CV] differ, prefer [LI] wording for the public site unless the ow
 - Senior Software Developer at AG Grid, Aug 2023 – present, Greater London. [LI]
 - LinkedIn headline: "Principal Full Stack Engineer", location London, England. [LI]
 - Works on **AG Charts** (open source) — "you can see all of my work through GitHub". [OWNER]
-- 2023 site text said "open to work, Frontend, ~130 hrs/month remote" — **no longer assumed true**
-  (see Open questions).
+- Focus at AG Grid: mainly **optimising and refactoring the library's infrastructure**. [OWNER]
+- AG Grid is a flat organisation; most developers there work at staff-engineer level. The owner
+  sees "Senior Software Developer" as the role's title, not a measure of level. [OWNER]
+- Not open to freelance/consulting work. [OWNER]
 
 ## 2. Evidence: AG Charts (2023–present) [GIT]
 
@@ -47,23 +58,25 @@ Main threads of work, by commit history (ticket IDs are AG Grid's internal Jira 
 | Options & validation | 2023 → 2026 | Fuzzy-matching for mistyped options (AG-9896); union / value-level deprecation validators (AG-18140, AG-17863); async `throwOn` (AG-18439) |
 | Large refactors | 2023 → 2026 | Series properties management; removing reactive decorators and `BaseProperties` in favour of plain options (AG-17392, AG-18619, AG-18620) |
 
-Not yet known: which of these the owner considers their headline work, and any user-facing
-impact numbers (see Open questions).
+Owner's own summary of this work: infrastructure optimisation and refactoring. [OWNER]
 
 ## 3. Career history
 
 | Years | Company | Role [LI] | Domain [CV] |
 |---|---|---|---|
 | 2023 – now | AG Grid | Senior Software Developer | Data grid / charting libraries |
+| 2022 – 2023 | Freelance — 3DFY.ai [OWNER] | — | AI text-to-3D-model generation |
 | 2021 – 2022 | Apiiro | Front End Lead / Guild Master | Application security |
 | 2019 – 2021 | Authomize | Full Stack Architect / Technical Lead | Identity security |
 | 2015 – 2019 | Twiggle | Senior Full Stack Engineer / Technical Lead | NLP e-commerce search |
-| 2011 – 2015 | EasyHi [LI] / Slidely (later Promo) [CV] | Senior Full Stack Engineer / Technical Lead | Video/slideshow creation |
+| 2011 – 2015 | Slidely (the company was EasyHi when the owner joined; renamed Slidely with the product pivot; renamed Promo after the owner left) [OWNER] | Senior Full Stack Engineer / Technical Lead | Slideshow / video creation |
 | 2010 – 2011 | Yedioth Aharonot | Full Stack Engineer / Lead Engineer | News portal |
 | 2009 – 2010 | John Bryce | Front End Lecturer | Training |
 
 Highlights per role (keep to what's supported):
 
+- **3DFY.ai (freelance, Nov 2022 – Aug 2023)** — built a canvas-based viewer and a payment
+  control / CMS for an AI company that generates 3D models from prompts. [OWNER]
 - **Apiiro** — established a frontend guild and owned client architecture across teams; mentored
   via code review and pair programming; drove an in-house design system with design & product;
   refactored the legacy client; built SVG charts with React, d3 and MobX; optimised data tables
@@ -77,7 +90,7 @@ Highlights per role (keep to what's supported):
   built an ontology-modelling IDE (Electron, React, MobX); production ETL (Docker, Terraform,
   AWS, GCP, k8s); helped establish DevOps. [LI][CV] [CV] also says: analytics SDK adopted by
   Walmart, Flipkart and AliExpress.
-- **EasyHi / Slidely** — joined as PHP developer, became frontend lead then web-division lead;
+- **Slidely** — joined as PHP developer, became frontend lead then web-division lead;
   rewrote the client for millions of monthly users; canvas editors with Web Workers and
   audio/video APIs; moved image manipulation from servers to the client, cutting costs. [LI][CV]
 - **Yedioth Aharonot** — one of Israel's largest news portals; led two teams (13 engineers)
@@ -85,8 +98,12 @@ Highlights per role (keep to what's supported):
 - **John Bryce** — lectured web design & development; wrote the syllabus. [LI]
 
 Also:
-- Co-author on patents US20180046703A1 and US20220121665A1. [CV] (Not yet checked against a
-  patent database.)
+- Co-author on patents [US20180046703A1](https://patents.google.com/patent/US20180046703A1/en)
+  and [US20220121665A1](https://patents.google.com/patent/US20220121665A1/en). [CV]
+- Talk: "Efficient Data Visualisation with React and SVG", React Summit 2025 (13 Jun 2025, ~27 min).
+  [GitNation](https://gitnation.com/contents/efficient-data-visualisation-with-react-and-svg) ·
+  [YouTube](https://www.youtube.com/watch?v=0lcQ-d2oII8). Owner is "not super proud" of it. [OWNER]
+- Has given meetup talks in Tel Aviv in the past. [OWNER]
 - Largely self-taught: a few Open University courses as a teenager, then web-dev forums and IRC.
   Long-time volunteer with young people; prefers small study groups. [CV]
 - Hebrew (native), English (full professional). [LI]
@@ -103,20 +120,7 @@ Also:
 
 ## 5. Open questions (owner to answer; delete each once answered)
 
-1. **Audience and goal.** Who should the site convince now (recruiters, peers in open source,
-   consulting clients, conference organisers), and what should they do after reading?
-2. **Open to work?** Is any availability / freelance / consulting offer still true? If not,
-   the "Open to Work" section and "Freelance Consultant" sidebar line go.
-3. **Headline AG Charts work.** Which 2–3 threads from section 2 are you proudest of, and is
-   there any public impact (release notes, blog posts, downloads) you want cited?
-4. **2011–2015 employer name.** LinkedIn says EasyHi, CV says Slidely (Promo). Which should the
-   site use?
-5. **Titles.** LinkedIn headline says Principal Full Stack Engineer; AG Grid role says Senior
-   Software Developer. Which framing do you want on the site?
-6. **Nov 2022 – Aug 2023.** Anything to show for this period, or leave it out?
-7. **Talks / teaching since 2010, and the community events you organise** — anything public
-   to link?
-8. **Taste.** Sites/profiles you like; anything you don't want on the site; English only or
-   also Hebrew?
-9. **Writing.** Do you actually want to publish? If yes, topics and realistic frequency.
-10. **Stack Overflow link** — keep or drop?
+1. Site structure — proposed in the session of 2026-09-30, awaiting owner's pick (see AGENTS.md).
+2. Is any of the 3DFY.ai work publicly showable (link, screenshots)?
+3. Include the React Summit 2025 talk on the site, or leave it out?
+4. Keep the Stack Overflow link?

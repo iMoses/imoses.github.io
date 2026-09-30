@@ -36,6 +36,7 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 Last updated: 2026-09-30
 
 Done:
+- 2026-09-30: Owner answered the profile questions; `docs/PROFILE.md` and "Direction" updated.
 - 2026-09-30: `docs/PROFILE.md` filled from the owner's LinkedIn export, detailed CV and the
   public ag-charts git history. Remaining gaps are listed in its "Open questions" section.
 - 2026-09-29: Build infrastructure updated (Jekyll 4.4.1, Ruby 3.4, current Pages actions,
@@ -53,17 +54,30 @@ Drafts worth keeping:
 - `_drafts/memoir.md` — short, specific, strongest writing voice in the repo. Good basis for the About.
 - `_drafts/scalable-vector-graphics.md` — half-finished tutorial, partly paraphrased from MDN.
 
-## Direction (proposed, not yet confirmed by owner)
+## Direction
 
-1. One-page profile first: one-line positioning, 3–5 work highlights (problem → what was done →
-   outcome), working style / availability (only if current), contact.
-2. Rewrite About in the memoir's voice, sourced only from `docs/PROFILE.md`.
-3. The site itself is proof of front-end/UX craft: fast, accessible, well-designed.
-4. Hide blog/categories until there are 3+ real posts; keep the infrastructure.
-5. Housekeeping: remove the lorem post, add `jekyll-seo-tag`, real meta description, drop empty JS.
+Confirmed by owner (2026-09-30):
+- **Not a CV.** Don't list the owner's past; LinkedIn does that. Career data in `docs/PROFILE.md`
+  is agent context only.
+- Audience: potential employers and connections. Purpose: showcase talents and work.
+- No freelance / consulting / "open to work" offer.
+- English. Professional, can be whimsical. Less is more.
+
+Proposed structure (awaiting owner's pick; see the session of 2026-09-30):
+- **A (recommended). One page:** short intro in the memoir's voice → "Now" (AG Charts:
+  infrastructure, performance, refactoring, linking to the owner's public contributions) →
+  a few showcase items → links (GitHub, LinkedIn for the CV, email). Optionally one small
+  interactive SVG/canvas touch as the whimsical element.
+- **B. Lab:** minimal intro plus a growing set of small interactive experiments. Strongest
+  showcase, needs ongoing effort.
+- **C. Card:** name, one line, links. Least effort, weakest showcase.
+
+Whichever is chosen: drop the sidebar of titles, the categories and the blog listing; remove the
+lorem post; add `jekyll-seo-tag` and a real meta description; drop the empty JS file.
 
 ## Decisions (append; newest first)
 
+- 2026-09-30: The site is not a CV (owner). Career history stays in `docs/PROFILE.md` as context.
 - 2026-09-30: The owner's current work is AG Charts (open source, AG Grid). Their public GitHub
   history there is the primary evidence for the site; to refresh it, clone
   `https://github.com/ag-grid/ag-charts` (blobless) and use `git log origin/latest --author=iMoses`.
