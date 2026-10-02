@@ -42,7 +42,7 @@
 
 /* ——— Marks ——— */
 .chart-round path {
-  stroke: var(--paper); /* a hairline gap between slices */
+  stroke: var(--figure-bg); /* a hairline gap between slices */
   stroke-width: 1.5;
 }
 

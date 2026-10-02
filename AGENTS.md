@@ -128,8 +128,8 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 Last updated: 2026-10-02 (Fig. 01 rewrite)
 
 Done:
-- 2026-10-02: Fig. 01 rewritten to the house style on branch `fig01-lesson` (NOT pushed: the owner
-  hasn't seen it). New title "Who draws the chart?" (slug kept so links don't break). One lesson
+- 2026-10-02: Fig. 01 rewritten to the house style and merged to `main` at the owner's request.
+  New title "Who draws the chart?" (slug kept so links don't break). One lesson
   ("every node in the DOM has exactly one owner: d3 computes, React renders, CSS styles and moves"),
   seven sections, seven figures sharing one Data → d3 → DOM model, each with its real source beside
   it. The unsourced sales sample was replaced by UK electricity generation 1990–2025 from Our World
@@ -169,9 +169,9 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 - The home intro still calls the lab "small, interactive experiments with the pixels and the
   maths", which no longer matches the content direction.
 - Fig. 02 is live; the owner is still reading the text and may send notes.
-- Fig. 01 rewrite awaits the owner's review. Open choice for them: the "tween the paths" mode
-  makes Chrome log an error per frame (invalid arc flag). That is the failure the figure shows and
-  the text points at the console, but the owner may prefer a silent page.
+- Fig. 01 is live; the owner may still send notes on the text. Open choice for them: the "tween
+  the paths" mode makes Chrome log an error per frame (invalid arc flag). That is the failure the
+  figure shows and the text points at the console, but the owner may prefer a silent page.
 - Only one lab entry so far; the "3 experiments" guideline is now a target, not a launch gate.
 
 Drafts worth keeping:
@@ -239,6 +239,11 @@ Structure chosen by owner (2026-09-30): **Lab.**
   IBM Plex Sans body, entries labelled "Fig. NN", figures framed like drawings.
 
 ## Decisions (append; newest first)
+
+- 2026-10-02: Owner asked for figures to stand out from the page: figures sit on their own
+  surface, `--figure-bg` (a shade lighter than the paper in light mode, a raised navy in dark),
+  and `--code-bg` is a cool gray in light mode so code panels differ from both. Light syntax
+  comment/number colors darkened to keep 4.5:1 on it.
 
 - 2026-10-02: Fig. 01 data: UK electricity by source (Our World in Data), chosen because it's
   public, licensed, and carries a story (coal 65% → 0.1%) that suits bars, a line and a donut.

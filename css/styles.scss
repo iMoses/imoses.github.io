@@ -6,6 +6,7 @@
 @mixin light-tokens {
   color-scheme: light;
   --paper: #f7f5ee;
+  --figure-bg: #fdfcf8; // a figure is a sheet laid on the graph paper, a shade lighter
   --ink: #1b2a44;
   --ink-2: #46546e;
   --ink-3: #6b778c;
@@ -13,7 +14,7 @@
   --grid-major: rgb(31 95 176 / 0.13);
   --accent: #1f5fb0;
   --hot: #c6303a;
-  --code-bg: #fffdf7;
+  --code-bg: #f1f3f6; // cool, so code stands apart from the warm paper and the figure sheet
   --code-ink: #24324d;
   // Rules are opaque (ink mixed into paper) so a line drawn over a grid line doesn't darken it.
   --rule: color-mix(in srgb, var(--ink) 18%, var(--paper));
@@ -33,10 +34,10 @@
   --series-8: #e34948;
 
   // Syntax
-  --syn-comment: #7a8599;
+  --syn-comment: #5f6b82; // syntax colors keep 4.5:1 on --code-bg
   --syn-keyword: #7a3ea8;
   --syn-string: #0f7a4f;
-  --syn-number: #b3541e;
+  --syn-number: #ab4f1b;
   --syn-tag: #1f5fb0;
   --syn-attr: #9a5b00;
 }
@@ -44,6 +45,7 @@
 @mixin dark-tokens {
   color-scheme: dark;
   --paper: #10233d;
+  --figure-bg: #16294a;
   --ink: #e8eef7;
   --ink-2: #b9c6d9;
   --ink-3: #8a9ab2;
@@ -506,7 +508,7 @@ hr {
 .demo, .figure {
   --frame-extra: 6px 6px 0 var(--grid-major);
   margin: 0 0 var(--u);
-  background: var(--paper);
+  background: var(--figure-bg);
 
   figcaption {
     margin-top: var(--u);
