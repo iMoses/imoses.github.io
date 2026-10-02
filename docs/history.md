@@ -10,6 +10,9 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
 
 ## Done
 
+- 2026-10-03: Fig. 03 merged to `main` at the owner's request, with the instruction-file split
+  (`AGENTS.md` 27.7k → ~11k chars, `site-design` skill, `docs/history.md`), the size budgets shared
+  with the owner's other repos, and `npm run check:sizes`.
 - 2026-10-02: Fig. 03 "What the next session knows" drafted on branch `fig03-next-session`
   (NOT pushed: awaiting the owner's text approval). Owner picked the subject (agent workflow:
   sessions, scripts, splitting CLAUDE.md) and left every other decision to the agent. One lesson

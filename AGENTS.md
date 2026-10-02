@@ -86,7 +86,7 @@ Rules that keep this from growing back:
 
 ## Status (update this)
 
-Last updated: 2026-10-02 (instruction files split; Fig. 03 draft)
+Last updated: 2026-10-03 (Fig. 03 merged)
 
 Still open (see also `docs/PROFILE.md` → Open questions):
 - Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
@@ -98,8 +98,8 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 - Fig. 01 is live; the owner may still send notes on the text. Open choice for them: the "tween
   the paths" mode makes Chrome log an error per frame (invalid arc flag). That is the failure the
   figure shows and the text points at the console, but the owner may prefer a silent page.
-- Fig. 03 awaits the owner's text approval. Owner (2026-10-03): the story may simplify the
-  journey; flow beats completeness. Section 5 (budgets) and its figure read this repo's own files
+- Fig. 03 is live (merged 2026-10-03); the owner may still send notes. Owner: the story may
+  simplify the journey; flow beats completeness. Section 5 (budgets) and its figure read this repo's own files
   at build time, so they stay current.
 - Three entries once Fig. 03 is approved, which meets the "3 experiments" target.
 
