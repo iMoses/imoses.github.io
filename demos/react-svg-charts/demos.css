@@ -47,6 +47,10 @@
 }
 
 .bar { fill: var(--series-1); }
+
+/* Section 1: bars left in the <svg> by earlier effect runs. In an app they'd be the same blue as
+   the newest ones; the figure greys them so you can see they're still there. */
+.leftovers g:not(:last-child) rect { fill: var(--ink-3); }
 .bar.selected { fill: var(--series-2); }
 
 .line {
@@ -103,6 +107,17 @@
   transform: none;
 }
 /* #endregion */
+
+.donut-label {
+  font-size: 22px;
+  fill: var(--ink);
+  pointer-events: none; /* hovering the label shouldn't take the hover off a slice */
+}
+
+.donut-label tspan + tspan {
+  font-size: 12px;
+  fill: var(--ink-3);
+}
 
 .arc { outline: none; } /* hover and focus only: not clickable, so no pointer */
 

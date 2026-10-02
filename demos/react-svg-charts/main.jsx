@@ -71,7 +71,7 @@ function Trap() {
       <div className="split">
         <div>
           <h4 className="chart-label">d3 owns the DOM</h4>
-          <div className="chart chart-wide" ref={ref}>
+          <div className="chart chart-wide leftovers" ref={ref}>
             <D3Chart key={deps} data={data} />
           </div>
           <h4 className="chart-label">React owns the DOM</h4>
@@ -105,9 +105,7 @@ function Trap() {
               setDrawnFrom(year);
             }}
           />
-          <span>
-            add <code>[data, …]</code> to the effect’s dependencies
-          </span>
+          fill in the effect’s dependency array
         </label>
       </div>
     </>
@@ -356,7 +354,7 @@ function Donut() {
       <div className="split">
         <div>
           <div className="chart chart-round" ref={ref}>
-            <DonutChart data={data} innerRatio={ratio} onHover={setHovered} />
+            <DonutChart data={data} innerRatio={ratio} active={hovered} onHover={setHovered} />
           </div>
           <Legend data={data} />
         </div>
@@ -375,9 +373,10 @@ function Donut() {
           year
           <input type="range" min={1990} max={2025} value={year} onChange={(e) => setYear(+e.target.value)} />
         </label>
+        {/* Stops short of the clip circle (90% of the radius): a hole that big hides every slice. */}
         <label>
           innerRadius
-          <input type="range" min={0} max={0.9} step={0.05} value={ratio} onChange={(e) => setRatio(+e.target.value)} />
+          <input type="range" min={0} max={0.75} step={0.05} value={ratio} onChange={(e) => setRatio(+e.target.value)} />
         </label>
       </div>
     </>

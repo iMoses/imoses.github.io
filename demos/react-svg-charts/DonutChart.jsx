@@ -1,9 +1,11 @@
 import { useId } from 'react';
 import { arc, pie } from 'd3-shape';
 
-export function DonutChart({ data, innerRatio, onHover, width = 280, height = 280 }) {
+export function DonutChart({ data, innerRatio, active, onHover, width = 280, height = 280 }) {
   const id = useId(); // clip-path ids must be unique on the page
   const radius = Math.min(width, height) / 2;
+  const total = data.reduce((sum, d) => sum + d.twh, 0);
+  const label = active ? active.data : { source: 'total', twh: total };
 
   // #region shapes
   const toPie = pie()
@@ -40,6 +42,12 @@ export function DonutChart({ data, innerRatio, onHover, width = 280, height = 28
           </g>
           // #endregion
         ))}
+        {innerRatio >= 0.5 && ( // the label needs a hole to sit in
+          <text className="donut-label" textAnchor="middle">
+            <tspan x="0" dy="-0.2em">{Math.round(label.twh)} TWh</tspan>
+            <tspan x="0" dy="1.4em">{label.source}</tspan>
+          </text>
+        )}
       </g>
     </svg>
   );

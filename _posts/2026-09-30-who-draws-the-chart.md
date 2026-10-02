@@ -33,25 +33,27 @@ electricity. In 2025 it made 0.1%.
 ## 1. Two owners, one DOM
 
 Here's the usual first attempt, and the bug it ships with. The figure shows the same bar chart
-twice. The one on the left is d3 inside a `useEffect`, the way most tutorials write it; the one on
-the right is the same scales with React doing the rendering. Above them is what's normally hidden:
+twice. The top one is d3 inside a `useEffect`, the way most tutorials write it; the bottom one is
+the same scales with React doing the rendering. Above them is what's normally hidden:
 how often d3's effect has run, and how many bars are really in its `<svg>`.
 
-{% include demo.html id="trap" wide=true caption="UK electricity by source, one bar per source. Next year steps through 1990, 2000, 2010, 2020 and 2025. The checkbox swaps in the same component with its dependencies filled in." %}
+{% include demo.html id="trap" wide=true caption="UK electricity by source, one bar per source. Next year steps through 1990, 2000, 2010, 2020 and 2025. The checkbox swaps in the same component with its dependencies filled in. Bars left over from earlier runs are greyed." %}
 
-Press **Next year** and only the right-hand chart moves. The effect's dependency array is empty,
+Press **Next year** and only the bottom chart moves. The effect's dependency array is empty,
 so it ran once, on mount, and never again. React re-rendered the component, but the `<svg>` it
 renders has no children as far as React knows, so there was nothing for it to update. d3's bars
 are still showing 1990.
 
 Now tick the checkbox, which is the fix most people try next, and press Next year a few times.
 The effect runs on every change, and every run calls `.append('g')`: a new group with eight new
-bars, drawn over the old ones. Watch the `<rect>` count climb by eight each time. The tallest bar
-from any year you've visited stays on screen, because nothing ever removes it. You could fix this
+bars, drawn over the old ones. Watch the `<rect>` count climb by eight each time. The new bars are
+right, but nothing removes the old ones, and wherever an old bar was taller it sticks out above
+the new one. (The figure greys the leftovers so you can see them; in your app they'd be the same
+blue, and the chart would look wrong.) You could fix this
 too (select the existing group instead of appending, or clear the `<svg>` first), but notice what
 you'd be doing: writing, by hand, the reconciliation React already does.
 
-The right-hand chart has none of this, and its code is shorter. It's the same two scales, and the
+The bottom chart has none of this, and its code is shorter. It's the same two scales, and the
 bars are plain JSX:
 
 {% code_file demos/react-svg-charts/BarChart.jsx %}
@@ -116,8 +118,8 @@ A line chart is the plainest example of React rendering what d3 computed, and bu
 steps shows where each concern belongs. The data is coal's share of UK electricity. A share
 already has a natural domain, 0 to 100%, so the y scale uses that rather than the data's extent.
 
-Step through the figure. The code panel lights the lines each step adds, and the readout above it
-shows the selected year going through both scales, and what's in the DOM as a result.
+Step through the figure. The code panel lights the lines each step adds, and the readout above the
+chart shows the selected year going through both scales, and what's in the DOM as a result.
 
 {% include demo.html id="line" wide=true caption="Coal's share of UK electricity, 1990–2025. In step 4 the points are clickable and focusable; the checkbox shows their hit areas." %}
 
@@ -153,11 +155,12 @@ for each value, and `arc()` turns one of those into the `d` attribute of a `<pat
 
 Hover a slice to see its numbers go through both, and drag the year to watch the mix change. The
 `innerRadius` slider shows that a pie and a donut are one shape: a pie is a donut with no hole.
+The hole is also where a donut keeps its label: the total, or the slice you're on.
 
 {% include demo.html id="donut" wide=true caption="UK electricity by source for one year. Hover or tab through the slices." %}
 
-The `d` string in the readout is the entire slice: a move, an outer arc, a line, an inner arc
-back. It's text, and React treats it like any other attribute: when the year changes, React
+The `d` string, whose start the readout shows, is the entire slice: a move, an outer arc, a line,
+an inner arc back. It's text, and React treats it like any other attribute: when the year changes, React
 updates eight attributes and the browser redraws.
 
 The hover effect follows the same rule as the markers. Each slice is clipped by a circle a little
@@ -225,11 +228,15 @@ chart had neither.
 
 {% code_file demos/react-svg-charts/D3Axis.jsx %}
 
+The React port is d3-axis's own source, translated: the same tick values, positions and labels,
+but every node is a React element.
+
+{% code_file demos/react-svg-charts/Axis.jsx %}
+
 Which one should you use? The fence is quick, and gives you everything d3-axis does, including its
-transitions. The [React port](https://github.com/iMoses/imoses.github.io/blob/main/demos/react-svg-charts/Axis.jsx)
-is more code, but its ticks are React elements: you can style them with props, render them on the
-server, and test them like any other component. Either way, the rule held. Every node had exactly
-one owner.
+transitions. The port is more code, but its ticks are React elements: you can style them with
+props, render them on the server, and test them like any other component. Either way, the rule
+held. Every node had exactly one owner.
 
 ## What to take with you
 
