@@ -8,6 +8,7 @@
     "watch": "vite build --config demos/vite.config.js --watch",
     "og": "node tools/og/render.mjs",
     "lint:entry": "node tools/lint-entry.mjs",
+    "check:sizes": "node tools/check-sizes.mjs",
     "check": "node tools/check-layout.mjs"
   },
   "dependencies": {

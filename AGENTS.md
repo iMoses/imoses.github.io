@@ -68,19 +68,20 @@ Rules that keep this from growing back:
 - **Rules never move into `docs/`.** Anything still actionable lives here, in `docs/STYLE.md` or
   in a skill; only inert history moves.
 - **Keep it small.** Size limits shared by the owner's three repos (homelab, home-assistant, this
-  one; the stricter rule wins), measured with
-  `wc -m AGENTS.md .claude/skills/*/* docs/*.md docs/*/*.md`:
+  one; the stricter rule wins), in characters (`wc -m`). `npm run check:sizes` checks rules 1–3
+  and fails on anything over:
   1. This file (always loaded): at most 12,000 characters.
   2. A skill: split it when its `SKILL.md`, or any file in its folder, passes 15,000.
-  3. Any other file meant to be read whole (`docs/`): split before ~65 KB (~25k tokens, one
-     Read's cap, measured 2026-10-02). Past it a session sees a truncated page and may answer
-     from it.
+  3. Any other file meant to be read whole (`docs/`, archive parts included): at most 50,000
+     characters, safely under one Read's cap (~65 KB, ~25k tokens, measured 2026-10-02). Past
+     the cap a session sees a truncated page and may answer from it.
   4. Append-only logs (`docs/history.md`): the current month in the main file, earlier months in
-     `docs/history/YYYY-MM.md`; split an archive into date ranges of at most 55 KB, never
+     `docs/history/YYYY-MM.md`; split an archive into date ranges within rule 3, never
      splitting an entry.
   5. The auto-memory index `MEMORY.md` loads every turn too, so rule 1 applies; one line per
      memory.
-  6. Before ending a session that grew any of these files, check the sizes and split what's over.
+  6. Before ending a session that grew any of these files, run `npm run check:sizes` (and
+     measure `MEMORY.md` by hand; it lives outside the repo) and split what's over.
 
 ## Status (update this)
 
