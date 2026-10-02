@@ -58,7 +58,7 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 | `docs/STYLE.md` | How an entry reads (the house style) | read by both entry skills |
 | `docs/PROFILE.md` | Facts about the owner (owner-written) | before writing about the owner |
 | `docs/lab-ideas.md` | Candidate subjects for the next entry | when picking one |
-| `docs/history.md` | What was done and decided, by date | when looking back |
+| `docs/history.md` | What was done and decided this month (earlier: `docs/history/`) | when looking back |
 
 Rules that keep this from growing back:
 - **This file wins on any disagreement.** A skill or doc describes the world on the day it was
@@ -67,8 +67,20 @@ Rules that keep this from growing back:
   session needs before it knows its task.
 - **Rules never move into `docs/`.** Anything still actionable lives here, in `docs/STYLE.md` or
   in a skill; only inert history moves.
-- **Keep it small.** Check sizes with `wc -m AGENTS.md .claude/skills/*/SKILL.md docs/*.md`.
-  This file stays under ~12,000 characters; split a skill when it passes ~15,000.
+- **Keep it small.** Size limits shared by the owner's three repos (homelab, home-assistant, this
+  one; the stricter rule wins), measured with
+  `wc -m AGENTS.md .claude/skills/*/* docs/*.md docs/*/*.md`:
+  1. This file (always loaded): at most 12,000 characters.
+  2. A skill: split it when its `SKILL.md`, or any file in its folder, passes 15,000.
+  3. Any other file meant to be read whole (`docs/`): split before ~65 KB (~25k tokens, one
+     Read's cap, measured 2026-10-02). Past it a session sees a truncated page and may answer
+     from it.
+  4. Append-only logs (`docs/history.md`): the current month in the main file, earlier months in
+     `docs/history/YYYY-MM.md`; split an archive into date ranges of at most 55 KB, never
+     splitting an entry.
+  5. The auto-memory index `MEMORY.md` loads every turn too, so rule 1 applies; one line per
+     memory.
+  6. Before ending a session that grew any of these files, check the sizes and split what's over.
 
 ## Status (update this)
 
