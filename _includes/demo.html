@@ -1,4 +1,13 @@
-<figure class="demo framed" data-demo="{{ include.id }}">
-  <div class="demo-stage"><p class="demo-fallback">Interactive figure — needs JavaScript.</p></div>
+<figure class="demo framed{% if include.wide %} wide{% endif %}" data-demo="{{ include.id }}">
+  <div class="demo-stage">
+    {%- if include.shot %}
+    <div class="demo-fallback">
+      {% include shot.html src=include.shot width=include.width height=include.height alt=include.alt %}
+      <p>A still. The live version of this figure needs JavaScript.</p>
+    </div>
+    {%- else %}
+    <p class="demo-fallback">Interactive figure — needs JavaScript.</p>
+    {%- endif %}
+  </div>
   {%- if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
 </figure>

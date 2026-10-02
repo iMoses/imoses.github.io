@@ -402,7 +402,22 @@ hr {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
+
+  a { text-decoration: none; }
+  a:hover { text-decoration: underline; }
 }
+
+// Lists of entries outside the home page: "More on …" at the end of an entry, and /topics/.
+.more-on ul, .topic-entries {
+  margin: 0 0 var(--u);
+  padding: 0;
+  list-style: none;
+
+  // The smaller mono label would sit on the text's baseline and stretch the row past 24px.
+  .fig-label { margin-right: 1ch; vertical-align: top; }
+}
+
+.lab-topics { font-family: var(--font-mono); }
 
 // ——— Home ———
 
@@ -485,9 +500,10 @@ hr {
   font-family: var(--font-mono);
 }
 
-// ——— Figures (live demos) ———
+// ——— Figures ———
+// .demo is a live figure (see _includes/demo.html), .figure a still one; both are framed drawings.
 
-.demo {
+.demo, .figure {
   --frame-extra: 6px 6px 0 var(--grid-major);
   margin: 0 0 var(--u);
   background: var(--paper);
@@ -505,7 +521,160 @@ hr {
   text-align: center;
   font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
+
+  &:has(img) { padding: 0; }
+
+  p { margin: var(--u) 0 0; }
 }
+
+// Controls under a live figure, shared by every entry's bundle.
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 16px;
+  font: 400 0.8125rem/1.4 var(--font-mono);
+  color: var(--ink-2);
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  input { accent-color: var(--accent); }
+  input[type='range'] { width: 120px; }
+
+  button {
+    padding: 6px 12px;
+    font: inherit;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+
+    &:hover { background: var(--grid-major); }
+
+    &:disabled {
+      opacity: 0.4;
+      background: transparent;
+      cursor: default;
+    }
+  }
+
+  output { color: var(--ink); }
+}
+
+// A wide figure puts the example and its code side by side (docs/STYLE.md §3). With room to spare
+// it breaks out of the column by two major squares each side, so its edges stay on the grid; its
+// inside is then 42 squares: a 20-square example column and a 21-square code column.
+.demo.wide {
+  @media (min-width: 1152px) {
+    margin-inline: calc(var(--major) * -2);
+
+    .split {
+      grid-template-columns: calc(var(--u) * 20) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--u);
+
+  > * { container-type: inline-size; } // so a picture in a column can size itself in rows (cqw)
+}
+
+// Real code beside a live example. Lines are whole rows; the ones that just ran are lit, and the
+// live values the example produced sit at the end of their line like a debugger's inline values.
+.code-panel {
+  --frame-extra: none; // it sits inside a figure, which already has the drop shadow
+  margin: 0;
+  padding: 0;
+  background: var(--code-bg);
+
+  figcaption {
+    margin: 0;
+    padding: 0 var(--u);
+    font: 500 0.75rem/var(--u) var(--font-mono);
+    color: var(--ink-3);
+  }
+
+  pre {
+    @include rule-above($reserve: false);
+    margin: 0;
+    padding: calc(var(--u) / 2) 0;
+    overflow-x: auto;
+    font-size: 0.75rem;
+    line-height: var(--u);
+    color: var(--code-ink);
+  }
+
+  .line {
+    display: block;
+    min-height: var(--u); // blank lines too
+    padding: 0 var(--u);
+    white-space: pre;
+    transition: background-color 300ms;
+  }
+
+  .line.hot { background: color-mix(in srgb, var(--accent) 16%, var(--code-bg)); }
+  .line.off { color: var(--syn-comment); text-decoration: line-through; }
+  .live { color: var(--accent); font-weight: 500; }
+  .inline-value { color: var(--accent); }
+}
+
+// What normally can't be seen: one column per party in a conversation (a machine, a message
+// broker, a dashboard), each a short list of what it currently holds. Lines here are horizontal
+// only, so the columns can be any width.
+.wire {
+  display: grid;
+  gap: 0 var(--u);
+  font: 400 0.75rem/var(--u) var(--font-mono);
+
+  @media (min-width: 696px) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  h3 {
+    @include rule-above;
+    margin: 0;
+    font: 500 0.75rem/var(--u) var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  dl { margin: 0 0 var(--u); }
+  dl > div { display: flex; flex-wrap: wrap; gap: 0 1ch; } // name and value share a row if they fit
+  dt { color: var(--ink-3); }
+  dd { display: grid; margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+  dd > * { grid-area: 1 / 1; } // a value and its invisible widest case share one cell
+  .ghost { visibility: hidden; }
+  .bad { color: var(--hot); }
+  .muted { color: var(--ink-3); }
+}
+
+// Screenshots come in a light and a dark copy (_includes/shot.html); show the one that matches the
+// theme, using the same two conditions as the dark tokens.
+@mixin when-dark {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & { @content; }
+  }
+  :root[data-theme="dark"] & { @content; }
+}
+
+.shot-light, .shot-dark {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.shot-dark { display: none; }
+.shot-light { @include when-dark { display: none; } }
+.shot-dark { @include when-dark { display: block; } }
 
 // ——— Code ———
 

@@ -113,11 +113,16 @@ Also:
 - Quotes used on LinkedIn: Einstein ("as simple as possible, but not simpler") and Martin
   Golding ("code as if the maintainer is a violent psychopath…"). [LI]
 
+- Topics the owner wants to write and talk about: their Home Assistant custom integrations,
+  holistic development views, working with AI, home automation, integrations, reverse
+  engineering. Wants a distinctive way to talk about development concepts, since many people
+  already do. [OWNER 2026-09-30]
+
 ## 4. Links
 
 - GitHub: https://github.com/iMoses
 - LinkedIn: https://www.linkedin.com/in/imoses
-- Stack Overflow: https://stackoverflow.com/users/1145124/imoses (still wanted? see below)
+- Stack Overflow: https://stackoverflow.com/users/1145124/imoses — not used on the site. [OWNER]
 - Email (site uses): imoses.g+website@gmail.com
 
 ## 5. Owner decisions (2026-09-30)
@@ -128,13 +133,11 @@ Also:
 
 ## 6. Open questions (owner to answer; delete each once answered)
 
-1. Stack Overflow link: keep only if the profile is still active or has notable reputation
-   (agents couldn't check it from their environment). It's currently left off the footer.
-2. Source of the "yearly sales 1988–2017" sample data used in the talk and in Fig. 01, so it
-   can be credited. It's currently labelled only as sample data.
-3. Home page tagline: owner found "draws things in browsers" too narrow (they're full-stack across
-   many fields). Now "Full-stack engineer, from pixels to pipelines" (agent draft) — confirm or rewrite.
-4. The talk-based entry says it's adapted from the talk and links it. OK, or drop the link?
-5. Home "about me" paragraph is an agent draft built only from facts in this file — confirm or rewrite.
-   (Owner rejected the "first code at ten" opener as too much: keep the about text about the
-   present and relevant work, not childhood backstory.)
+None right now.
+
+Answered 2026-09-30 [OWNER]:
+- Stack Overflow link: not on the site.
+- Fig. 01 sample data ("yearly sales 1988–2017"): source unknown, a very old example, probably from
+  the d3 example it was adapted from. Fig. 01 isn't final; the data can be replaced later.
+- Tagline, home "about me" paragraph, and the link to the talk in Fig. 01: fine for now.
+  (Earlier: the "about me" stays about present, relevant work; no "first code at ten" backstory.)

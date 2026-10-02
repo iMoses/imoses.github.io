@@ -7,6 +7,7 @@
     "build": "vite build --config demos/vite.config.js",
     "watch": "vite build --config demos/vite.config.js --watch",
     "og": "node tools/og/render.mjs",
+    "lint:entry": "node tools/lint-entry.mjs",
     "check": "node tools/check-layout.mjs"
   },
   "dependencies": {

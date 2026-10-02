@@ -29,44 +29,6 @@
   color: var(--ink-3);
 }
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 20px;
-  margin-top: 16px;
-  font: 400 0.8125rem/1.4 var(--font-mono);
-  color: var(--ink-2);
-}
-
-.controls label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.controls input[type='range'] {
-  width: 120px;
-  accent-color: var(--accent);
-}
-
-.controls button {
-  padding: 6px 12px;
-  font: inherit;
-  color: var(--accent);
-  background: transparent;
-  border: 1px solid var(--accent);
-  cursor: pointer;
-}
-
-.controls button:hover {
-  background: var(--grid-major);
-}
-
-.controls output {
-  color: var(--ink);
-}
-
 /* Line chart, step 3: hover is plain CSS */
 /* #region marker-css */
 .marker {

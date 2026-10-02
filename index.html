@@ -19,7 +19,8 @@ title: Ido Moshe
       <a class="lab-card framed" href="{{ entry.url }}">
         <span class="thumb" aria-hidden="true">{% include thumbs/{{ entry.thumb }}.svg %}</span>
         <span>
-          <span class="fig-label">Fig. {{ entry.fig }}</span>
+          <span class="fig-label">Fig. {{ entry.fig }}
+            {%- for id in entry.topics %}{% assign topic = site.data.topics | where: "id", id | first %} · {{ topic.name }}{% endfor %}</span>
           <h3>{{ entry.title }}</h3>
           <p>{{ entry.summary }}</p>
         </span>
@@ -27,4 +28,5 @@ title: Ido Moshe
     </li>
     {%- endfor %}
   </ol>
+  <p class="lab-topics"><a href="/topics/">Entries by topic →</a></p>
 </section>

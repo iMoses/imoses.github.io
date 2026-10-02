@@ -1,0 +1,6 @@
+{%- comment -%}
+A screenshot in a light and a dark copy (`src`-light.png / `src`-dark.png); CSS shows the one that
+matches the theme. `width` and `height` are the CSS size, so the page doesn't jump while it loads.
+{%- endcomment -%}
+<img class="shot-light" src="{{ include.src }}-light.png" width="{{ include.width }}" height="{{ include.height }}" alt="{{ include.alt }}" loading="lazy"/>
+<img class="shot-dark" src="{{ include.src }}-dark.png" width="{{ include.width }}" height="{{ include.height }}" alt="{{ include.alt }}" loading="lazy"/>

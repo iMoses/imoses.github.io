@@ -1,0 +1,5 @@
+{%- comment -%} An entry's topics as links to /topics/, joined with middots. {%- endcomment -%}
+{%- for id in include.topics -%}
+  {%- assign topic = site.data.topics | where: "id", id | first -%}
+  <span aria-hidden="true"> · </span><a href="/topics/#{{ id }}">{{ topic.name }}</a>
+{%- endfor -%}

@@ -1,0 +1,88 @@
+/* Figure styles for "The button that does nothing". Uses the site's tokens; spacing in rows. */
+
+/* ——— Screenshots ——— */
+
+/* Each family of screenshots: its CSS width and its height/width ratio. The box is the picture's
+   height at the column's width (100cqw), rounded up to whole rows. */
+.shot-storage { --w: 412px; --ratio: calc(357 / 412); }
+.shot-update { --w: 412px; --ratio: calc(520 / 412); }
+.shot-card { --w: 480px; --ratio: calc(101 / 480); }
+.shot-signin { --w: 472px; --ratio: calc(184 / 472); }
+
+.shot-box {
+  width: var(--w);
+  max-width: 100%;
+  height: round(up, calc(min(var(--w), 100cqw) * var(--ratio)), var(--u));
+  margin-inline: auto;
+}
+
+.shot { position: relative; }
+
+/* The sign-in pop-up's place under the Claude card, kept while it's closed. */
+.popup-slot { margin-top: var(--u); }
+
+.popup-slot .controls { margin-top: 0; }
+
+/* Stands in for the card while Home Assistant restarts, at the card's size. */
+.shot-blank {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 412 / 357; /* the card it stands in for */
+  font: 400 0.75rem/var(--u) var(--font-mono);
+  color: var(--ink-3);
+  background: var(--code-bg);
+}
+
+/* A pressable control in the picture: outlined, filled on hover and focus. No motion. */
+.hotspot {
+  position: absolute;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  outline: 1px dashed var(--accent);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+
+.hotspot:hover,
+.hotspot:focus-visible {
+  outline-style: solid;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+/* Positions as fractions of each screenshot, so they hold at any width. */
+.hotspot-update { left: 74.3%; top: 89.2%; width: 19.4%; height: 7.7%; }
+.hotspot-sub-button { left: 81.3%; top: 47.5%; width: 15.4%; height: 34.7%; }
+.hotspot-title { left: 6.4%; top: 16.3%; width: 72.5%; height: 30.4%; }
+.hotspot-field { left: 6.4%; top: 53.3%; width: 75.2%; height: 30.4%; }
+.hotspot-send { left: 82.6%; top: 56%; width: 9.8%; height: 25%; }
+.hotspot-close { left: 81.8%; top: 16.3%; width: 11.9%; height: 30.4%; }
+
+/* ——— Readouts ——— */
+
+/* What went over the wire, newest first. Five rows high whatever it holds; older lines fall off. */
+.broker-log {
+  height: calc(var(--u) * 5);
+  overflow: hidden;
+  margin: var(--u) 0 0;
+  padding: 0;
+  list-style: none;
+  font: 400 0.75rem/var(--u) var(--font-mono);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.broker-log .t { color: var(--ink-3); }
+.broker-log .from-broker { color: var(--ink); }
+.broker-log .from-ha { color: var(--accent); }
+
+/* An icon color as Home Assistant would draw it, named. */
+.swatch::before {
+  content: "●";
+  margin-right: 0.5ch;
+}
+
+.swatch-green::before { color: var(--series-3); }
+.swatch-red::before { color: var(--hot); }
+.swatch-gray::before { color: var(--ink-3); }

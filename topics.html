@@ -1,0 +1,21 @@
+---
+title: Topics
+permalink: /topics/
+---
+<section class="topics">
+  <h1>Topics</h1>
+  <p>Every lab entry belongs to one or more topics. Within a topic, entries are listed in the order
+  they were written, which is also a good order to read them in.</p>
+  {%- for topic in site.data.topics %}
+  {%- assign entries = site.posts | where_exp: "p", "p.topics contains topic.id" | sort: "date" %}
+  {%- if entries.size > 0 %}
+  <h2 id="{{ topic.id }}">{{ topic.name }}</h2>
+  <p>{{ topic.description }}</p>
+  <ul class="topic-entries">
+    {%- for p in entries %}
+    <li><a href="{{ p.url }}"><span class="fig-label">Fig. {{ p.fig }}</span> {{ p.title }}</a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+  {%- endfor %}
+</section>

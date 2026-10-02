@@ -1,0 +1,14 @@
+# The topics that tie lab entries together (docs/STYLE.md §6). Entries list ids in `topics:`.
+# Listed in the order /topics/ shows them. Add one only when a second entry is planned for it.
+- id: rendering
+  name: Rendering
+  description: Getting pixels onto the screen with SVG, canvas and the browser, and keeping it fast.
+- id: data-viz
+  name: Data visualisation
+  description: Charts and pictures that explain numbers, built from the shapes up.
+- id: home-automation
+  name: Home automation
+  description: Home Assistant and the devices around it, and what a house can honestly tell you.
+- id: integrations
+  name: Integrations
+  description: Making two systems talk, and keeping what they say about each other true.

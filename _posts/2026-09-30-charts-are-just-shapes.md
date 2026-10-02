@@ -4,6 +4,7 @@ subtitle: Building charts with React, SVG and a pinch of d3, one step at a time.
 summary: A line chart, a donut and a gauge from scratch, with React and plain SVG, and where d3 fits in.
 fig: "01"
 thumb: react-svg-charts
+topics: [rendering, data-viz]
 demo: react-svg-charts
 ---
 

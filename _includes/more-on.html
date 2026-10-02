@@ -1,0 +1,18 @@
+{%- comment -%}
+End of an entry: for each of its topics, the other entries on it in reading order. Topics with no
+other entry yet are skipped.
+{%- endcomment -%}
+{%- for id in page.topics -%}
+  {%- assign topic = site.data.topics | where: "id", id | first -%}
+  {%- assign others = site.posts | where_exp: "p", "p.topics contains id" | where_exp: "p", "p.url != page.url" | sort: "date" -%}
+  {%- if others.size > 0 %}
+<section class="more-on" aria-label="More on {{ topic.name }}">
+  <h2>More on {{ topic.name }}</h2>
+  <ul>
+    {%- for p in others %}
+    <li><a href="{{ p.url }}"><span class="fig-label">Fig. {{ p.fig }}</span> {{ p.title }}</a></li>
+    {%- endfor %}
+  </ul>
+</section>
+  {%- endif -%}
+{%- endfor -%}

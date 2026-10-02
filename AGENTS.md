@@ -1,6 +1,8 @@
 # AGENTS.md — handoff notes for any AI agent working on this repo
 
-Read this file and `docs/PROFILE.md` before doing anything. They are the project's memory:
+Read this file and `docs/PROFILE.md` before doing anything. Before writing or changing a lab
+entry, also read `docs/STYLE.md` (the house style) and use the `write-entry` / `review-entry`
+skills in `.claude/skills/`. They are the project's memory:
 agents do not carry context between sessions, so anything not written here is lost.
 When you finish a task, update the "Status" and "Decisions" sections below in the same commit.
 
@@ -30,6 +32,9 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   GitHub Pages on every push to `main`.
 - Custom domain `imoses.me` is configured in the repo's Settings → Pages (there is no `CNAME` file).
 - Local build: `npm ci && npm run build && bundle install && bundle exec jekyll build` (or `serve`).
+  On the owner's home server a managed dev server already runs this checkout (`watch` + `serve` on
+  port 4000, switched on and off from the owner's dashboard). Don't start your own `jekyll serve`
+  on :4000 there; its details live in the owner's private homelab repo, not in this public one.
   If `bundle exec jekyll` reports "command not found", run
   `bundle exec ruby "$(bundle info --path jekyll)/exe/jekyll" build`.
 - Styles: single file `css/styles.scss`. All colours are tokens on `:root`, redefined for dark mode.
@@ -89,11 +94,22 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 
 ### How a lab entry works
 
+- How an entry *reads* is in `docs/STYLE.md`; this section is how it's *built*.
 - A lab entry is a Jekyll post: `_posts/YYYY-MM-DD-slug.md` → `/lab/slug/`. Front matter:
   `title`, `subtitle`, `summary` (card text), `fig` (e.g. `"02"`), `thumb` (name of an inline SVG in
-  `_includes/thumbs/`, drawn with `currentColor`), and `demo` (bundle name, if it has figures).
+  `_includes/thumbs/`, drawn with `currentColor`), `topics` (1–3 ids from `_data/topics.yml`), and
+  `demo` (bundle name, if it has figures).
+- Topics tie entries together: they show beside the Fig. label (home card and entry header), the
+  entry ends with "More on <topic>" lists (`_includes/more-on.html`), and `/topics/` lists them all.
+- `npm run lint:entry -- _posts/<file>.md` checks what can be counted (structure, front matter,
+  figure captions, banned words, spelling); the `review-entry` skill does the rest.
 - Place a live figure with `{% include demo.html id="name" caption="…" %}`; the entry's bundle maps
   `id` → component in `demos/<entry>/main.jsx`. The figure shows a text fallback without JS.
+- Screenshots come in a light and a dark copy (`name-light.png` / `name-dark.png`, 2x renders);
+  `_includes/shot.html` shows the one matching the theme. A still figure is
+  `{% include figure.html src="/assets/lab/<entry>/name" width=… height=… alt="…" caption="…" %}`;
+  give `demo.html` the same `shot`/`width`/`height`/`alt` and its no-JS fallback becomes that still.
+  Shared figure controls (`.controls`) live in `css/styles.scss`, not in an entry's bundle.
 - Show real source code with `{% code_file demos/<entry>/File.jsx %}`; add `region=name` to show only
   the lines between `#region name` / `#endregion` comments, and `label=` to set the file caption.
   Never paste code by hand when the file exists, so the post can't drift from what runs.
@@ -105,9 +121,25 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 
 ## Status (update this)
 
-Last updated: 2026-09-30
+Last updated: 2026-10-02
 
 Done:
+- 2026-10-01: House style written down (`docs/STYLE.md`) from the owner's feedback on the first
+  Fig. 02 draft and their references (Bret Victor, Josh Comeau, Amelia Wattenberger). Added the
+  `write-entry` and `review-entry` skills, `tools/lint-entry.mjs`, and topics (`_data/topics.yml`,
+  `/topics/`, "More on …" at the end of each entry).
+- 2026-10-02: Fig. 02 merged to `main` and deployed at the owner's request ("when done, merge
+  into main"). `npm run check` now also covers `/lab/nas-dashboard/` and `/topics/`. Screenshot
+  boxes round their height up to whole rows (`.shot-box`, container query), so the code panel
+  beside them stays on the grid. Claude card renders redone after the dashboard's icon-opacity fix.
+- 2026-10-01: Fig. 02 "The button that does nothing" rewritten to the house style. One lesson ("a dashboard is a
+  set of claims; make each true or visibly unsure, buttons included"), six sections, seven
+  figures sharing one NAS → broker → Home Assistant model (`demos/nas-dashboard/Wire.jsx`), each
+  with its real code beside it (`Code.jsx`: lit lines + live values). Code panels are labelled
+  excerpts from the owner's private homelab repo. Renders come from a read-only capture harness on
+  the NAS, outside this repo (`~/blog-card-export/tools/fig02*.js`); its `raw/` folder holds
+  private data, never copy from it. Shared `.demo.wide` / `.split` / `.code-panel` / `.wire` styles
+  are in `css/styles.scss` (`{% include demo.html … wide=true %}`).
 - 2026-09-30: Blueprint redesign (graph-paper light theme, blueprint-navy dark theme, page rulers,
   coordinate crosshair) and the first lab entry, "Charts are just shapes" (Fig. 01), adapted from
   the owner's React Summit 2025 talk and d3-examples meetup repo. Merged to `main` and deployed
@@ -119,8 +151,14 @@ Done:
   Sass modules). Deployed successfully from `main`.
 
 Still open (see also `docs/PROFILE.md` → Open questions):
-- Owner to approve or rewrite the tagline and the home "about me" paragraph.
-- Credit for the sample sales data in Fig. 01; keep or drop the link to the talk.
+- Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
+- Fig. 01's sample sales data has no known source; replace it when Fig. 01 is revised.
+- Content format decided (see Direction); the reusable interaction patterns are still being worked out.
+- Fig. 02 passes the linter and a review-entry pass; Fig. 01 doesn't pass the style guide yet.
+- The home intro still calls the lab "small, interactive experiments with the pixels and the
+  maths", which no longer matches the content direction.
+- Fig. 02 is live; the owner is still reading the text and may send notes.
+- Fig. 01 needs more than a style pass (owner, 2026-10-01); revisit with the owner.
 - Only one lab entry so far; the "3 experiments" guideline is now a target, not a launch gate.
 
 Drafts worth keeping:
@@ -169,9 +207,15 @@ Confirmed by owner (2026-09-30):
 Structure chosen by owner (2026-09-30): **Lab.**
 - Homepage: title block in the header (name + tagline beside the logo), a short general "about me"
   (not just the current job), then the list of experiments, then links.
-- Each experiment: a small, self-contained, interactive piece (SVG / canvas / charting /
-  performance) with a one-paragraph "what and why". Plain HTML/CSS/JS, no framework unless the
-  experiment needs one. Must work on mobile and without breaking if JS fails to load.
+- Each entry (owner, 2026-09-30): **large and meaningful, less is more.** A story built on the
+  owner's own real work, with one idea at its core; concepts appear as what the story taught, never
+  as a standalone lecture. Interactivity and storytelling matter: where it makes sense the reader
+  *does* something (predicts, breaks, solves) and the reading can be gamified. The format bends to
+  the content; there's no fixed template. Topics are open: working with AI, home automation,
+  integrations, reverse engineering, development views; AG Charts experience is fair game but not
+  the main gist (owner finds "build it yourself" / modularity / refactoring talk overdone).
+- Figures must work on mobile and without breaking if JS fails to load. Plain HTML/CSS/JS, no
+  framework unless the figure needs one.
 - Aim for at least 3 experiments: one entry reads as a start, three as a practice. (Owner chose to
   launch with one; this is a target, not a gate.)
 - Experiments are the owner's own from-scratch work. Don't copy AG Charts code (the enterprise
@@ -183,6 +227,29 @@ Structure chosen by owner (2026-09-30): **Lab.**
 
 ## Decisions (append; newest first)
 
+- 2026-10-01: Owner: figures must not make the page jump while you play with them. Anything that
+  changes size reserves its largest case (`Wire` facts take a `widest` value; logs are fixed-height,
+  newest first; the pop-up keeps its slot; buttons are disabled, never removed). Disk serials in
+  renders are invented look-alikes (warranty risk); the real ones were scrubbed from the unpushed
+  history with the owner's OK. No-JS fallbacks: a text line is enough (owner:
+  the site's point is interactivity).
+- 2026-10-01: Style additions (owner): every example interactive, its code beside it when there's
+  room and following what the reader does; explain *why* (read the owner's system instructions);
+  oblique titles are fine if subtitle and summary are clear. American spelling (owner doesn't mind
+  much; it matches the code). Fig. 01 will be revised later; it needs more than the style pass.
+- 2026-10-01: Owner on style (first Fig. 02 draft): sections too short and unclear; gamification
+  childish; no clear opening or ending; read as praise of the writer, not a lesson; entries need
+  continuity. Owner asked for the style to be written down and enforced by a write skill and a
+  validate skill. Result: `docs/STYLE.md`, the two skills, the linter, topics.
+- 2026-10-01: Fig. 02 is the NAS ↔ Home Assistant entry (owner, via handoff from another session).
+  Public-safety rules for it (owner): no container names except Authelia, nothing from the *arr /
+  download stack, no VPN; the server's security setup is described in one line, not mapped.
+  Screenshots must look identical to the live dashboard; they are made playable with hotspots
+  rather than redrawn. Earlier "no interactive figures" for this entry was superseded by the
+  owner's later "storytelling + interactivity, gamified where it makes sense".
+- 2026-09-30: Content format (owner): entries are large, story-led pieces with one core idea,
+  interactive and gamified where it makes sense; format varies by content. Topics widened beyond
+  charts (AI, home automation, integrations, reverse engineering, development views).
 - 2026-09-30: Added `npm run check` (tools/check-layout.mjs) so layout rules are verified by a
   committed script, not ad-hoc ones; documented the owner's review setup and lab ideas.
 - 2026-09-30: Crosshair coordinates update on scroll, not only on pointer move.

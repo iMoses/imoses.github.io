@@ -6,6 +6,7 @@ import { defineConfig } from 'vite';
 // (no hashes); the Jekyll layout appends a build timestamp for cache busting.
 const entries = {
   'react-svg-charts': 'react-svg-charts/main.jsx',
+  'nas-dashboard': 'nas-dashboard/main.jsx',
 };
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url));

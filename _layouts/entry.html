@@ -3,11 +3,12 @@ layout: root
 ---
 <article class="entry">
   <header class="entry-header">
-    <p class="fig-label">Fig. {{ page.fig }}</p>
+    <p class="fig-label">Fig. {{ page.fig }}{% include topic-links.html topics=page.topics %}</p>
     <h1>{{ page.title }}</h1>
     {%- if page.subtitle %}<p class="entry-subtitle">{{ page.subtitle }}</p>{% endif %}
     <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%-d %B %Y' }}</time>
   </header>
   {{ content }}
+  {% include more-on.html %}
   <p class="back"><a href="/">← Back to the lab</a></p>
 </article>
