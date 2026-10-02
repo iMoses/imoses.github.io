@@ -118,8 +118,9 @@ Drafts worth keeping:
   Several bugs only showed up there: uneven frame edges at fractional scaling, and ~1px drift per
   bordered block on mobile. Desktop Chromium at 100% doesn't reproduce these, so reason about
   device-pixel rounding and don't trust a clean local render alone.
-- **The sandbox can't reach imoses.me or github.io** (egress policy), and Google Fonts may be
-  blocked, so local renders can fall back to other fonts. To test with the real fonts, serve IBM Plex
+- **Check the live site after a deploy.** Sessions on the owner's home server reach imoses.me
+  directly (verified 2026-10-03: curl and Playwright). Only cloud sandboxes can't (egress policy);
+  there Google Fonts may be blocked too, so local renders can fall back to other fonts. To test with the real fonts, serve IBM Plex
   from `@fontsource/ibm-plex-*` and intercept the Google Fonts requests in Playwright. Only Chromium is
   available (no WebKit/Safari).
 - **Owner preferences:** concise answers, lead with what's verified, don't guess; say plainly what
