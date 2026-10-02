@@ -12,7 +12,7 @@ export function Axis({
   noDomain,
   ...props
 }) {
-  const offset = window?.devicePixelRatio > 1 ? 0 : 0.5;
+  const offset = globalThis.devicePixelRatio > 1 ? 0 : 0.5; // as d3-axis; on a server it's undefined
   const values =
     tickValues ?? scale.ticks?.(...tickArguments) ?? scale?.domain();
   const format = tickFormat ?? scale.tickFormat?.(...tickArguments) ?? identity;
@@ -31,7 +31,6 @@ export function Axis({
     <g
       fill='none'
       fontSize={10}
-      fontFamily='sans-serif'
       textAnchor={
         orientation === Axis.Right
           ? 'start'

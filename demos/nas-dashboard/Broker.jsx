@@ -8,10 +8,10 @@
 //
 // Simulated time runs ten times fast: one second of the clock is a tenth of a real second.
 import { useEffect, useReducer } from 'react';
-import { Code } from './Code';
+import { Code } from '../shared/Code';
 import { Shot, usePreload } from './Shot';
 import { Log, mmss } from './sim';
-import { Wire } from './Wire';
+import { Wire } from '../shared/Wire';
 
 const SPEED = 10;
 const INTERVAL = 60; // INTERVAL_HEALTH: seconds between status publishes

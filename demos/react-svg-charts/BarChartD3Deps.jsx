@@ -32,7 +32,7 @@ export function BarChart({ data, width = 400, height = 200, padding = 10 }) {
       .attr('width', x.bandwidth())
       .attr('height', (d) => innerHeight - y(d.twh))
       .attr('fill', 'var(--series-1)');
-  }, []);
+  }, [data, width, height, padding]);
   // #endregion
 
   return <svg ref={ref} />;

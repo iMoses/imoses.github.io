@@ -627,8 +627,8 @@ hr {
   .inline-value { color: var(--accent); }
 }
 
-// What normally can't be seen: one column per party in a conversation (a machine, a message
-// broker, a dashboard), each a short list of what it currently holds. Lines here are horizontal
+// What normally can't be seen: one column per party (a machine, a message broker, a dashboard;
+// or the data, d3 and React), each a short list of what it currently holds. Lines here are horizontal
 // only, so the columns can be any width.
 .wire {
   display: grid;

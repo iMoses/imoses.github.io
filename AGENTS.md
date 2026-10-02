@@ -110,6 +110,10 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   `{% include figure.html src="/assets/lab/<entry>/name" width=… height=… alt="…" caption="…" %}`;
   give `demo.html` the same `shot`/`width`/`height`/`alt` and its no-JS fallback becomes that still.
   Shared figure controls (`.controls`) live in `css/styles.scss`, not in an entry's bundle.
+- Figures share `demos/shared/`: `Wire.jsx` (the hidden-state columns above an example) and
+  `Code.jsx` (the code panel beside it). A panel can show a file of this repo imported with
+  `?raw`, with `regions` like `code_file` and lines named by `match`, so it can't drift from what
+  runs (see Fig. 01's `main.jsx`). Readouts in Fig. 01 come from the live DOM (`inspect.js`).
 - Show real source code with `{% code_file demos/<entry>/File.jsx %}`; add `region=name` to show only
   the lines between `#region name` / `#endregion` comments, and `label=` to set the file caption.
   Never paste code by hand when the file exists, so the post can't drift from what runs.
@@ -121,9 +125,17 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 
 ## Status (update this)
 
-Last updated: 2026-10-02
+Last updated: 2026-10-02 (Fig. 01 rewrite)
 
 Done:
+- 2026-10-02: Fig. 01 rewritten to the house style on branch `fig01-lesson` (NOT pushed: the owner
+  hasn't seen it). New title "Who draws the chart?" (slug kept so links don't break). One lesson
+  ("every node in the DOM has exactly one owner: d3 computes, React renders, CSS styles and moves"),
+  seven sections, seven figures sharing one Data → d3 → DOM model, each with its real source beside
+  it. The unsourced sales sample was replaced by UK electricity generation 1990–2025 from Our World
+  in Data (CC BY 4.0, credited at the end; extraction described in `data.js`). The owner gave no
+  steer on purpose ("see what you come up with"). Gauge and pie figures dropped (pie merged into
+  the donut); `d3-axis` and `d3-interpolate` added.
 - 2026-10-01: House style written down (`docs/STYLE.md`) from the owner's feedback on the first
   Fig. 02 draft and their references (Bret Victor, Josh Comeau, Amelia Wattenberger). Added the
   `write-entry` and `review-entry` skills, `tools/lint-entry.mjs`, and topics (`_data/topics.yml`,
@@ -152,13 +164,14 @@ Done:
 
 Still open (see also `docs/PROFILE.md` → Open questions):
 - Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
-- Fig. 01's sample sales data has no known source; replace it when Fig. 01 is revised.
 - Content format decided (see Direction); the reusable interaction patterns are still being worked out.
-- Fig. 02 passes the linter and a review-entry pass; Fig. 01 doesn't pass the style guide yet.
+- Both entries pass the linter and a review-entry pass.
 - The home intro still calls the lab "small, interactive experiments with the pixels and the
   maths", which no longer matches the content direction.
 - Fig. 02 is live; the owner is still reading the text and may send notes.
-- Fig. 01 needs more than a style pass (owner, 2026-10-01); revisit with the owner.
+- Fig. 01 rewrite awaits the owner's review. Open choice for them: the "tween the paths" mode
+  makes Chrome log an error per frame (invalid arc flag). That is the failure the figure shows and
+  the text points at the console, but the owner may prefer a silent page.
 - Only one lab entry so far; the "3 experiments" guideline is now a target, not a launch gate.
 
 Drafts worth keeping:
@@ -226,6 +239,10 @@ Structure chosen by owner (2026-09-30): **Lab.**
   IBM Plex Sans body, entries labelled "Fig. NN", figures framed like drawings.
 
 ## Decisions (append; newest first)
+
+- 2026-10-02: Fig. 01 data: UK electricity by source (Our World in Data), chosen because it's
+  public, licensed, and carries a story (coal 65% → 0.1%) that suits bars, a line and a donut.
+  Owner: "use any other data source that meets the goal (ideally public)".
 
 - 2026-10-01: Owner: figures must not make the page jump while you play with them. Anything that
   changes size reserves its largest case (`Wire` facts take a `widest` value; logs are fixed-height,

@@ -2,8 +2,8 @@
 // call that fills it to the line the dashboard prints. The reader decides what docker answers, and
 // can put back the one-word shortcut the publisher's comment warns against.
 import { useState } from 'react';
-import { Code } from './Code';
-import { Wire } from './Wire';
+import { Code } from '../shared/Code';
+import { Wire } from '../shared/Wire';
 
 const ANSWERS = {
   exited: { label: 'authelia has exited', allc: '"authelia\\texited\\n…"' },
@@ -86,7 +86,9 @@ export function Unknown() {
         ))}
         <label>
           <input type="checkbox" checked={shortcut} onChange={(e) => setShortcut(e.target.checked)} />
-          add <code>or ""</code>
+          <span>
+            add <code>or ""</code>
+          </span>
         </label>
       </div>
     </>

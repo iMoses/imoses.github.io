@@ -2,10 +2,10 @@
 // the installing, and the availability topics that decide whether the Update button is offered.
 // The reader can kill the updater, press Update, and add the third availability source.
 import { useState } from 'react';
-import { Code } from './Code';
+import { Code } from '../shared/Code';
 import { Hotspot, Shot, usePreload } from './Shot';
 import { Log, useLater, useLog } from './sim';
-import { Wire } from './Wire';
+import { Wire } from '../shared/Wire';
 
 const CMD = 'homelab/updates/authelia/install';
 const NAMES = ['update-available', 'update-unavailable', 'update-done'];
@@ -131,7 +131,9 @@ export function DeadButton() {
         </button>
         <label>
           <input type="checkbox" checked={third} onChange={(e) => reset(e.target.checked, alive)} />
-          require <code>RESULT_AVAIL</code> too
+          <span>
+            require <code>RESULT_AVAIL</code> too
+          </span>
         </label>
       </div>
     </>

@@ -1,33 +1,68 @@
-/* Figure styles for the "Charts are just shapes" entry. Uses the site's colour tokens. */
+/* Figure styles for "Who draws the chart?". Uses the site's tokens; spacing in rows. */
 
-.demo svg {
+/* ——— Chart boxes ———
+   A chart scales its viewBox to the column's width; its box is that height rounded up to whole
+   rows, so whatever comes under it stays on the grid. --ratio is the viewBox's height / width. */
+.chart { container-type: inline-size; }
+
+.chart > svg {
   display: block;
-  max-width: 100%;
-  height: auto;
-  margin-inline: auto;
+  width: 100%;
+  height: round(up, calc(100cqw * var(--ratio)), var(--u));
   overflow: visible;
   color: var(--ink-2);
 }
 
-.demo .tick text,
-.demo text {
-  font-family: var(--font-mono);
+.chart-wide { --ratio: 0.5; }
+.chart-tall { --ratio: 0.75; }
+
+.chart-shapes,
+.chart-round {
+  --ratio: 1;
+  width: calc(var(--u) * 10);
+  max-width: 100%;
+  margin-inline: auto;
 }
 
-.demo-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  align-items: end;
-}
+.chart-round { width: calc(var(--u) * 12); }
+.chart-round > svg { overflow: hidden; } /* a broken tween stays inside its box */
 
-.demo-row h4 {
-  margin: 0 0 8px;
-  font: 500 0.75rem/1.4 var(--font-mono);
-  letter-spacing: 0.08em;
+.demo text { font-family: var(--font-mono); }
+
+/* A small label above a chart, when a figure shows two. */
+.chart-label {
+  margin: 0;
+  font: 500 0.75rem/var(--u) var(--font-mono);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
+
+.chart + .chart-label { margin-top: var(--u); }
+
+/* ——— Marks ——— */
+.chart-round path {
+  stroke: var(--paper); /* a hairline gap between slices */
+  stroke-width: 1.5;
+}
+
+.bar { fill: var(--series-1); }
+.bar.selected { fill: var(--series-2); }
+
+.line {
+  fill: none;
+  stroke: var(--series-1);
+  stroke-width: 2;
+}
+
+.fill-1 { fill: var(--series-1); }
+.fill-2 { fill: var(--series-2); }
+.fill-3 { fill: var(--series-3); }
+.fill-4 { fill: var(--series-4); }
+.fill-5 { fill: var(--series-5); }
+.fill-6 { fill: var(--series-6); }
+.fill-7 { fill: var(--series-7); }
+.fill-8 { fill: var(--series-8); }
 
 /* Line chart, step 3: hover is plain CSS */
 /* #region marker-css */
@@ -50,24 +85,25 @@
   outline: none;
 }
 
-.readout {
-  min-height: 1.4em;
-  margin: 12px 0 0;
-  font: 400 0.8125rem/1.4 var(--font-mono);
-  color: var(--ink);
-  text-align: center;
+.hit { fill: transparent; }
+
+.show-hits .hit {
+  fill: color-mix(in srgb, var(--accent) 12%, transparent);
+  stroke: var(--accent);
+  stroke-dasharray: 2 2;
 }
 
-/* Donut: the clip circle grows on hover */
+/* Donut: each slice is clipped by a circle a little smaller than the chart; on hover the circle
+   grows to full size and the slice seems to pop out. */
 /* #region arc-css */
 .arc circle {
-  r: calc(var(--arc-radius) * 0.9);
-  transition: r 200ms cubic-bezier(0.45, 0, 0.55, 1);
+  transform: scale(0.9);
+  transition: transform 200ms cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 .arc:hover circle,
 .arc:focus-visible circle {
-  r: var(--arc-radius);
+  transform: none;
 }
 /* #endregion */
 
@@ -76,38 +112,33 @@
   cursor: pointer;
 }
 
-.donut-label {
-  font-size: 22px;
-  fill: var(--ink);
+@media (prefers-reduced-motion: reduce) {
+  .marker,
+  .arc circle { transition: none; }
 }
 
-.donut-label tspan + tspan {
-  font-size: 12px;
-  fill: var(--ink-3);
-}
-
+/* ——— Legend ——— */
 .legend {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px 16px;
-  margin: 16px 0 0;
+  gap: 0 var(--u);
+  margin: var(--u) 0 0;
   padding: 0;
   list-style: none;
-  font: 400 0.8125rem/1.4 var(--font-mono);
+  font: 400 0.75rem/var(--u) var(--font-mono);
   color: var(--ink-2);
 }
 
 .legend li {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 1ch;
 }
 
 .legend i {
   width: 10px;
   height: 10px;
-  border-radius: 2px;
 }
 
 .swatch-1 { background: var(--series-1); }
@@ -118,28 +149,3 @@
 .swatch-6 { background: var(--series-6); }
 .swatch-7 { background: var(--series-7); }
 .swatch-8 { background: var(--series-8); }
-
-.controls-center {
-  justify-content: center;
-}
-
-.gauge {
-  text-align: center;
-}
-
-.gauge-value {
-  margin-top: -1em;
-  font: 600 2.5rem/1 var(--font-mono);
-  color: var(--ink);
-}
-
-.gauge-label {
-  margin-top: 4px;
-  font: 400 0.875rem/1.3 var(--font-mono);
-  color: var(--ink-3);
-}
-
-.viewbox-code {
-  font: 500 0.8125rem/1.4 var(--font-mono);
-  color: var(--ink);
-}

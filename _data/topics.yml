@@ -4,7 +4,7 @@
   name: Rendering
   description: Getting pixels onto the screen with SVG, canvas and the browser, and keeping it fast.
 - id: data-viz
-  name: Data visualisation
+  name: Data visualization
   description: Charts and pictures that explain numbers, built from the shapes up.
 - id: home-automation
   name: Home automation

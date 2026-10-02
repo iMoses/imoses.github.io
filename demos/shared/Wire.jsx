@@ -1,7 +1,7 @@
-// The parties in the conversation and what each one currently holds: the machine, the broker in
-// the middle, and Home Assistant. Each fact is [name, value, className?, widest?]: `widest` is the
-// longest value the fact can take, laid invisibly under the live one so that playing with the
-// figure never changes its height.
+// The hidden state behind an example: one column per party (a machine, a broker and a dashboard;
+// the data, d3 and React) and what each one currently holds. Each fact is
+// [name, value, className?, widest?]: `widest` is the longest value the fact can take, laid
+// invisibly under the live one so that playing with the figure never changes its height.
 export function Wire({ nodes }) {
   return (
     <div className="wire">

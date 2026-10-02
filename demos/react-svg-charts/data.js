@@ -1,52 +1,62 @@
-// Yearly sales sample data used in the React Summit 2025 talk.
-export const sales = [
-  { year: 1988, efficiency: 24.3, sales: 8949000 },
-  { year: 1989, efficiency: 27.6, sales: 10979000 },
-  { year: 1990, efficiency: 28, sales: 9303000 },
-  { year: 1991, efficiency: 28.4, sales: 8185000 },
-  { year: 1992, efficiency: 27.9, sales: 8213000 },
-  { year: 1993, efficiency: 28.4, sales: 8518000 },
-  { year: 1994, efficiency: 28.3, sales: 8991000 },
-  { year: 1995, efficiency: 28.6, sales: 8620000 },
-  { year: 1996, efficiency: 28.5, sales: 8479000 },
-  { year: 1997, efficiency: 28.7, sales: 8217000 },
-  { year: 1998, efficiency: 28.8, sales: 8085000 },
-  { year: 1999, efficiency: 28.3, sales: 8638000 },
-  { year: 2000, efficiency: 28.5, sales: 8778000 },
-  { year: 2001, efficiency: 28.8, sales: 8352000 },
-  { year: 2002, efficiency: 29, sales: 8042000 },
-  { year: 2003, efficiency: 29.5, sales: 7556000 },
-  { year: 2004, efficiency: 29.5, sales: 7483000 },
-  { year: 2005, efficiency: 30.3, sales: 7660000 },
-  { year: 2006, efficiency: 30.1, sales: 7762000 },
-  { year: 2007, efficiency: 31.2, sales: 7562000 },
-  { year: 2008, efficiency: 31.5, sales: 6769000 },
-  { year: 2009, efficiency: 32.9, sales: 5402000 },
-  { year: 2010, efficiency: 33.9, sales: 5636000 },
-  { year: 2011, efficiency: 33.1, sales: 6093000 },
-  { year: 2012, efficiency: 35.3, sales: 7245000 },
-  { year: 2013, efficiency: 36.4, sales: 7586000 },
-  { year: 2014, efficiency: 36.5, sales: 7708000 },
-  { year: 2015, efficiency: 37.2, sales: 7517000 },
-  { year: 2016, efficiency: 37.7, sales: 6873000 },
-  { year: 2017, efficiency: 39.4, sales: 6081000 },
+// UK electricity generation by source, 1990–2025, in terawatt-hours (TWh).
+// Source: Our World in Data, energy dataset (github.com/owid/energy-data, downloaded 2026-10-02),
+// based on Ember's Yearly Electricity Data and the Energy Institute's Statistical Review of World
+// Energy. Licensed CC BY 4.0. Columns `<source>_electricity` for the United Kingdom; the eight
+// sources add up to the dataset's `electricity_generation` for every year.
+
+export const sources = ['coal', 'gas', 'oil', 'nuclear', 'wind', 'solar', 'hydro', 'bioenergy'];
+
+// [year, ...TWh per source, in the order above]
+const rows = [
+  [1990, 206.44, 5, 36.83, 65.75, 0.01, 0, 5.12, 0.6],
+  [1991, 211.46, 5.82, 29.82, 70.54, 0.01, 0, 4.54, 0.69],
+  [1992, 193.64, 12.58, 31.7, 76.81, 0.03, 0, 5.35, 0.93],
+  [1993, 171.25, 34.04, 22.75, 89.35, 0.22, 0, 4.3, 1.2],
+  [1994, 161.34, 53.26, 16.7, 88.28, 0.34, 0, 5.12, 1.52],
+  [1995, 155.21, 63.74, 22.83, 88.96, 0.39, 0, 4.65, 1.64],
+  [1996, 147.27, 84.09, 19.15, 94.67, 0.49, 0, 3.4, 1.8],
+  [1997, 121.97, 110.96, 12.41, 98.15, 0.67, 0, 4.4, 2.11],
+  [1998, 122.97, 117.8, 13.8, 99.49, 0.88, 0, 5.12, 2.65],
+  [1999, 106.18, 142.9, 14.32, 95.13, 0.85, 0, 5.34, 3.43],
+  [2000, 119.95, 148.08, 14.06, 85.06, 0.94, 0, 5.09, 3.88],
+  [2001, 131.46, 141.91, 11.77, 90.09, 0.96, 0, 4.05, 4.53],
+  [2002, 124.28, 152.28, 11.71, 87.85, 1.25, 0, 4.79, 5.08],
+  [2003, 138.46, 148.88, 11.49, 88.69, 1.29, 0, 3.23, 6.17],
+  [2004, 131.79, 157.06, 10.93, 80, 1.94, 0, 4.84, 7.36],
+  [2005, 134.64, 152.64, 12.52, 81.62, 2.9, 0.01, 4.92, 9.1],
+  [2006, 148.85, 140.83, 14.04, 75.45, 4.22, 0.01, 4.59, 9.28],
+  [2007, 135.94, 165.79, 12.37, 63.03, 5.27, 0.01, 5.08, 9.32],
+  [2008, 124.38, 176.22, 13.93, 52.49, 7.13, 0.02, 5.14, 9.65],
+  [2009, 103.04, 166.5, 12.88, 69.1, 9.28, 0.02, 5.23, 10.71],
+  [2010, 107.59, 175.65, 10.5, 62.14, 10.29, 0.04, 3.59, 12.26],
+  [2011, 108.44, 146.5, 8.85, 68.98, 15.96, 0.24, 5.69, 13.31],
+  [2012, 142.79, 100.17, 9.26, 70.41, 19.84, 1.35, 5.31, 14.74],
+  [2013, 130.26, 95.84, 8.36, 70.61, 28.4, 2.01, 4.7, 18.1],
+  [2014, 100.24, 100.89, 8.69, 63.75, 31.95, 4.05, 5.89, 22.62],
+  [2015, 75.88, 99.88, 9.41, 70.34, 40.27, 7.53, 6.3, 29.26],
+  [2016, 30.67, 143.13, 10.64, 71.73, 37.16, 10.41, 5.37, 30.07],
+  [2017, 22.53, 136.75, 9.71, 70.34, 49.65, 11.46, 5.88, 31.9],
+  [2018, 16.83, 131.49, 10.24, 65.06, 56.91, 12.67, 5.44, 35.11],
+  [2019, 6.92, 133.09, 11.26, 56.18, 63.84, 12.42, 5.93, 37.54],
+  [2020, 5.7, 111.89, 8.84, 50.24, 75.62, 12.55, 6.88, 38.58],
+  [2021, 6.79, 122.84, 9.68, 46.1, 64.93, 12.13, 5.42, 40.01],
+  [2022, 5.94, 125.11, 11.07, 47.4, 80.21, 13.34, 5.66, 35.85],
+  [2023, 3.78, 101.66, 10.82, 40.6, 82.15, 13.88, 5.54, 34.1],
+  [2024, 1.9, 86.3, 11.45, 40.59, 83.28, 14.79, 5.76, 40.09],
+  [2025, 0.33, 90.91, 12.77, 36.38, 85.84, 19.32, 5.55, 41.21],
 ];
 
-export const categories = [
-  { category: 'Electronics', value: 9 },
-  { category: 'Apparel', value: 20 },
-  { category: 'Groceries', value: 30 },
-  { category: 'Health & Beauty', value: 8 },
-  { category: 'Books & Media', value: 12 },
-  { category: 'Toys & Games', value: 3 },
-  { category: 'Furniture', value: 7 },
-  { category: 'Automotive', value: 14 },
-];
+export const years = rows.map(([year, ...twh]) => ({
+  year,
+  ...Object.fromEntries(sources.map((s, i) => [s, twh[i]])),
+  total: Math.round(twh.reduce((a, b) => a + b) * 100) / 100,
+}));
 
-export const fruit = [
-  { label: 'Apples', value: 10 },
-  { label: 'Oranges', value: 15 },
-  { label: 'Bananas', value: 7 },
-  { label: 'Kiwis', value: 12 },
-  { label: 'Pears', value: 9 },
-];
+// One year's mix, as the bar chart and the donut take it: [{ source, twh }].
+export const mix = (year) => {
+  const row = years.find((d) => d.year === year);
+  return sources.map((source) => ({ source, twh: row[source] }));
+};
+
+// Coal's share of each year's generation, in percent: [{ year, share }].
+export const coalShare = years.map((d) => ({ year: d.year, share: (d.coal / d.total) * 100 }));

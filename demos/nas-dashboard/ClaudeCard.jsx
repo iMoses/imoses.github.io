@@ -2,10 +2,10 @@
 // in the screenshots are pressable; the two switches are the two lines of the relay that the
 // section is about.
 import { useState } from 'react';
-import { Code } from './Code';
+import { Code } from '../shared/Code';
 import { Hotspot, Shot, usePreload } from './Shot';
 import { Log, useLater, useLog } from './sim';
-import { Wire } from './Wire';
+import { Wire } from '../shared/Wire';
 
 const CARDS = ['healthy', 'update-ready', 'updating', 'sign-in-due', 'offline'];
 const STEPS = ['idle', 'asking', 'awaiting-code', 'code-pasted', 'verifying', 'signed-in', 'failed'];
@@ -192,7 +192,9 @@ export function ClaudeCard() {
         </label>
         <label>
           <input type="checkbox" checked={sentinel} onChange={(e) => setSentinel(e.target.checked)} />
-          retract with <code>"none"</code>
+          <span>
+            retract with <code>"none"</code>
+          </span>
         </label>
       </div>
     </>

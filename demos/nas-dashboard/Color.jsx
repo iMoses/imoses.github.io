@@ -1,8 +1,8 @@
 // Section 4, second figure: the icon color of a NAS card, computed by its first draft and by the
 // version that replaced it, in the four situations the card has to survive.
 import { useState } from 'react';
-import { Code } from './Code';
-import { Wire } from './Wire';
+import { Code } from '../shared/Code';
+import { Wire } from '../shared/Wire';
 
 // What Home Assistant holds in each situation: the availability sensor and the problem sensor.
 const SITUATIONS = {

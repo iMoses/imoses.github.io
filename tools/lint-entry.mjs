@@ -10,7 +10,7 @@ const topics = [...readFileSync('_data/topics.yml', 'utf8').matchAll(/^- id: (\S
 const bundles = readFileSync('demos/vite.config.js', 'utf8');
 
 const BANNED = /\b(just|simply|seamless(ly)?|powerful|robust|let's dive|dive in|in this (post|article))\b/gi;
-const BRITISH = /\b(colours?|coloured|behaviours?|optimis\w*|visualis\w*|analys(e|ed|es|ing)|grey|centre[ds]?|recognis\w*|favour\w*)\b/gi;
+const BRITISH = /\b(colours?|coloured|behaviours?|optimis\w*|visualis\w*|analys(e|ed|es|ing)|grey|centre[ds]?|recognis\w*|favour\w*|maths)\b/gi;
 const EMOJI = /\p{Extended_Pictographic}/u;
 
 let failed = false;
