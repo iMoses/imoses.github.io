@@ -12,7 +12,8 @@ const files = (dir) =>
 
 const caps = [
   ['loaded every session', ['CLAUDE.md', 'AGENTS.md'], 12_000],
-  ['skill files', files('.claude/skills'), 15_000],
+  ['skill instructions', files('.claude/skills').filter((f) => f.endsWith('SKILL.md')), 15_000],
+  ['skill supporting files', files('.claude/skills').filter((f) => !f.endsWith('SKILL.md')), 50_000],
   ['read whole (docs/)', files('docs').filter((f) => f.endsWith('.md')), 50_000],
 ];
 

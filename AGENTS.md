@@ -71,7 +71,8 @@ Rules that keep this from growing back:
   one; the stricter rule wins), in characters (`wc -m`). `npm run check:sizes` checks rules 1–3
   and fails on anything over:
   1. This file (always loaded): at most 12,000 characters.
-  2. A skill: split it when its `SKILL.md`, or any file in its folder, passes 15,000.
+  2. A skill's `SKILL.md`: at most 15,000; split the skill when it passes. Its supporting files
+     follow rule 3 (owner, 2026-10-03).
   3. Any other file meant to be read whole (`docs/`, archive parts included): at most 50,000
      characters, safely under one Read's cap (~65 KB, ~25k tokens, measured 2026-10-02). Past
      the cap a session sees a truncated page and may answer from it.
