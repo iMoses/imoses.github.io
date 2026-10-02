@@ -1,0 +1,210 @@
+/* Figure styles for "What the next session knows". Uses the site's tokens; spacing in rows. */
+
+/* ——— The context window (Context.jsx) ——— */
+.context { font: 400 0.75rem/var(--u) var(--font-mono); }
+
+.context-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 var(--u);
+  margin: 0;
+  color: var(--ink-3);
+}
+
+.context-total { color: var(--ink); }
+
+.context svg {
+  display: block;
+  width: 100%;
+  height: var(--u);
+  padding: 6px 0; /* a 12px bar centered in one row */
+  box-sizing: border-box;
+}
+
+.context-window {
+  fill: var(--grid-major);
+}
+
+.context-legend {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+}
+
+.context-legend li {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  min-height: var(--u);
+}
+
+.context-legend li.dim { color: var(--ink-3); }
+.context-size { margin-left: auto; }
+
+.swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+}
+
+/* Parts of the window, in the palette's fixed order. */
+.part-1 { fill: var(--series-1); background: var(--series-1); }
+.part-2 { fill: var(--series-2); background: var(--series-2); }
+.part-3 { fill: var(--series-3); background: var(--series-3); }
+.part-4 { fill: var(--series-4); background: var(--series-4); }
+
+/* ——— Growth chart (section 1) ——— */
+.chart { container-type: inline-size; }
+
+.chart > svg {
+  display: block;
+  width: 100%;
+  height: round(up, calc(100cqw * 0.5), var(--u));
+  max-height: calc(var(--u) * 10);
+  overflow: visible;
+  color: var(--ink-3);
+  touch-action: pan-y;
+}
+
+.chart text { font: 400 11px var(--font-mono); fill: currentColor; }
+.chart .tick line, .chart .axis { stroke: var(--rule); }
+.chart .milestone { stroke: var(--rule-dash); stroke-dasharray: 2 3; }
+.chart .series-1 { fill: none; stroke: var(--series-1); stroke-width: 2; }
+.chart .series-2 { fill: none; stroke: var(--series-2); stroke-width: 2; }
+.chart .cursor { stroke: var(--accent); }
+.chart .dot-1 { fill: var(--series-1); }
+.chart .dot-2 { fill: var(--series-2); }
+
+.note {
+  margin: 0;
+  min-height: calc(var(--u) * 2); /* the longest note takes two rows on a phone */
+  font: 400 0.8125rem/var(--u) var(--font-sans);
+  color: var(--ink);
+}
+
+.controls input[type='range'].wide-range { width: 100%; }
+
+/* ——— Fact sorter (section 3) ——— */
+.facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 400 0.75rem/var(--u) var(--font-mono);
+}
+
+.facts > li { margin-bottom: var(--u); }
+
+.fact-text {
+  margin: 0;
+  font: 400 0.8125rem/var(--u) var(--font-sans);
+  color: var(--ink);
+}
+
+.fact-row {
+  display: grid;
+  grid-template-columns: repeat(4, 7ch);
+  gap: 0 1ch;
+  align-items: center;
+}
+
+.fact-row > .places { grid-column: 1 / -1; }
+
+.fact-head { margin-bottom: 0; color: var(--ink-3); }
+.fact-head > :first-child { grid-column: 1 / -1; }
+
+@media (min-width: 480px) {
+  .fact-row { grid-template-columns: 28ch repeat(4, 7ch); }
+  .fact-row > .places, .fact-head > :first-child { grid-column: auto; }
+}
+
+.places {
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.places label {
+  white-space: nowrap;
+  padding: 0 1ch;
+  color: var(--ink-3);
+}
+
+.places label:has(:checked) {
+  color: var(--accent);
+  background: var(--grid-major);
+}
+
+.places input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.places label:has(:focus-visible) { outline: 1px solid var(--accent); }
+
+.cell { color: var(--ink-3); }
+.cell.used { color: var(--ink); }
+.cell.missed { color: var(--hot); }
+
+.sessions {
+  margin: 0 0 var(--u);
+  padding: 0;
+  list-style: none;
+  font: 400 0.75rem/var(--u) var(--font-mono);
+  color: var(--ink-2);
+}
+
+.sessions b { font-weight: 500; color: var(--ink); }
+
+/* ——— Night log (section 4) ——— */
+
+/* Controls inside a column, above other content: every control is 36px tall and every row of
+   them 48px with its gap, so the column stays whole rows however they wrap. */
+.controls-rows {
+  margin: 0;
+  padding-bottom: 12px;
+  gap: 12px 20px;
+}
+
+.controls-rows button,
+.controls-rows select {
+  height: 36px;
+  padding-block: 0;
+}
+
+.controls-rows label { min-height: 36px; }
+
+.night-log {
+  height: calc(var(--u) * 8);
+  overflow: hidden;
+  margin: var(--u) 0 0;
+  padding: 0;
+  list-style: none;
+  font: 400 0.75rem/var(--u) var(--font-mono);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.night-log .t { color: var(--ink-3); }
+.night-log .bad { color: var(--hot); }
+
+/* ——— Diff (section 5) ——— */
+.diff {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 400 0.75rem/var(--u) var(--font-mono);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.diff .file { color: var(--ink-3); }
+.diff .del { color: var(--hot); }
+.diff .ins { color: var(--accent); }
+.diff .ref { color: var(--ink); }

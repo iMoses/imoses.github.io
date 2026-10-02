@@ -125,9 +125,17 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
 
 ## Status (update this)
 
-Last updated: 2026-10-02 (Fig. 01 rewrite)
+Last updated: 2026-10-02 (Fig. 03 draft)
 
 Done:
+- 2026-10-02: Fig. 03 "What the next session knows" drafted on branch `fig03-next-session`
+  (NOT pushed: awaiting the owner's text approval). Owner picked the subject (agent workflow:
+  sessions, scripts, splitting CLAUDE.md) and left every other decision to the agent. One lesson
+  ("a session knows only what it loads, so file each thing by when it's needed"), five sections,
+  five figures sharing one model: the context window before you type (`demos/next-session/
+  Context.jsx`). Evidence is measured from the private home-assistant repo's git history: sizes
+  and dates only (`history.js`, `model.js`), plus faithful excerpts of `git-nightly-push.sh` at five
+  commits and of `export-inventory.py`. New topic `ai-agents`.
 - 2026-10-02: Fig. 01 rewritten to the house style and merged to `main` at the owner's request.
   New title "Who draws the chart?" (slug kept so links don't break). One lesson
   ("every node in the DOM has exactly one owner: d3 computes, React renders, CSS styles and moves"),
@@ -172,6 +180,9 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 - Fig. 01 is live; the owner may still send notes on the text. Open choice for them: the "tween
   the paths" mode makes Chrome log an error per frame (invalid arc flag). That is the failure the
   figure shows and the text points at the console, but the owner may prefer a silent page.
+- Fig. 03 awaits the owner's text approval. Honest finding in it: the dashboards skill has
+  regrown to 115k chars, so a dashboard session now loads more than the pre-split CLAUDE.md did;
+  the entry says so and suggests the same split one level down (not done in that repo).
 - Only one lab entry so far; the "3 experiments" guideline is now a target, not a launch gate.
 
 Drafts worth keeping:
@@ -239,6 +250,13 @@ Structure chosen by owner (2026-09-30): **Lab.**
   IBM Plex Sans body, entries labelled "Fig. NN", figures framed like drawings.
 
 ## Decisions (append; newest first)
+
+- 2026-10-02: Fig. 03 public-safety choices (agent's, owner delegated): only house-repo material,
+  nothing from the home-server repo except its script count; skill names and descriptions shown
+  only for skills that reveal no security, network or presence setup (three left out, said so in
+  the caption); no session-archive excerpts (they hold pasted credentials). Tokens are estimated
+  at 4 chars each against a 200k window, labelled as estimates. Shared `.controls` gained a
+  `select` style and `select` joined the pointer-cursor rule; `Code.jsx` highlights `sh`.
 
 - 2026-10-02: Owner asked for figures to stand out from the page: figures sit on their own
   surface, `--figure-bg` (a shade lighter than the paper in light mode, a raised navy in dark),

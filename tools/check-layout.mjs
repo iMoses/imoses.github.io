@@ -14,7 +14,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../_site/', import.meta.url));
-const pages = ['/', '/lab/charts-are-just-shapes/', '/lab/nas-dashboard/', '/topics/'];
+const pages = ['/', '/lab/charts-are-just-shapes/', '/lab/nas-dashboard/', '/lab/next-session/', '/topics/'];
 const views = [
   { width: 1100, scheme: 'light', deviceScaleFactor: 1 },
   { width: 390, scheme: 'dark', deviceScaleFactor: 2.625, isMobile: true },

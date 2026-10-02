@@ -17,10 +17,11 @@ const KEYWORDS = {
   jinja: 'if|elif|else|endif|set|is|not|in|none|and|or',
   js: 'const|let|return|if|else|true|false|null|undefined',
   jsx: 'import|from|export|function|const|let|return|if|else|new|true|false|null|undefined',
+  sh: 'if|then|else|fi|for|in|do|done|exit|export|set|cd|echo|try|except|with|as|not|continue',
 };
 
 const JS_COMMENT = /\/\*.*?(?:\*\/|$)|\/\/.*|\s*[^'`]*\*\/$/y; // block comments may span lines
-const COMMENT = { python: /#.*/y, yaml: /#.*/y, jinja: /\{#.*?#\}/y, js: JS_COMMENT, jsx: JS_COMMENT };
+const COMMENT = { python: /#.*/y, yaml: /#.*/y, sh: /#.*/y, jinja: /\{#.*?#\}/y, js: JS_COMMENT, jsx: JS_COMMENT };
 
 // Just enough tokenizing to color an excerpt with the site's syntax classes (.highlight).
 function tokens(text, lang) {

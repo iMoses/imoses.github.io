@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 const entries = {
   'react-svg-charts': 'react-svg-charts/main.jsx',
   'nas-dashboard': 'nas-dashboard/main.jsx',
+  'next-session': 'next-session/main.jsx',
 };
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url));

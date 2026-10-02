@@ -124,7 +124,7 @@ body {
 }
 
 // Anything clickable shows a pointer; a disabled control goes back to the page's cursor.
-a[href], button, summary, [role="button"], label:has(input),
+a[href], button, select, summary, [role="button"], label:has(input),
 input:is([type="checkbox"], [type="radio"], [type="range"]) { cursor: pointer; }
 button:disabled, input:disabled, label:has(:disabled) { cursor: var(--cursor); }
 
@@ -570,6 +570,14 @@ hr {
       opacity: 0.4;
       background: transparent;
     }
+  }
+
+  select {
+    padding: 6px 8px;
+    font: inherit;
+    color: var(--ink);
+    background: var(--figure-bg);
+    border: 1px solid var(--rule);
   }
 
   output { color: var(--ink); }

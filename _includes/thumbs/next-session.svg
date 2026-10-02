@@ -1,0 +1,12 @@
+<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="10" y="8" width="34" height="64" rx="3"/>
+  <path d="M17 18h20M17 25h20M17 32h20M17 39h20M17 46h20M17 53h20M17 60h14" stroke-width="1" opacity=".5"/>
+  <path d="M52 40h12" stroke-dasharray="3 5" opacity=".6"/>
+  <path d="M60 35l5 5-5 5" stroke-width="1.5"/>
+  <rect x="74" y="10" width="36" height="22" rx="3"/>
+  <path d="M80 18h24M80 24h16" stroke-width="1" opacity=".5"/>
+  <rect x="74" y="40" width="16" height="16" rx="3"/>
+  <rect x="94" y="40" width="16" height="16" rx="3"/>
+  <rect x="74" y="60" width="16" height="12" rx="3" stroke-dasharray="3 3"/>
+  <rect x="94" y="60" width="16" height="12" rx="3"/>
+</svg>

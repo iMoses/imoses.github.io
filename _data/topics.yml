@@ -12,3 +12,6 @@
 - id: integrations
   name: Integrations
   description: Making two systems talk, and keeping what they say about each other true.
+- id: ai-agents
+  name: Working with AI agents
+  description: Coding agents that start every session from scratch, and what they need written down.
