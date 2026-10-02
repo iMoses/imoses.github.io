@@ -174,7 +174,9 @@ to depth: cut repetition, never cut the explanation.
 
 No hostnames, IPs, internal URLs, account details, or maps of the owner's security setup. Describe
 security in one line. The owner decides per entry what else stays private (Fig. 02: no container
-names except Authelia, nothing from the download stack, no VPN).
+names except Authelia, nothing from the download stack, no VPN. Fig. 03: from the owner's
+repos only sizes, dates and faithful excerpts; no skill that reveals the security, network or
+presence setup; nothing from the session archive, which holds pasted credentials).
 
 ---
 

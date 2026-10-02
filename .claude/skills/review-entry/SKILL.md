@@ -47,7 +47,7 @@ with PASS or FAIL, a short quote or location as evidence, and a concrete fix for
     the entry teaches. direct, warm, precise, measured numbers, honest about difficulty; no hype words, no
     emoji, American spelling.
 13. Public safety: any hostname, IP, internal URL, account detail, security map, or anything the
-    owner ruled private for this entry (AGENTS.md decisions)?
+    owner ruled private for this entry (STYLE.md §9)?
 14. Continuity: right topics; prerequisites linked in the opening.
 
 ## 3. Report
