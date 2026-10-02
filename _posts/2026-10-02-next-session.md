@@ -1,7 +1,7 @@
 ---
 title: What the next session knows
 subtitle: A coding agent starts every session knowing nothing about your project except what it loads. How to decide what it loads, and when.
-summary: An agent's instruction file grew ten times in nine days and had to be taken apart. What to load in every session, what to load only for one task, what to keep as history, and what to turn into a script, measured on a real repo.
+summary: An agent's instruction file grew ten times in nine days and had to be taken apart. What to load in every session, what to load only for one task, what to keep as history, what to turn into a script, and how big each file may get, measured on real repos.
 fig: "03"
 thumb: next-session
 topics: [ai-agents, home-automation]
@@ -47,7 +47,7 @@ or "Record". Each paragraph was earned by a real mistake, such as a broken UI ed
 symlink or a silent failure. None of them was wrong. Drag across the chart to see what the file
 held each day.
 
-{% include demo.html id="growth" wide=true caption="The size of the Home Assistant repo's CLAUDE.md per day, from its git history, and of the dashboards skill once it was split out (section 2). Drag across the chart or use the slider. The bar is what a session about a dashboard card loads that day, to scale with a 200,000-token context window. Tokens are estimated at four characters each." %}
+{% include demo.html id="growth" wide=true caption="The size of the Home Assistant repo's CLAUDE.md per day, from its git history, and of the dashboards skill's SKILL.md once it was split out (section 2; from October 2 its detail lives in reference files beside it, read when needed). Drag across the chart or use the slider. The bar is what a session about a dashboard card loads that day, to scale with a 200,000-token context window. Tokens are estimated at four characters each." %}
 
 Nine days took the file from about 9,000 characters to 154,000. Look at the shape of the curve.
 It only goes up, because writing a rule down is a step in every session and taking one out is a
@@ -119,14 +119,6 @@ keeps those in both places on purpose. The split commit lists the cross-cutting 
 "appear both inline and in their skill, deliberately". It's a few lines of duplication, and they
 cost far less than one missed rule.
 
-The honest part is that the rule doesn't stop growth. It only moves the growth to where it's paid
-for by the sessions that need it. In the chart in section 1, the dashboards skill grew from 29,000
-characters to 115,000 in two months, over 43 commits. Today a dashboard session loads 165,000
-characters: more than the whole file at its peak. The skill's largest section, a fifth of it, is
-the design of one pop-up, so a session restyling any other card loads all of that too. The same
-pressure is back one level down, and the same move answers it: split the skill, or move one
-card's design notes into a page the skill links to.
-
 Facts aren't the only thing an agent learns, though. Some of what it learns is a procedure: a
 series of steps that has to be done the same way every time. Where do those go?
 
@@ -135,7 +127,7 @@ series of steps that has to be done the same way every time. Where do those go?
 This section is about the lessons that are procedures. Written as prose, a procedure is executed
 afresh by every session: it reads the steps, works out the commands and types them, a little
 differently each time. If a session does the same steps twice, they should become a script, and
-the instruction file only has to say "run it". The house repo has 10 scripts. The repo for the
+the instruction file only has to say "run it". The house repo has 11 scripts. The repo for the
 home server, which has its own sessions, has 140.
 
 The best example is the nightly push. Home Assistant edits its own configuration through its UI,
@@ -161,10 +153,50 @@ next session won't "simplify" it away. That's the difference from a rule in `CLA
 doesn't need a session to load it, or to read it the same way twice. What it learned is applied
 every night at 04:00.
 
-A script can only act on what it can see, though. Some of what an agent needs to know isn't in the
-repo at all.
+A script also does something a rule can't: it can refuse. That turns out to be the answer to the
+last problem with the filing rule, which is that files grow back.
 
-## 5. The repo is the memory
+## 5. Give every file a budget
+
+This section is about keeping the split from undoing itself. The filing rule says where a fact
+goes; it says nothing about how much a place can hold. And every place grows, for the reason the
+chart in section 1 showed: writing a lesson down is a step in every session, and trimming is a
+step in none.
+
+The dashboards skill is the clearest case. Scrub the chart to October 1: it went from 29,000
+characters to 115,000 in two months, and a dashboard session loaded 165,000 characters, more than
+the whole of `CLAUDE.md` at its peak. A fifth of the skill was the design of one pop-up, which a
+session restyling any other card loaded too. It isn't the only one. The `AGENTS.md` of this site,
+the file that tells agents how to write entries like this one, reached 27,700 characters in four
+days. The home server's reached 24,000.
+
+So each kind of file now has a budget, set by how often it loads. A file loaded in every session
+gets 12,000 characters, about 3,000 tokens. A skill's `SKILL.md` gets 15,000; its detail goes into
+reference files beside it, which the skill's own index says when to read. Anything read whole gets
+50,000. That last one isn't about cost but about truncation: an agent reads a file up to a limit,
+and past it the session sees part of a page and can answer from the half it saw. Logs keep the
+current month and archive the rest. The three sessions, one per repo, compared their rules and
+kept the strictest of each.
+
+{% include demo.html id="budget" wide=true caption="This site's own instruction files, measured when the page was built, and the check that holds them to their budgets. Have a session write a lesson into AGENTS.md (each lesson is a real rule from the site's design skill, 485 characters) until the check fails, then move the lessons where they belong. The panel is the check itself; the lit lines are the budgets being broken." %}
+
+A budget in prose is a wish. "Check sizes before ending the session" is followed when a session
+remembers, which is when it matters least. As a script that exits 1, it runs with the rest of the
+checks, and the over-budget file fails them. Moving the lessons into the skill passes the check
+without deleting a word, which is the point: the budget doesn't ask you to know less, only to
+file it for the moment it's needed.
+
+The check doesn't fix anything on its own. When the house repo got its version, the first run
+failed on its `CLAUDE.md`, the file this entry started with, which has grown back to 46,000
+characters. The dashboards skill passed after one more split: an 11,000-character index of core
+rules, pointing at twelve reference files. What the check guarantees is that no session can
+believe the files are fine when they aren't. It reports the truth, and a person or a session acts
+on it.
+
+Size is something a script can measure, because it's in the repo. Some of what the next session
+needs isn't in the repo at all.
+
+## 6. The repo is the memory
 
 This section is about the one memory every session shares: the repo and its history. Each purpose
 here has its own repo and its own long-lived agent session: the house, the home server, and this
@@ -199,7 +231,8 @@ checked to have arrived. It loads in no session, and any session can find it.
    know the task, it goes in that task's skill, whose description names the trigger. Looking
    back, it goes in `docs/`. Rules never move to `docs/`.
 4. Steps done twice become a script, with the reasons in its comments.
-5. State the agent can't see becomes a file in git, so the next session can read what changed.
+5. Give every file a budget by how often it loads, and a check that fails when it's over.
+6. State the agent can't see becomes a file in git, so the next session can read what changed.
 
 The principle, now with the numbers behind it: **a session knows only what it loads, so file each
 thing by when it's needed.** It's also cheap to check. Measure what a session loads for a typical

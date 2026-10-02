@@ -1,11 +1,11 @@
-// Measured from the owner's private Home Assistant config repo on 2026-10-02, with git:
+// Measured from the owner's private Home Assistant config repo on 2026-10-03, with git:
 // every commit that changed CLAUDE.md (`git log -- CLAUDE.md`), and the file's size in characters
 // at each one (`git show <commit>:CLAUDE.md | wc -m`). Same for the largest skill. Only dates and
 // sizes are copied; the files themselves stay private.
 
 // [date, characters] per commit, oldest first.
 export const claudeMd = [
-  ['2026-02-27', 8780],
+  ['2026-02-27', 8559],
   ['2026-07-25', 10900],
   ['2026-07-25', 11517],
   ['2026-07-25', 14863],
@@ -85,9 +85,11 @@ export const claudeMd = [
   ['2026-09-21', 44989],
   ['2026-09-23', 45560],
   ['2026-09-23', 45677],
+  ['2026-10-02', 46245],
 ];
 
-// The dashboards skill, from the day it was split out of CLAUDE.md.
+// The dashboards skill's SKILL.md, from the day it was split out of CLAUDE.md. On 2026-10-03 its
+// detail moved into reference files beside it, read on demand, so only the index counts after that.
 export const dashboardSkill = [
   ['2026-08-04', 28871],
   ['2026-08-06', 30225],
@@ -132,4 +134,6 @@ export const dashboardSkill = [
   ['2026-10-01', 114082],
   ['2026-10-01', 115288],
   ['2026-10-01', 115476],
+  ['2026-10-02', 40557],
+  ['2026-10-03', 11351],
 ];

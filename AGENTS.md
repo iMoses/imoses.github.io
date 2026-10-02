@@ -98,9 +98,9 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 - Fig. 01 is live; the owner may still send notes on the text. Open choice for them: the "tween
   the paths" mode makes Chrome log an error per frame (invalid arc flag). That is the failure the
   figure shows and the text points at the console, but the owner may prefer a silent page.
-- Fig. 03 awaits the owner's text approval. Honest finding in it: the dashboards skill has
-  regrown to 115k chars, so a dashboard session now loads more than the pre-split CLAUDE.md did;
-  the entry says so and suggests the same split one level down (not done in that repo).
+- Fig. 03 awaits the owner's text approval. Owner (2026-10-03): the story may simplify the
+  journey; flow beats completeness. Section 5 (budgets) and its figure read this repo's own files
+  at build time, so they stay current.
 - Three entries once Fig. 03 is approved, which meets the "3 experiments" target.
 
 Drafts worth keeping:

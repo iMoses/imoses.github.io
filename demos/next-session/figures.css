@@ -194,7 +194,20 @@
 .night-log .t { color: var(--ink-3); }
 .night-log .bad { color: var(--hot); }
 
-/* ——— Diff (section 5) ——— */
+/* ——— Size check output (section 5) ——— */
+.check-output {
+  margin: var(--u) 0 0;
+  padding: 0;
+  list-style: none;
+  font: 400 0.75rem/var(--u) var(--font-mono);
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.check-output .bad { color: var(--hot); }
+
+/* ——— Diff (section 6) ——— */
 .diff {
   margin: 0;
   padding: 0;

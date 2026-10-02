@@ -10,6 +10,13 @@ import { Context } from './Context';
 import { claudeMd, dashboardSkill } from './history';
 import { DESCRIPTIONS, ONE_FILE, RULES, SPLIT_FILE, facts, k, loaded, places, sessions, skills, tasks, tokens } from './model';
 import { ROWS, initialHost, runNight, versions } from './nightly';
+import agentsMd from '../../AGENTS.md?raw';
+import siteDesignSkill from '../../.claude/skills/site-design/SKILL.md?raw';
+import writeEntrySkill from '../../.claude/skills/write-entry/SKILL.md?raw';
+import reviewEntrySkill from '../../.claude/skills/review-entry/SKILL.md?raw';
+import styleMd from '../../docs/STYLE.md?raw';
+import historyMd from '../../docs/history.md?raw';
+import checkSizesSrc from '../../tools/check-sizes.mjs?raw';
 import './figures.css';
 
 const chars = (n) => `${n.toLocaleString('en-US')} chars`;
@@ -18,7 +25,7 @@ const chars = (n) => `${n.toLocaleString('en-US')} chars`;
 
 const DAY = 86_400_000;
 const START = Date.parse('2026-07-24');
-const DAYS = Array.from({ length: 70 }, (_, i) => new Date(START + i * DAY).toISOString().slice(0, 10));
+const DAYS = Array.from({ length: 72 }, (_, i) => new Date(START + i * DAY).toISOString().slice(0, 10));
 
 // The size of a file at the end of a day: its last commit on or before it.
 const sizeOn = (series, day) => series.filter(([d]) => d <= day).at(-1)?.[1] ?? null;
@@ -33,6 +40,7 @@ const NOTES = [
   ['2026-08-03', 'The peak: 2,286 lines, loaded whole at the start of every session.'],
   ['2026-08-04', 'The split: ten skills and a docs/ page. CLAUDE.md keeps 481 lines.'],
   ['2026-09-23', 'The dashboards skill passes 100,000 characters on its own.'],
+  ['2026-10-02', 'Size budgets arrive (section 5). The dashboards skill is split the same way: an index, and reference files read when needed.'],
 ];
 
 const W = 480;
@@ -376,7 +384,87 @@ function Nightly() {
   );
 }
 
-// ——— Section 5: making hidden state readable ———
+// ——— Section 5: a budget per file, and a check that says no ———
+
+// This repo's own instruction files, measured when the site is built, so the figure can't drift
+// from them. A "lesson" is a real one: the Frames rule from the site-design skill.
+const size = (text) => [...text].length;
+const LESSON = siteDesignSkill.slice(siteDesignSkill.indexOf('- **Frames:**'), siteDesignSkill.indexOf('- **Lines never'));
+const description = (skill) => skill.match(/^description: (.*)$/m)[1];
+const DESCRIPTIONS_HERE = [siteDesignSkill, writeEntrySkill, reviewEntrySkill].map(description).join('\n');
+
+const CAP_LINES = { always: "'loaded every session'", skill: "'skill instructions'", docs: "'read whole" };
+
+function Budget() {
+  const [written, setWritten] = useState(0); // lessons a session added to AGENTS.md
+  const [moved, setMoved] = useState(0); // of those, how many were moved into the skill
+  const extra = LESSON.repeat(written - moved);
+  const rows = [
+    ['AGENTS.md', size(agentsMd) + size(extra), 12_000, 'always'],
+    ['.claude/skills/site-design/SKILL.md', size(siteDesignSkill) + size(LESSON) * moved, 15_000, 'skill'],
+    ['.claude/skills/write-entry/SKILL.md', size(writeEntrySkill), 15_000, 'skill'],
+    ['docs/STYLE.md', size(styleMd), 50_000, 'docs'],
+    ['docs/history.md', size(historyMd), 50_000, 'docs'],
+  ];
+  const over = rows.filter(([, n, cap]) => n > cap);
+
+  return (
+    <>
+      <Wire
+        nodes={[
+          { name: 'Every session', facts: [['loads AGENTS.md', chars(rows[0][1]), over.some((r) => r[3] === 'always') && 'bad', chars(19_999)], ['cap', chars(12_000)]] },
+          { name: 'Design tasks', facts: [['also load the skill', chars(rows[1][1]), null, chars(19_999)], ['cap', chars(15_000)]] },
+          { name: 'npm run check:sizes', facts: [['exit code', over.length ? 1 : 0, over.length > 0 && 'bad'], ['over their cap', over.length, over.length > 0 && 'bad', '0']] },
+        ]}
+      />
+      <div className="split">
+        <div>
+          <Context
+            rows={2}
+            parts={[
+              { name: 'AGENTS.md', chars: rows[0][1], cls: 'part-1' },
+              { name: 'every skill’s description', chars: size(DESCRIPTIONS_HERE), cls: 'part-3' },
+            ]}
+          />
+          <ul className="check-output" aria-live="polite">
+            {rows.map(([path, n, cap]) => (
+              <li key={path} className={n > cap ? 'bad' : undefined}>
+                {`${n > cap ? '✗' : '✓'} ${String(n).padStart(6, ' ')} / ${cap}  ${path}`}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Code
+          file="tools/check-sizes.mjs"
+          lang="js"
+          source={checkSizesSrc}
+          match={{ ...CAP_LINES, exit: 'process.exit(1)' }}
+          hot={[...new Set(over.map((r) => r[3])), ...(over.length ? ['exit'] : [])]}
+        />
+      </div>
+      <div className="controls">
+        <button type="button" onClick={() => setWritten((w) => w + 1)}>
+          A session writes down a lesson
+        </button>
+        <button type="button" disabled={written === moved} onClick={() => setMoved(written)}>
+          Move them to the site-design skill
+        </button>
+        <button
+          type="button"
+          disabled={!written}
+          onClick={() => {
+            setWritten(0);
+            setMoved(0);
+          }}
+        >
+          Start over
+        </button>
+      </div>
+    </>
+  );
+}
+
+// ——— Section 6: making hidden state readable ———
 
 const OLD = 'light.ikea_of_sweden_tradfri_bulb_e14_cws_globe_806lm';
 const NEW = 'light.master_bedroom_wall_1';
@@ -461,7 +549,7 @@ function Inventory() {
   );
 }
 
-const figures = { growth: Growth, load: Load, sort: Sort, nightly: Nightly, inventory: Inventory };
+const figures = { growth: Growth, load: Load, sort: Sort, nightly: Nightly, budget: Budget, inventory: Inventory };
 
 for (const el of document.querySelectorAll('.demo[data-demo]')) {
   const Figure = figures[el.dataset.demo];
