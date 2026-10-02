@@ -244,6 +244,8 @@ Structure chosen by owner (2026-09-30): **Lab.**
   surface, `--figure-bg` (a shade lighter than the paper in light mode, a raised navy in dark),
   and `--code-bg` is a cool gray in light mode so code panels differ from both. Light syntax
   comment/number colors darkened to keep 4.5:1 on it.
+  The theme switch uses `--figure-bg` too. Screenshots get a 1px `--rule` outline (no layout
+  space), since a light screenshot can match the figure's own background (owner noticed on Fig. 02).
 
 - 2026-10-02: Fig. 01 data: UK electricity by source (Our World in Data), chosen because it's
   public, licensed, and carries a story (coal 65% → 0.1%) that suits bars, a line and a donut.

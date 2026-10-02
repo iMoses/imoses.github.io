@@ -367,7 +367,7 @@ hr {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
-  background: var(--paper);
+  background: var(--figure-bg); // a framed box, like the figures
   cursor: pointer;
 
   &:hover { --frame: var(--accent); color: var(--accent); }
@@ -672,6 +672,8 @@ hr {
   max-width: 100%;
   height: auto;
   margin-inline: auto;
+  outline: 1px solid var(--rule); // a screenshot's own background can match the figure's; an
+                                  // outline marks its edge without taking layout space
 }
 
 .shot-dark { display: none; }
