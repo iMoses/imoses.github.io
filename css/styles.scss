@@ -123,6 +123,11 @@ body {
   body { cursor: var(--cursor); }
 }
 
+// Anything clickable shows a pointer; a disabled control goes back to the page's cursor.
+a[href], button, summary, [role="button"], label:has(input),
+input:is([type="checkbox"], [type="radio"], [type="range"]) { cursor: pointer; }
+button:disabled, input:disabled, label:has(:disabled) { cursor: var(--cursor); }
+
 main, .site-header, .site-footer {
   position: relative;
   z-index: 1;
@@ -367,10 +372,14 @@ hr {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
-  background: var(--figure-bg); // a framed box, like the figures
-  cursor: pointer;
+  background: var(--figure-bg); // a framed box, like the figures and cards
+  transition: box-shadow 150ms;
 
-  &:hover { --frame: var(--accent); color: var(--accent); }
+  &:hover {
+    --frame: var(--accent);
+    --frame-extra: 6px 6px 0 var(--grid-major); // as the lab cards
+    color: var(--accent);
+  }
   &[hidden] { display: none; }
 
   svg { width: 16px; height: 16px; }
@@ -437,7 +446,7 @@ hr {
   align-items: start;
   color: inherit;
   text-decoration: none;
-  background: color-mix(in srgb, var(--paper) 85%, transparent);
+  background: var(--figure-bg);
   transition: box-shadow 150ms;
 
   &:hover {
@@ -554,14 +563,12 @@ hr {
     color: var(--accent);
     background: transparent;
     border: 1px solid var(--accent);
-    cursor: pointer;
 
     &:hover { background: var(--grid-major); }
 
     &:disabled {
       opacity: 0.4;
       background: transparent;
-      cursor: default;
     }
   }
 

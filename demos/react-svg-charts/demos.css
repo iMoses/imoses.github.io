@@ -80,10 +80,7 @@
 }
 /* #endregion */
 
-.marker-hit {
-  cursor: pointer;
-  outline: none;
-}
+.marker-hit { outline: none; }
 
 .hit { fill: transparent; }
 
@@ -107,10 +104,7 @@
 }
 /* #endregion */
 
-.arc {
-  outline: none;
-  cursor: pointer;
-}
+.arc { outline: none; } /* hover and focus only: not clickable, so no pointer */
 
 @media (prefers-reduced-motion: reduce) {
   .marker,

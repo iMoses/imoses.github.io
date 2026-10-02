@@ -246,6 +246,9 @@ Structure chosen by owner (2026-09-30): **Lab.**
   comment/number colors darkened to keep 4.5:1 on it.
   The theme switch uses `--figure-bg` too. Screenshots get a 1px `--rule` outline (no layout
   space), since a light screenshot can match the figure's own background (owner noticed on Fig. 02).
+  Home cards use `--figure-bg`; the theme switch gets the cards' hover shadow. Cursors (owner:
+  "anything clickable has a pointer") come from one rule in `css/styles.scss`, not per component;
+  hover-only things (donut slices) keep the page's cursor.
 
 - 2026-10-02: Fig. 01 data: UK electricity by source (Our World in Data), chosen because it's
   public, licensed, and carries a story (coal 65% → 0.1%) that suits bars, a line and a donut.
