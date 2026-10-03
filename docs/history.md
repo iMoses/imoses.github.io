@@ -10,12 +10,14 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
 
 ## Done
 
-- 2026-10-03: Entry header and home cards (branch `design-header-cards`, owner's notes). Header:
+- 2026-10-03: Entry header and home cards, merged to `main` (owner's notes). Header:
   "Fig. NN" alone above the title; date and topics in one line under the subtitle, a row clear of
   it (the label was jammed against the h1, the date against the subtitle). Cards: thumbs centered
   in their column and the card; NAS and charts thumbs redrawn to the same ink box as the third.
   Summaries capped at 160 characters (linter, STYLE.md §4), so all cards are 7 rows on desktop;
-  Fig. 02 and 03 summaries shortened by the agent, pending the owner's approval.
+  Fig. 02 and 03 summaries shortened by the agent; the owner merged them. Topic links in the meta
+  line stay accent blue at weight 500. In "More on" and /topics/ lists, the label and title are
+  joined by a generated " · " with equal gaps (owner rejected a margin: it breaks the underline).
 - 2026-10-03: Fig. 01 fixes from the owner's review, merged to `main` (owner: better than before,
   still needs more work). URL now
   `/lab/who-draws-the-chart/`, matching the title; the old one is a meta-refresh stub
