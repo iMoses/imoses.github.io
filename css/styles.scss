@@ -489,7 +489,7 @@ hr {
   font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
 
-  a { color: var(--accent); text-decoration: none; white-space: nowrap; } // a topic never splits
+  a { font-weight: 500; color: var(--accent); text-decoration: none; white-space: nowrap; } // a topic never splits
   a:hover { text-decoration: underline; }
 }
 
