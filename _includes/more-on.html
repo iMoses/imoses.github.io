@@ -10,7 +10,7 @@ other entry yet are skipped.
   <h2>More on {{ topic.name }}</h2>
   <ul>
     {%- for p in others %}
-    <li><a href="{{ p.url }}"><span class="fig-label">Fig. {{ p.fig }}</span> {{ p.title }}</a></li>
+    <li><a href="{{ p.url }}"><span class="fig-label">Fig. {{ p.fig }}</span>&ensp;{{ p.title }}</a></li>
     {%- endfor %}
   </ul>
 </section>
