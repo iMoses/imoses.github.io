@@ -86,7 +86,7 @@ Rules that keep this from growing back:
 
 ## Status (update this)
 
-Last updated: 2026-10-03 (home intro's lab line rewritten, on `home-intro`)
+Last updated: 2026-10-03 (home intro's lab line rewritten, merged)
 
 Still open (see also `docs/PROFILE.md` → Open questions):
 - Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
