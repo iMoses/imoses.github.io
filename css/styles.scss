@@ -424,8 +424,8 @@ hr {
   padding: 0;
   list-style: none;
 
-  // The smaller mono label would sit on the text's baseline and stretch the row past 24px. The gap
-  // after it is an &ensp; in the markup, not a margin, so the link's underline runs through it.
+  // The smaller mono label would sit on the text's baseline and stretch the row past 24px. Its gap is
+  // a middle dot and a space in the markup, not a margin, so the link's underline runs through it.
   .fig-label { vertical-align: top; }
 }
 
