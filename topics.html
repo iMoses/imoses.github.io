@@ -13,7 +13,7 @@ permalink: /topics/
   <p>{{ topic.description }}</p>
   <ul class="topic-entries">
     {%- for p in entries %}
-    <li><a href="{{ p.url }}"><span class="fig-label">Fig. {{ p.fig }} ·</span> {{ p.title }}</a></li>
+    <li><a href="{{ p.url }}"><span class="fig-label">Fig. {{ p.fig }}</span>{{ p.title }}</a></li>
     {%- endfor %}
   </ul>
   {%- endif %}

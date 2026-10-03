@@ -424,9 +424,20 @@ hr {
   padding: 0;
   list-style: none;
 
-  // The smaller mono label would sit on the text's baseline and stretch the row past 24px. Its gap is
-  // a middle dot and a space in the markup, not a margin, so the link's underline runs through it.
-  .fig-label { vertical-align: top; }
+  // The smaller mono label would sit on the text's baseline and stretch the row past 24px.
+  .fig-label {
+    vertical-align: top;
+
+    // The dot before the title is text, not a margin, so the link's underline runs through it. It
+    // drops the label's letter-spacing, and takes back the spacing after the label's last letter,
+    // so the gaps either side of the dot are equal.
+    &::after {
+      content: ' · ';
+      margin-left: -0.12em;
+      letter-spacing: normal;
+      white-space: pre;
+    }
+  }
 }
 
 .lab-topics { font-family: var(--font-mono); }
