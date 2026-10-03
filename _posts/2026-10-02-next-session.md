@@ -1,7 +1,7 @@
 ---
 title: What the next session knows
 subtitle: A coding agent starts every session knowing nothing about your project except what it loads. How to decide what it loads, and when.
-summary: An agent's instruction file grew ten times in nine days and had to be taken apart. What to load in every session, what to load only for one task, what to keep as history, what to turn into a script, and how big each file may get, measured on real repos.
+summary: An agent's instruction file grew tenfold in nine days. What to load every session, what only for one task, what to keep as history, and how big a file may get.
 fig: "03"
 thumb: next-session
 topics: [ai-agents, home-automation]

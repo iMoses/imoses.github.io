@@ -1,7 +1,7 @@
 ---
 title: The button that does nothing
 subtitle: A dashboard makes claims about machines it can't see. How to make every claim true or visibly unsure, buttons included.
-summary: Why a dashboard can show a healthy disk on a switched-off server, and a button that does nothing when you press it. Retained messages, Last Wills, null versus empty, and buttons that only exist while something is listening.
+summary: Why a dashboard shows a healthy disk on a switched-off server, and a button that does nothing. Retained messages, Last Wills, and null versus empty.
 fig: "02"
 thumb: nas-dashboard
 topics: [home-automation, integrations]

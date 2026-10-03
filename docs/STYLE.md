@@ -132,7 +132,8 @@ the section is about* and watch the consequence right away.
 
 The title may be oblique ("The button that does nothing") as long as the **subtitle and the card
 summary say plainly what the entry teaches**. A reader skimming the home page should know the
-subject from the summary alone.
+subject from the summary alone. The summary is at most 160 characters (owner, 2026-10-03; the linter
+checks it): the card shows all of it, never a cut-off version.
 
 ## 5. Voice
 

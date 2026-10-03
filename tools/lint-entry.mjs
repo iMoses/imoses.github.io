@@ -26,6 +26,9 @@ for (const file of process.argv.slice(2)) {
 
   // Front matter
   for (const key of ['title', 'subtitle', 'summary', 'fig', 'thumb', 'topics']) if (!meta[key]) fail(`front matter: missing \`${key}\``);
+  // The home card shows the whole summary, so it's kept short rather than cut off: about three
+  // lines on desktop, which also keeps the cards the same height.
+  if (meta.summary?.length > 160) fail(`front matter: summary is ${meta.summary.length} characters, want at most 160`);
   const own = (meta.topics ?? '').replace(/[[\]]/g, '').split(',').map((t) => t.trim()).filter(Boolean);
   if (own.length < 1 || own.length > 3) fail(`front matter: ${own.length} topics, want 1–3`);
   for (const t of own) if (!topics.includes(t)) fail(`front matter: unknown topic \`${t}\` (see _data/topics.yml)`);

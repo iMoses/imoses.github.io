@@ -454,7 +454,10 @@ hr {
     --frame-extra: 6px 6px 0 var(--grid-major);
   }
 
+  // Centered in its column and in the card, so a card's height doesn't leave it in a corner.
   .thumb {
+    align-self: center;
+    justify-self: center;
     color: var(--accent);
 
     svg { display: block; height: calc(var(--u) * 3); width: auto; max-width: 100%; }
@@ -467,7 +470,7 @@ hr {
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
 
-    .thumb { max-width: 160px; }
+    .thumb { justify-self: start; max-width: 160px; }
   }
 }
 
@@ -477,12 +480,17 @@ hr {
   margin-bottom: var(--u);
 
   h1 { margin-bottom: var(--u); }
+}
 
-  time {
-    display: block;
-    font: 400 0.875rem/var(--u) var(--font-mono);
-    color: var(--ink-3);
-  }
+// Date and topics in one line under the subtitle, a row clear of it; the Fig. label stays above
+// the title, like a drawing's number.
+.entry-meta {
+  margin: var(--u) 0 0;
+  font: 400 0.875rem/var(--u) var(--font-mono);
+  color: var(--ink-3);
+
+  a { color: var(--ink-2); text-decoration: none; white-space: nowrap; } // a topic never splits
+  a:hover { text-decoration: underline; }
 }
 
 .entry-subtitle {
