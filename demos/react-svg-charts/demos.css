@@ -47,10 +47,6 @@
 }
 
 .bar { fill: var(--series-1); }
-
-/* Section 1: bars left in the <svg> by earlier effect runs. In an app they'd be the same blue as
-   the newest ones; the figure greys them so you can see they're still there. */
-.leftovers g:not(:last-child) rect { fill: var(--ink-3); }
 .bar.selected { fill: var(--series-2); }
 
 .line {

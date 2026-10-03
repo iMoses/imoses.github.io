@@ -34,26 +34,28 @@ electricity. In 2025 it made 0.1%.
 
 Here's the usual first attempt, and the bug it ships with. The figure shows the same bar chart
 twice. The top one is d3 inside a `useEffect`, the way most tutorials write it; the bottom one is
-the same scales with React doing the rendering. Above them is what's normally hidden:
-how often d3's effect has run, and how many bars are really in its `<svg>`.
+the same scales with React doing the rendering. Above them is what's normally hidden: how many
+bars are really in each `<svg>`, and which year they show.
 
-{% include demo.html id="trap" wide=true caption="UK electricity by source, one bar per source. Next year steps through 1990, 2000, 2010, 2020 and 2025. The checkbox swaps in the same component with its dependencies filled in. Bars left over from earlier runs are greyed." %}
+{% include demo.html id="trap" wide=true caption="UK electricity by source, one bar per source. Next year steps through 1990, 2000, 2010, 2020 and 2025. The checkbox swaps in the same component, fixed the d3 way." %}
 
 Press **Next year** and only the bottom chart moves. The effect's dependency array is empty,
 so it ran once, on mount, and never again. React re-rendered the component, but the `<svg>` it
 renders has no children as far as React knows, so there was nothing for it to update. d3's bars
 are still showing 1990.
 
-Now tick the checkbox, which is the fix most people try next, and press Next year a few times.
-The effect runs on every change, and every run calls `.append('g')`: a new group with eight new
-bars, drawn over the old ones. Watch the `<rect>` count climb by eight each time. The new bars are
-right, but nothing removes the old ones, and wherever an old bar was taller it sticks out above
-the new one. (The figure greys the leftovers so you can see them; in your app they'd be the same
-blue, and the chart would look wrong.) You could fix this
-too (select the existing group instead of appending, or clear the `<svg>` first), but notice what
-you'd be doing: writing, by hand, the reconciliation React already does.
+Now tick **fix the effect** to see what it takes to make d3 keep up. The obvious half is filling
+in the dependency array, so the effect runs when the data changes. That alone makes things worse:
+every run would call `.append('g')` and draw a new group of eight bars over the old ones, and
+wherever an old bar was taller it would stick out above the new one. So the other half replaces
+the append with a join on a one-item array, which creates the group on the first run and reuses it
+on every run after. Press Next year: the charts now agree, and the `<rect>` count stays at eight.
 
-The bottom chart has none of this, and its code is shorter. It's the same two scales, and the
+It works, but look at what the fix is: code that compares what's on the page with what should be
+there, and patches the difference. That's reconciliation, written by hand, and React already does
+it for the chart below.
+
+The bottom chart needed none of this, and its code is shorter. It's the same two scales, and the
 bars are plain JSX:
 
 {% code_file demos/react-svg-charts/BarChart.jsx %}
@@ -224,7 +226,8 @@ column: who made the tick nodes. The d3-axis version works because of two proper
 need both. The node is **fenced off**: React renders the `<g>` with no children, so it never has
 an opinion about what's inside. And the drawing is **idempotent**: d3-axis joins its ticks to data,
 so running it again updates the ticks it drew last time instead of appending more. Section 1's
-chart had neither.
+fixed chart had both, which is why it worked; the difference is that d3-axis writes the join for
+you.
 
 {% code_file demos/react-svg-charts/D3Axis.jsx %}
 

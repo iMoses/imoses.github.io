@@ -9,7 +9,7 @@ import { count, useDom } from './inspect';
 import { coalShare, mix, years } from './data';
 
 import { BarChart as BarChartD3 } from './BarChartD3';
-import { BarChart as BarChartD3Deps } from './BarChartD3Deps';
+import { BarChart as BarChartD3Fixed } from './BarChartD3Fixed';
 import { BarChart } from './BarChart';
 import { Shapes } from './Shapes';
 import { ScaleBars } from './ScaleBars';
@@ -22,7 +22,7 @@ import { MixDonut } from './MixDonut';
 import { GenerationChart } from './GenerationChart';
 
 import barChartD3Src from './BarChartD3.jsx?raw';
-import barChartD3DepsSrc from './BarChartD3Deps.jsx?raw';
+import barChartD3FixedSrc from './BarChartD3Fixed.jsx?raw';
 import shapesSrc from './Shapes.jsx?raw';
 import scaleBarsSrc from './ScaleBars.jsx?raw';
 import lineChart1Src from './LineChart1.jsx?raw';
@@ -41,16 +41,15 @@ const DECADES = [1990, 2000, 2010, 2020, 2025];
 
 function Trap() {
   const [step, setStep] = useState(0);
-  const [deps, setDeps] = useState(false);
+  const [fixed, setFixed] = useState(false);
   const [drawnFrom, setDrawnFrom] = useState(DECADES[0]); // the year the d3 chart was mounted on
   const year = DECADES[step % DECADES.length];
   const data = useMemo(() => mix(year), [year]);
   const ref = useRef();
-  const dom = useDom(ref, (el) => ({ g: count(el, 'g'), rect: count(el, 'rect') })) ?? { g: 1, rect: 8 };
+  const rects = useDom(ref, (el) => count(el, 'rect')) ?? data.length;
   const largest = data.reduce((a, b) => (b.twh > a.twh ? b : a));
-  const D3Chart = deps ? BarChartD3Deps : BarChartD3;
-  const shows = deps ? `every year since ${drawnFrom}, stacked` : `${drawnFrom}`;
-  const stale = dom.rect > data.length || drawnFrom !== year;
+  const D3Chart = fixed ? BarChartD3Fixed : BarChartD3;
+  const shows = fixed ? year : drawnFrom;
 
   return (
     <>
@@ -60,19 +59,18 @@ function Trap() {
           {
             name: 'd3 draws',
             facts: [
-              ['effect runs', dom.g, dom.g > 1 && 'bad', '00'],
-              ['<rect>s in its <svg>', dom.rect, dom.rect > data.length && 'bad', '00'],
-              ['bars show', stale ? shows : `${year}`, stale && 'bad', 'every year since 1990, stacked'],
+              ['<rect>s in its <svg>', rects, rects !== data.length && 'bad', '00'],
+              ['bars show', shows, shows !== year && 'bad', '0000'],
             ],
           },
-          { name: 'React renders', facts: [['<rect>s in its <svg>', data.length], ['bars show', `${year}`]] },
+          { name: 'React renders', facts: [['<rect>s in its <svg>', data.length], ['bars show', year]] },
         ]}
       />
       <div className="split">
         <div>
           <h4 className="chart-label">d3 owns the DOM</h4>
-          <div className="chart chart-wide leftovers" ref={ref}>
-            <D3Chart key={deps} data={data} />
+          <div className="chart chart-wide" ref={ref}>
+            <D3Chart key={fixed} data={data} />
           </div>
           <h4 className="chart-label">React owns the DOM</h4>
           <div className="chart chart-wide">
@@ -80,15 +78,15 @@ function Trap() {
           </div>
         </div>
         <Code
-          file={deps ? 'BarChartD3.jsx, with its dependencies' : 'BarChartD3.jsx'}
+          file={fixed ? 'BarChartD3Fixed.jsx' : 'BarChartD3.jsx'}
           lang="jsx"
-          source={deps ? barChartD3DepsSrc : barChartD3Src}
+          source={fixed ? barChartD3FixedSrc : barChartD3Src}
           regions={['effect']}
-          match={{ append: ".append('g')", deps: '  }, [' }}
-          hot={deps && dom.g > 1 ? ['append', 'deps'] : ['deps']}
+          match={{ join: '.data([null])', deps: '}, [' }}
+          hot={fixed ? ['deps', 'join'] : ['deps']}
           notes={{
-            deps: deps ? `ran ${dom.g} time${dom.g > 1 ? 's' : ''}: once per change` : 'ran once, on mount',
-            append: `<g> number ${dom.g}`,
+            deps: fixed ? 'runs on every change' : 'ran once, on mount',
+            join: 'the same <g> every run',
           }}
         />
       </div>
@@ -99,13 +97,13 @@ function Trap() {
         <label>
           <input
             type="checkbox"
-            checked={deps}
+            checked={fixed}
             onChange={(e) => {
-              setDeps(e.target.checked);
+              setFixed(e.target.checked);
               setDrawnFrom(year);
             }}
           />
-          fill in the effect’s dependency array
+          fix the effect
         </label>
       </div>
     </>

@@ -20,12 +20,15 @@ export function BarChart({ data, width = 400, height = 200, padding = 10 }) {
       .domain([0, max(data, (d) => d.twh)])
       .range([innerHeight, 0]);
 
+    // One <g>, created on the first run and reused after.
     select(ref.current)
       .attr('viewBox', `0 0 ${width} ${height}`)
-      .append('g')
+      .selectAll('g')
+      .data([null])
+      .join('g')
       .attr('transform', `translate(${padding},${padding})`)
       .selectAll('rect')
-      .data(data)
+      .data(data, (d) => d.source)
       .join('rect')
       .attr('x', (d) => x(d.source))
       .attr('y', (d) => y(d.twh))

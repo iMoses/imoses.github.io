@@ -12,9 +12,12 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
 
 - 2026-10-03: Fig. 01 fixes from the owner's review (branch `fig01-fixes`). URL now
   `/lab/who-draws-the-chart/`, matching the title; the old one is a meta-refresh stub
-  (`redirects/charts-are-just-shapes.html`, GitHub Pages has no real redirects). Section 1: bars
-  left by earlier effect runs are greyed (before, the old taller bars hid the new ones, so the
-  "with dependencies" chart looked like it never updated), checkbox reworded. Donut: `innerRadius`
+  (`redirects/charts-are-just-shapes.html`, GitHub Pages has no real redirects). Section 1: the
+  checkbox ("fix the effect") now swaps in a working d3 version, `BarChartD3Fixed.jsx`
+  (dependencies plus a join on one reused `<g>`). Before, it only added the dependencies, so each
+  run stacked a new chart on the old one and the owner read the figure as broken; the text now
+  describes the stacking instead of showing it. The dependency-line note never lit (its `match`
+  had the indent the panel strips); fixed. Donut: `innerRadius`
   capped at 0.75 (at 0.9 it equalled the clip circle and every slice vanished); the center label
   (total, or the hovered slice) is back. Section 7 shows the React port (`Axis.jsx`) again instead
   of only linking it. Text no longer says "left/right" for charts that are stacked, nor claims the
