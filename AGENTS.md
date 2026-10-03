@@ -17,7 +17,8 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   If something needed isn't there, list it under "Open questions" instead of guessing.
 - Keep the owner's time and budget in mind: batch questions, don't ask what the repo already answers.
 - This repo is public. Anything in it (including `docs/`) is visible to the world.
-- Push work to a feature branch; merge to `main` only when the owner asks. Pushing to `main` deploys.
+- Work on `main`: commit locally, push only when the owner says "merge" (pushing deploys). No
+  feature branches unless the owner asks for one (owner, 2026-10-03).
 - Before writing anything about the owner, read `docs/PROFILE.md`.
 - **The code is part of the showcase (owner).** How the site is written matters as much as how it
   looks: small, consistent, commented where the *why* isn't obvious; review your own diff.
@@ -86,7 +87,7 @@ Rules that keep this from growing back:
 
 ## Status (update this)
 
-Last updated: 2026-10-03 (repo cleanup merged)
+Last updated: 2026-10-03 (work on `main`, push on "merge")
 
 Still open (see also `docs/PROFILE.md` → Open questions):
 - Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
@@ -105,8 +106,8 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 
 ## Working with the owner
 
-- **Loop:** work on the session's feature branch; the owner reviews and says "merge"; then
-  fast-forward `main` to the branch and push, which deploys. Watch the run with
+- **Loop:** commit to local `main`; the owner reviews (their dev server serves this checkout) and
+  says "merge"; then push, which deploys. Watch the run with
   `curl https://api.github.com/repos/iMoses/imoses.github.io/actions/runs?per_page=1` (the GitHub
   API is reachable from the sandbox even when the MCP tools aren't). GitHub occasionally returns a
   500 on push: retry with backoff.
