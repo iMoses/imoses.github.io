@@ -15,8 +15,8 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
   old Fig. 01 address's redirect stub (`redirects/`; `/lab/charts-are-just-shapes/` now 404s);
   unused `assets/github.svg`, `linkedin.svg`, `gmail.svg`, `stackoverflow.svg`, `logo.svg` (the
   site uses `_includes/`); the unused `updates-list` screenshots; `stackoverflow` in
-  `_data/contact.yml`; two unused CSS rules in Fig. 03; boilerplate in `.gitignore`. Merged and
-  superseded branches deleted, local and on GitHub.
+  `_data/contact.yml`; two unused CSS rules in Fig. 03; boilerplate in `.gitignore`. Branches
+  merged into `main` deleted, local and on GitHub.
 - 2026-10-03: Home intro's lab line rewritten to match the content direction (was "small,
   interactive experiments with the pixels and the maths"). The first paragraph is unchanged.
 - 2026-10-03: Entry header and home cards, merged to `main` (owner's notes). Header:
