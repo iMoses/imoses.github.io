@@ -425,7 +425,7 @@ hr {
   list-style: none;
 
   // The smaller mono label would sit on the text's baseline and stretch the row past 24px.
-  .fig-label { margin-right: 1ch; vertical-align: top; }
+  .fig-label { vertical-align: top; }
 }
 
 .lab-topics { font-family: var(--font-mono); }
@@ -489,7 +489,7 @@ hr {
   font: 400 0.875rem/var(--u) var(--font-mono);
   color: var(--ink-3);
 
-  a { color: var(--ink-2); text-decoration: none; white-space: nowrap; } // a topic never splits
+  a { color: var(--accent); text-decoration: none; white-space: nowrap; } // a topic never splits
   a:hover { text-decoration: underline; }
 }
 
