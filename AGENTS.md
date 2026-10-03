@@ -17,8 +17,9 @@ Its job: tell a visitor who Ido is, what Ido does, show evidence, and make it ea
   If something needed isn't there, list it under "Open questions" instead of guessing.
 - Keep the owner's time and budget in mind: batch questions, don't ask what the repo already answers.
 - This repo is public. Anything in it (including `docs/`) is visible to the world.
-- Work on `main`: commit locally, push only when the owner says "merge" (pushing deploys). No
-  feature branches unless the owner asks for one (owner, 2026-10-03).
+- Work on `main`, and leave changes uncommitted: commit only when the owner approves, push only
+  when the owner says "merge" (pushing deploys). No feature branches unless the owner asks for
+  one (owner, 2026-10-03).
 - Before writing anything about the owner, read `docs/PROFILE.md`.
 - **The code is part of the showcase (owner).** How the site is written matters as much as how it
   looks: small, consistent, commented where the *why* isn't obvious; review your own diff.
@@ -106,8 +107,8 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 
 ## Working with the owner
 
-- **Loop:** commit to local `main`; the owner reviews (their dev server serves this checkout) and
-  says "merge"; then push, which deploys. Watch the run with
+- **Loop:** change files on `main` without committing; the owner reviews (their dev server serves
+  this checkout); commit when they approve; push, which deploys, when they say "merge". Watch the run with
   `curl https://api.github.com/repos/iMoses/imoses.github.io/actions/runs?per_page=1` (the GitHub
   API is reachable from the sandbox even when the MCP tools aren't). GitHub occasionally returns a
   500 on push: retry with backoff.

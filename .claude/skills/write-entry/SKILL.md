@@ -63,8 +63,8 @@ motion). Calm instrumentation: mono labels, no pulsing. Staged states are labell
 2. Run the `review-entry` skill and fix what it finds.
 3. Build and check in a browser (AGENTS.md → Before pushing). If the owner's dev server is running
    (see AGENTS.md → Tech), use it instead of starting another server.
-4. Tell the owner where to read it and list any open questions. Commit locally; don't push
-   (it deploys) until they approve the text and say "merge".
+4. Tell the owner where to read it and list any open questions. Leave it uncommitted until
+   they approve it; push (it deploys) only when they say "merge".
 5. Owner feedback about style goes into `docs/STYLE.md` (and the linter, if it can be counted) in
    the same commit as the fix, so the next entry gets it for free.
 

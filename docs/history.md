@@ -79,9 +79,9 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
 
 ## Decisions (newest first)
 
-- 2026-10-03: No feature branches by default (owner). Commit to local `main`, push when the
-  owner says "merge"; the owner asks for a branch when one is wanted. Same as the owner's other
-  two repos.
+- 2026-10-03: No feature branches by default (owner). Work on `main`; commit only with the
+  owner's approval, push only when they say "merge"; the owner asks for a branch when one is
+  wanted. Same as the owner's other two repos.
 - 2026-10-02: Fig. 03 public-safety choices (agent's, owner delegated): only house-repo material,
   nothing from the home-server repo except its script count; skill names and descriptions shown
   only for skills that reveal no security, network or presence setup (three left out, said so in
