@@ -1,6 +1,7 @@
 # imoses.me
 
-Source for [imoses.me](https://imoses.me): Ido Moshe's lab of small, interactive experiments.
+Source for [imoses.me](https://imoses.me): Ido Moshe's profile and lab, entries built from real work,
+with figures you can poke at.
 
 ## Build
 

@@ -103,10 +103,6 @@ Still open (see also `docs/PROFILE.md` → Open questions):
   at build time, so they stay current.
 - Three entries once Fig. 03 is approved, which meets the "3 experiments" target.
 
-Drafts worth keeping:
-- `_drafts/memoir.md` — short, specific, strongest writing voice in the repo. Good basis for the About.
-- `_drafts/scalable-vector-graphics.md` — half-finished tutorial, partly paraphrased from MDN.
-
 ## Working with the owner
 
 - **Loop:** work on the session's feature branch; the owner reviews and says "merge"; then
