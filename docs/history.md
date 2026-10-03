@@ -10,6 +10,8 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
 
 ## Done
 
+- 2026-10-03: Home intro's lab line rewritten to match the content direction (was "small,
+  interactive experiments with the pixels and the maths"). The first paragraph is unchanged.
 - 2026-10-03: Entry header and home cards, merged to `main` (owner's notes). Header:
   "Fig. NN" alone above the title; date and topics in one line under the subtitle, a row clear of
   it (the label was jammed against the h1, the date against the subtitle). Cards: thumbs centered

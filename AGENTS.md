@@ -86,14 +86,12 @@ Rules that keep this from growing back:
 
 ## Status (update this)
 
-Last updated: 2026-10-03 (header and card design merged)
+Last updated: 2026-10-03 (home intro's lab line rewritten, on `home-intro`)
 
 Still open (see also `docs/PROFILE.md` → Open questions):
 - Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
 - Content format decided (see Direction); the reusable interaction patterns are still being worked out.
 - All three entries pass the linter.
-- The home intro still calls the lab "small, interactive experiments with the pixels and the
-  maths", which no longer matches the content direction.
 - Fig. 02 is live; the owner is still reading the text and may send notes.
 - Fig. 01 is live with the review fixes (merged 2026-10-03). Owner: better, but it "still
   requires more work"; ask what, don't guess. The owner found the rewrite too big a change at
