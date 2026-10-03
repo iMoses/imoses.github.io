@@ -10,7 +10,8 @@ the current month; earlier months are in `docs/history/` (see the size rules in 
 
 ## Done
 
-- 2026-10-03: Fig. 01 fixes from the owner's review (branch `fig01-fixes`). URL now
+- 2026-10-03: Fig. 01 fixes from the owner's review, merged to `main` (owner: better than before,
+  still needs more work). URL now
   `/lab/who-draws-the-chart/`, matching the title; the old one is a meta-refresh stub
   (`redirects/charts-are-just-shapes.html`, GitHub Pages has no real redirects). Section 1: the
   checkbox ("fix the effect") now swaps in a working d3 version, `BarChartD3Fixed.jsx`

@@ -86,7 +86,7 @@ Rules that keep this from growing back:
 
 ## Status (update this)
 
-Last updated: 2026-10-03 (Fig. 01 fixes from the owner's review, on `fig01-fixes`)
+Last updated: 2026-10-03 (Fig. 01 review fixes merged)
 
 Still open (see also `docs/PROFILE.md` → Open questions):
 - Tagline, home "about me" and the talk link in Fig. 01 are accepted "for now" (owner), not final.
@@ -95,8 +95,9 @@ Still open (see also `docs/PROFILE.md` → Open questions):
 - The home intro still calls the lab "small, interactive experiments with the pixels and the
   maths", which no longer matches the content direction.
 - Fig. 02 is live; the owner is still reading the text and may send notes.
-- Fig. 01 is live; fixes from the owner's review are on `fig01-fixes`, awaiting "merge". The
-  owner found the rewrite too big a change at once: keep edits to it small and say what moved. Open choice for them: the "tween
+- Fig. 01 is live with the review fixes (merged 2026-10-03). Owner: better, but it "still
+  requires more work"; ask what, don't guess. The owner found the rewrite too big a change at
+  once: keep edits to it small and say what moved. Open choice for them: the "tween
   the paths" mode makes Chrome log an error per frame (invalid arc flag). That is the failure the
   figure shows and the text points at the console, but the owner may prefer a silent page.
 - Fig. 03 is live (merged 2026-10-03); the owner may still send notes. Owner: the story may
